@@ -765,12 +765,49 @@ struct nvram_pair router_defaults[] = {
 	{ "wyy_flac", "0" },
 	{ "wyy_staticnum_x", "0" },
 	
+#if defined(APP_ZEROTIER)
 	/*Zerotier*/
 	{ "zerotier_enable", "0" },
 	{ "zerotier_id", "" },
 	{ "zerotier_nat", "0" },
 	{ "zerotier_secret", "" },
 	{ "zero_staticnum_x", "0" },
+	{ "zero_afykey", "" },
+	{ "zero_afynen", "" },
+	{ "afycx_enable", "0" },
+	{ "gecoac_enable", "0" },
+#endif
+
+#if defined(APP_HXCLI)
+	/*hxcli*/
+	{ "hxcli_enable", "0" },
+	{ "hxcli_token", "" },
+	{ "hxcli_ip", "" },
+	{ "hxcli_localadd", "" },
+	{ "hxcli_serip", "" },
+	{ "hxcli_model", "0" },
+	{ "hxcli_key", "" },
+	{ "hxcli_log", "0" },
+	{ "hxcli_proxy", "0" },
+	{ "hxcli_first", "0" },
+	{ "hxcli_wg", "0" },
+	{ "hxcli_finger", "0" },
+	{ "hxcli_serverw", "" },
+	{ "hxcli_desname", "" },
+	{ "hxcli_id", "" },
+	{ "hxcli_tunname", "" },
+	{ "hxcli_mtu", "" },
+	{ "hxcli_dns", "" },
+	{ "hxcli_stun", "" },
+	{ "hxcli_port", "" },
+	{ "hxcli_punch", "0" },
+	{ "hxcli_comp", "0" },
+	{ "hxcli_relay", "0" },
+	{ "hxcli_bin", "" },
+	{ "hxcli_wan", "" },
+	{ "hxcli_routenum_x", "0" },
+	{ "hxcli_mappnum_x", "0" },
+#endif
 
 	/*DDNSTO*/
 	{ "ddnsto_enable", "0" },
