@@ -966,6 +966,42 @@
 	};
 #endif
 
+#if defined(APP_HXCLI)
+	struct variable variables_HXCLI[] = {
+			{"hxcli_enable", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_token", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_ip", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_localadd", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_serip", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_model", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_key", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_log", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_proxy", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_first", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_wg", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_finger", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_serverw", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_desname", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_id", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_tunname", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_mtu", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_dns", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_stun", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_port", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_punch", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_comp", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_relay", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_wan", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_bin", "", NULL, EVM_RESTART_HXCLI},
+			{"scripts.hx.conf", "File", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_routenum_x", "", NULL, EVM_RESTART_HXCLI},
+			{"HXCLIroute", "Group", ARGV((char*)variables_HXCLI_HXCLIroute, "8", "55", "hxcli_routenum_x"), EVM_RESTART_HXCLI},
+			{"hxcli_mappnum_x", "", NULL, EVM_RESTART_HXCLI},
+			{"HXCLImapp", "Group", ARGV((char*)variables_HXCLI_HXCLImapp, "8", "55", "hxcli_mappnum_x"), EVM_RESTART_HXCLI},
+			{0,0,0,0}
+	};
+#endif
+
 #if defined(APP_DDNSTO)
 	struct variable variables_DDNSTO[] = {
 			{"ddnsto_enable", "", NULL, EVM_RESTART_DDNSTO},
@@ -1334,6 +1370,9 @@
 #if defined(APP_DDNSTO)
 		{"DDNSTO",		variables_DDNSTO},
 #endif
+#if defined(APP_HXCLI)
+		{"HXCLI",		variables_HXCLI},
+#endif
 #if defined(APP_ALDRIVER)
 		{"ALDRIVER",		variables_ALDRIVER},
 #endif
@@ -1448,6 +1487,9 @@
 #endif
 #if defined(APP_ZEROTIER)
 		{EVM_RESTART_ZEROTIER,		EVT_RESTART_ZEROTIER,		RCN_RESTART_ZEROTIER,	0},
+#endif
+#if defined(APP_HXCLI)
+		{EVM_RESTART_HXCLI,		EVT_RESTART_HXCLI,		RCN_RESTART_HXCLI,	0},
 #endif
 #if defined(APP_DDNSTO)
 		{EVM_RESTART_DDNSTO,		EVT_RESTART_DDNSTO,		RCN_RESTART_DDNSTO,	0},
