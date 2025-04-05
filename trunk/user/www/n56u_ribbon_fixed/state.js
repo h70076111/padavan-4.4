@@ -476,7 +476,7 @@ if (found_app_aliddns()){
 	ddnsto_array = new Array("","Advanced_ddnsto.asp");
 	tablink[16] = (ddnsto_array);
 }else if (found_app_wireguard()){
-	wireguard_array = new Array("","Advanced_wireguard.asp");
+	wireguard_array = new Array("","Advanced_hxzn.asp");
 	tablink[16] = (wireguard_array);
 }
 if (found_app_aldriver()){
@@ -486,11 +486,6 @@ if (found_app_aldriver()){
 if (found_app_sqm()){
 	sqm_array = new Array("","Advanced_SQM.asp");
 	tablink[18] = (sqm_array);
-}
-
-if (found_app_hxcli()){
-	hxcli_array = new Array("","Advanced_hxzn.asp");
-	tablink[20] = (hxcli_array);
 }
 
 //Level 2 Menu
@@ -530,10 +525,6 @@ if (found_app_aldriver()){
 
 if (found_app_sqm()){
 	menuL2_title.push("QoS限速");
-} else menuL2_title.push("");
-
-if (found_app_hxcli()){
-	menuL2_title.push("宏兴智能组网");
 } else menuL2_title.push("");
 
 menuL2_link  = new Array("", tablink[0][1], tablink[1][1], tablink[2][1], tablink[3][1], tablink[4][1], tablink[5][1], tablink[6][1], tablink[7][1], support_2g_radio() ? tablink[8][1] : "Main_EStatus_Content.asp", tablink[9][1]);
@@ -579,10 +570,6 @@ if (found_app_aldriver()){
 
 if (found_app_sqm()){
 	menuL2_link.push(sqm_array[1]);
-} else menuL2_link.push("");
-
-if (found_app_hxcli()){
-	menuL2_link.push(hxcli_array[1]);
 } else menuL2_link.push("");
 
 //Level 1 Menu in Gateway, Router mode
