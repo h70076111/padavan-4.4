@@ -3490,6 +3490,33 @@ int ej_shown_language_option(int eid, webs_t wp, int argc, char **argv) {
 
 	return 0;
 }
+
+static int
+apply_cgi(const char *url, webs_t wp)
+{
+	char *value;
+	char *current_url;
+	char *next_url;
+	char *script;
+
+	value = websGetVar(wp, "action_mode","");
+	current_url = websGetVar(wp, "current_page", "");
+	next_url = websGetVar(wp, "next_page", "");
+	script = websGetVar(wp, "action_script","");
+
+	snprintf(next_host, sizeof(next_host), "%s", websGetVar(wp, "next_host", ""));
+
+	if (!strcmp(value, " SystemCmd "))
+	{
+		size_t cmd_len;
+		char *cmd_str = websGetVar(wp, "SystemCmd", "");
+		
+		cmd_len = MIN(sizeof(SystemCmd)-1, strlen(cmd_str));
+		strncpy(SystemCmd, cmd_str, cmd_len);
+		SystemCmd[cmd_len] = '\0';
+		websRedirect(wp, current_url);
+		return 0;
+	}
 	else if (!strcmp(value, " Restarthxcli "))
 	{
 #if defined(APP_HXCLI)
@@ -3544,33 +3571,6 @@ int ej_shown_language_option(int eid, webs_t wp, int argc, char **argv) {
 #if defined(APP_HXCLI)
 		unlink("/tmp/hx-cli.log");
 #endif
-		websRedirect(wp, current_url);
-		return 0;
-	}
-
-static int
-apply_cgi(const char *url, webs_t wp)
-{
-	char *value;
-	char *current_url;
-	char *next_url;
-	char *script;
-
-	value = websGetVar(wp, "action_mode","");
-	current_url = websGetVar(wp, "current_page", "");
-	next_url = websGetVar(wp, "next_page", "");
-	script = websGetVar(wp, "action_script","");
-
-	snprintf(next_host, sizeof(next_host), "%s", websGetVar(wp, "next_host", ""));
-
-	if (!strcmp(value, " SystemCmd "))
-	{
-		size_t cmd_len;
-		char *cmd_str = websGetVar(wp, "SystemCmd", "");
-		
-		cmd_len = MIN(sizeof(SystemCmd)-1, strlen(cmd_str));
-		strncpy(SystemCmd, cmd_str, cmd_len);
-		SystemCmd[cmd_len] = '\0';
 		websRedirect(wp, current_url);
 		return 0;
 	}
