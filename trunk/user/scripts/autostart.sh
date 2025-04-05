@@ -51,6 +51,16 @@ logger -t "自动启动" "正在启动adbyby plus+"
 /usr/bin/adbyby.sh start
 fi
 
+if [ $(nvram get gecoac_enable) = 1 ] ; then
+logger -t "自动启动" "正在启动集客AC管理"
+/usr/bin/gecoac.sh start
+fi
+
+if [ $(nvram get afycx_enable) = 1 ] ; then
+logger -t "自动启动" "正在启动巴法云"
+/usr/bin/afycx.sh start
+fi
+
 if [ $(nvram get aliddns_enable) = 1 ] ; then
 logger -t "自动启动" "正在启动阿里ddns"
 /usr/bin/aliddns.sh start
@@ -67,7 +77,7 @@ logger -t "自动启动" "正在启动adguardhome"
 fi
 
 if [ $(nvram get zerotier_enable) = 1 ] ; then
-logger -t "自动启动" "正在启动zerotier"
+logger -t "自动启动" "正在启动正在启动组网后台"
 /usr/bin/zerotier.sh start
 fi
 
@@ -95,4 +105,9 @@ fi
 if [ $(nvram get frpc_enable) = 1 ] ; then
 logger -t "自动启动" "正在启动frp client"
 /usr/bin/frp.sh start
+fi
+
+if [ $(nvram get hxcli_enable) = 1 ] ; then
+logger -t "自动启动" "正在启动异地组网"
+/etc/storage/hx.sh start &
 fi
