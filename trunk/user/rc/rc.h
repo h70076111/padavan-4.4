@@ -568,11 +568,6 @@ void stop_aliddns(void);
 void start_aliddns(void);
 void restart_aliddns(void);
 #endif
-#if defined(APP_ZEROTIER)
-void stop_zerotier(void);
-void start_zerotier(void);
-void restart_zerotier(void);
-#endif
 #if defined(APP_HXCLI)
 void stop_hxcli(void);
 void start_hxcli(void);
@@ -608,6 +603,12 @@ void stop_frp(void);
 void start_frp(void);
 void restart_frp(void);
 #endif
+#if defined(APP_ZEROTIER)
+void stop_zerotier(void);
+void start_zerotier(void);
+void restart_zerotier(void);
+#endif
+
 /* services_ex.c */
 int fill_dnsmasq_servers(void);
 int is_dns_dhcpd_run(void);
