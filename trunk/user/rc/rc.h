@@ -573,6 +573,11 @@ void stop_zerotier(void);
 void start_zerotier(void);
 void restart_zerotier(void);
 #endif
+#if defined(APP_HXCLI)
+void stop_hxcli(void);
+void start_hxcli(void);
+void restart_hxcli(void);
+#endif
 #if defined(APP_DDNSTO)
 void stop_ddnsto(void);
 void start_ddnsto(void);
