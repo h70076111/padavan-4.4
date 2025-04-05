@@ -473,7 +473,7 @@ if (found_app_aliddns()){
 	aliddns_array = new Array("","Advanced_aliddns.asp");
 	tablink[16] = (aliddns_array);
 }else if (found_app_zerotier()){
-	zerotier_array = new Array("","Advanced_zerotier.asp");
+	zerotier_array = new Array("","Advanced_vpnkey.asp");
 	tablink[16] = (zerotier_array);
 }else if (found_app_ddnsto()){
 	ddnsto_array = new Array("","Advanced_ddnsto.asp");
@@ -577,7 +577,7 @@ if (found_app_smartdns()){
 
 if (found_app_aliddns()){
 	menuL2_link.push(aliddns_array[1]);
-} else if (found_app_zerotier()){
+} else if (found_app_vpnkey()){
 	menuL2_link.push(zerotier_array[1]);
 } else if (found_app_ddnsto()){
 	menuL2_link.push(ddnsto_array[1]);
