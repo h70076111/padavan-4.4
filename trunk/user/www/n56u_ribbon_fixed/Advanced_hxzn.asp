@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><#Web_Title#> - 宏兴智能组网</title>
+<title><#Web_Title#> - <#menu5_35#></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -437,14 +437,29 @@ function button_hxcli_status() {
 	</ul>
 	</div>
 	</div>
-	<div class="span9">
-	<!--Body content-->
-	<div class="row-fluid">
-	<div class="span12">
-	<div class="box well grad_colour_dark_blue">
-	<h2 class="box_head round_top">宏兴智能组网</h2>
-	<div class="round_bottom">
-	<div>
+				<div class="span9">
+				<!--Body content-->
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="box well grad_colour_dark_blue">
+							<h2 class="box_head round_top"><#menu5_30#> - <#menu5_35#></h2>
+							<div class="round_bottom">
+							<div>
+                            <ul class="nav nav-tabs" style="margin-bottom: 10px;">
+								<li id="allink" style="display:none">
+                                    <a href="Advanced_aliddns.asp"><#menu5_23_1#></a>
+                                </li>
+								<li id="zelink" style="display:none">
+                                    <a href="Advanced_zerotier.asp"><#menu5_32_1#></a>
+                                </li>
+								<li id="ddlink" style="display:none">
+                                    <a href="Advanced_ddnsto.asp"><#menu5_34_1#></a>
+                                </li>
+								<li class="active">
+                                    <a href="Advanced_wireguard.asp"><#menu5_35_1#></a>
+                                </li>
+                            </ul>
+                        </div>
 	<ul class="nav nav-tabs" style="margin-bottom: 10px;">
 	<li class="active"><a id="tab_hxcli_cfg" href="#cfg">基本设置</a></li>
 	<li><a id="tab_hxcli_sta" href="#sta">运行状态</a></li>
