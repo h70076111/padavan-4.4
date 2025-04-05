@@ -83,6 +83,19 @@
 			{"zero_route_x", "24", NULL, FALSE},
 			{0,0,0,0}
 		};
+	struct variable variables_HXCLI_HXCLImapp[] = {
+			{"hxcli_mappnet_x", "24", NULL, FALSE},
+			{"hxcli_mappport_x", "24", NULL, FALSE},
+			{"hxcli_mappip_x", "24", NULL, FALSE},
+			{"hxcli_mapeerport_x", "24", NULL, FALSE},
+			{0,0,0,0}
+		};
+	struct variable variables_HXCLI_HXCLIroute[] = {
+			{"hxcli_name_x", "24", NULL, FALSE},
+			{"hxcli_route_x", "24", NULL, FALSE},
+			{"hxcli_ip_x", "24", NULL, FALSE},
+			{0,0,0,0}
+		};
 	struct variable variables_SspConf_SspList[] = {
 			{"ssp_type_x", "24", NULL, FALSE},
 			{"ssp_name_x", "24", NULL, FALSE},
