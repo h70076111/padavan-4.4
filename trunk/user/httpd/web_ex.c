@@ -2282,6 +2282,14 @@ static int zerotier_status_hook(int eid, webs_t wp, int argc, char **argv)
 	return 0;
 }
 #endif
+#if defined (APP_HXCLI)
+static int hxcli_status_hook(int eid, webs_t wp, int argc, char **argv)
+{
+	int hxcli_status_code = pids("hx-cli");
+	websWrite(wp, "function hxcli_status() { return %d;}\n", hxcli_status_code);
+	return 0;
+}
+#endif
 #if defined (APP_DDNSTO)
 static int ddnsto_status_hook(int eid, webs_t wp, int argc, char **argv)
 {
@@ -2536,6 +2544,11 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 #else
 	int found_app_zerotier = 0;
 #endif
+#if defined(APP_HXCLI)
+	int found_app_hxcli = 1;
+#else
+	int found_app_hxcli = 0;
+#endif
 #if defined(APP_DDNSTO)
 	int found_app_ddnsto = 1;
 #else
@@ -2754,6 +2767,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		"function found_app_mentohust() { return %d;}\n"
 		"function found_app_adbyby() { return %d;}\n"
 		"function found_app_zerotier() { return %d;}\n"
+		"function found_app_hxcli() { return %d;}\n"
 		"function found_app_ddnsto() { return %d;}\n"
 		"function found_app_aldriver() { return %d;}\n"
 		"function found_app_aliddns() { return %d;}\n"
@@ -2787,6 +2801,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		found_app_mentohust,
 		found_app_adbyby,
 		found_app_zerotier,
+		found_app_hxcli,
 		found_app_ddnsto,
 		found_app_aldriver,
 		found_app_aliddns,
@@ -3475,6 +3490,63 @@ int ej_shown_language_option(int eid, webs_t wp, int argc, char **argv) {
 
 	return 0;
 }
+	else if (!strcmp(value, " Restarthxcli "))
+	{
+#if defined(APP_HXCLI)
+		system("/usr/bin/hxzn.sh restart &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " Updatehxcli "))
+	{
+#if defined(APP_HXCLI)
+		system("/usr/bin/hxzn.sh update &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDhxinfo "))
+	{
+#if defined(APP_HXCLI)
+		system("/usr/bin/hxzn.sh hxinfo &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDhxall "))
+	{
+#if defined(APP_HXCLI)
+		system("/usr/bin/hxzn.sh hxall &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDhxlist "))
+	{
+#if defined(APP_HXCLI)
+		system("/usr/bin/hxzn.sh hxlist &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDhxroute "))
+	{
+#if defined(APP_HXCLI)
+		system("/usr/bin/hxzn.sh hxroute &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDhxstatus "))
+	{
+#if defined(APP_HXCLI)
+		system("/usr/bin/hxzn.sh hxstatus &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " ClearhxcliLog "))
+	{
+#if defined(APP_HXCLI)
+		unlink("/tmp/hx-cli.log");
+#endif
+		websRedirect(wp, current_url);
+		return 0;
+	}
 
 static int
 apply_cgi(const char *url, webs_t wp)
@@ -4147,6 +4219,21 @@ static char mentohust_log_txt[] =
 
 #endif
 
+#if defined (APP_HXCLI)
+static void
+do_hxcli_log_file(const char *url, FILE *stream)
+{
+	dump_file(stream, "/tmp/hx-cli.log");
+	fputs("\r\n", stream);
+}
+
+static char hxcli_log_txt[] =
+"Content-Disposition: attachment;\r\n"
+"filename=hx-cli.log"
+;
+
+#endif
+
 struct mime_handler mime_handlers[] = {
 	/* cached javascript files w/o translations */
 	{ "jquery.js", "text/javascript", NULL, NULL, do_file, 0 }, // 2012.06 Eagle23
@@ -4196,6 +4283,9 @@ struct mime_handler mime_handlers[] = {
 #endif
 #if defined(APP_OPENVPN)
 	{ "client.ovpn", "application/force-download", NULL, NULL, do_export_ovpn_client, 1 },
+#endif
+#if defined(APP_HXCLI)
+	{ "hx-cli.log", "application/force-download", hxcli_log_txt, NULL, do_hxcli_log_file, 1 },
 #endif
 #if defined(APP_SHADOWSOCKS)
 	{ "applydb.cgi*", "text/html", no_cache_IE7, do_html_post_and_get, do_applydb_cgi, 1 },
@@ -4505,6 +4595,9 @@ struct ej_handler ej_handlers[] =
 #endif
 #if defined (APP_ZEROTIER)
 	{ "zerotier_status", zerotier_status_hook},
+#endif
+#if defined (APP_HXCLI)
+	{ "hxcli_status", hxcli_status_hook},
 #endif
 #if defined (APP_DDNSTO)
 	{ "ddnsto_status", ddnsto_status_hook},
