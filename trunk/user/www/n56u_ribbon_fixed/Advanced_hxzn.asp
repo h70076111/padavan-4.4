@@ -67,9 +67,8 @@ if(m_mapplist.length > 0){
 var isMenuopen = 0;
 function initial(){
 	show_banner(2);
-	show_menu(5, 27, 0);
-	showROUTEList();
-	showMAPPList();
+	show_menu(5,17,0);
+	showmenu();
 	show_footer();
 	fill_status(hxcli_status());
 	change_hxcli_enable(1);
@@ -77,6 +76,11 @@ function initial(){
 	if (!login_safe())
         		textarea_scripts_enabled(0);
 
+}
+function showmenu(){
+showhide_div('allink', found_app_aliddns());
+showhide_div('zelink', found_app_zerotier());
+showhide_div('ddlink', found_app_ddnsto());
 }
 
 function fill_status(status_code){
