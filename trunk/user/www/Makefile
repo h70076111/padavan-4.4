@@ -209,7 +209,10 @@ ifneq ($(CONFIG_FIRMWARE_INCLUDE_ALIDDNS),y)
 	rm -f $(INSTALLDIR)/www/Advanced_aliddns.asp
 endif
 ifneq ($(CONFIG_FIRMWARE_INCLUDE_ZEROTIER),y)
-	rm -f $(INSTALLDIR)/www/Advanced_zerotier.asp
+	rm -f $(INSTALLDIR)/www/Advanced_vpnkey.asp
+endif
+ifneq ($(CONFIG_FIRMWARE_INCLUDE_HXCLI),y)
+	rm -f $(INSTALLDIR)/www/Advanced_hxzn.asp
 endif
 ifeq ($(CONFIG_FIRMWARE_INCLUDE_FRPC)_$(CONFIG_FIRMWARE_INCLUDE_FRPS), n_n)
 	rm -f $(INSTALLDIR)/www/Advanced_frp.asp
