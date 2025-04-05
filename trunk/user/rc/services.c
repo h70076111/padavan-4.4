@@ -859,6 +859,7 @@ stop_services(int stopall)
 #endif
 #if defined(APP_HXCLI)
 	stop_hxcli();
+#endif
 #if defined(APP_ALIDDNS)
 	stop_aliddns();
 #endif
