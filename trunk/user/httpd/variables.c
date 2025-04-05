@@ -956,11 +956,15 @@
 	struct variable variables_ZeroConf[] = {
 			{"zerotier_enable", "", NULL, EVM_RESTART_ZEROTIER},
 			{"zerotier_id", "", NULL, EVM_RESTART_ZEROTIER},
-		        {"zerotier_moonid", "", NULL, EVM_RESTART_ZEROTIER},
+			{"zerotier_moonid", "", NULL, EVM_RESTART_ZEROTIER},
 			{"zerotiermoon_enable", "", NULL, EVM_RESTART_ZEROTIER},
 			{"zerotiermoon_ip", "", NULL, EVM_RESTART_ZEROTIER},
 			{"zerotier_nat", "", NULL, EVM_RESTART_ZEROTIER},
 			{"zero_staticnum_x", "", NULL, EVM_RESTART_ZEROTIER},
+			{"zero_afykey", "", NULL, EVM_RESTART_ZEROTIER},
+			{"zero_afynen", "", NULL, EVM_RESTART_ZEROTIER},
+			{"afycx_enable", "", NULL, EVM_RESTART_ZEROTIER},
+			{"gecoac_enable", "", NULL, EVM_RESTART_ZEROTIER},
 			{"ZeroList", "Group", ARGV((char*)variables_ZeroConf_ZeroList, "8", "55", "zero_staticnum_x"), EVM_RESTART_ZEROTIER},
 			{0,0,0,0}
 	};
