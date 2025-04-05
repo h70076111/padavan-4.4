@@ -1140,6 +1140,12 @@ handle_notifications(void)
 			restart_zerotier();
 		}
 #endif
+#if defined(APP_HXCLI)
+		else if (strcmp(entry->d_name, RCN_RESTART_HXCLI) == 0)
+		{
+			restart_hxcli();
+		}
+#endif
 #if defined(APP_DDNSTO)
 		else if (strcmp(entry->d_name, RCN_RESTART_DDNSTO) == 0)
 		{
@@ -1585,7 +1591,7 @@ main(int argc, char **argv)
 	else if (!strcmp(base, "run_firefly")) {
 		restart_itunes();
 	}
-#endif
+#endif	
 #if defined(APP_TRMD)
 	else if (!strcmp(base, "run_transmission")) {
 		restart_torrent();
