@@ -211,17 +211,17 @@ function button_gecoac_web(){
 							<div class="round_bottom">
 							<div>
 							    <ul class="nav nav-tabs" style="margin-bottom: 10px;">
-								<li id="allink" style="display:none">
-								    <a href="Advanced_aliddns.asp"><#menu5_23_1#></a>
-								</li>
-								<li id="dtolink" style="display:none">
-								    <a href="Advanced_ddnsto.asp"><#menu5_32_2#></a>
-								</li>
+								<li id="ddlink" style="display:none">
+                                    <a href="Advanced_ddnsto.asp"><#menu5_34_1#></a>
+                                </li>
 								<li class="active">
-								    <a href="Advanced_vpnkey.asp"><#menu5_32_1#></a>
-								</li>
-								<li id="wirlink" style="display:none">
-								    <a href="Advanced_hxzn.asp"><#menu5_35_1#></a>
+                                    <a href="Advanced_vpnkey.asp"><#menu5_32_1#></a>
+                                </li>
+								<li id="wilink" style="display:none">
+                                    <a href="Advanced_hxzn.asp"><#menu5_35_1#></a>
+                                </li>
+								<li class="active">
+                                    <a href="Advanced_aliddns.asp"><menu5_23_1#></a>
 								</li>
 							    </ul>
 							</div>
