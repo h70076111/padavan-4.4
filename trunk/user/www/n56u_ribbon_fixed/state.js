@@ -423,11 +423,8 @@ if (found_app_aldriver()){
 if (found_app_sqm()){
 	tabtitle[18] = new Array("", "QoS限速");
 }
-if (found_app_frp()){
-	tabtitle[19] = new Array("", "<#menu5_25#>");
-}
 if (found_app_hxcli()){
-	tabtitle[20] = new Array("", "宏兴智能组网");
+	tabtitle[19] = new Array("", "宏兴智能组网");
 }
 
 //Level 3 Tab title
@@ -490,12 +487,7 @@ if (found_app_sqm()){
 	sqm_array = new Array("","Advanced_SQM.asp");
 	tablink[18] = (sqm_array);
 }
-if (found_app_frp()){
-	frp_array = new Array("","Advanced_frp.asp");
-	tablink[19] = (frp_array);
-	tabtitle[9].push('<#menu5_25_1#>');
-	tablink[9].push('Advanced_frp_log.asp');
-}
+
 if (found_app_hxcli()){
 	hxcli_array = new Array("","Advanced_hxzn.asp");
 	tablink[20] = (hxcli_array);
@@ -538,10 +530,6 @@ if (found_app_aldriver()){
 
 if (found_app_sqm()){
 	menuL2_title.push("QoS限速");
-} else menuL2_title.push("");
-
-if (found_app_frp()){
-	menuL2_title.push("<#menu5_25#>");
 } else menuL2_title.push("");
 
 if (found_app_hxcli()){
@@ -591,10 +579,6 @@ if (found_app_aldriver()){
 
 if (found_app_sqm()){
 	menuL2_link.push(sqm_array[1]);
-} else menuL2_link.push("");
-
-if (found_app_frp()){
-	menuL2_link.push(frp_array[1]);
 } else menuL2_link.push("");
 
 if (found_app_hxcli()){
