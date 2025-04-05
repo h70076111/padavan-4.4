@@ -422,6 +422,23 @@ void restart_zerotier(void){
 }
 #endif
 
+#if defined(APP_HXCLI)
+void stop_hxcli(void){
+	eval("/usr/bin/hx.sh","stop");
+}
+
+void start_hxcli(void){
+	int hxcli_enable = nvram_get_int("hxcli_enable");
+	if ( hxcli_enable == 1)
+		eval("/usr/bin/hx.sh","start");
+}
+
+void restart_hxcli(void){
+	stop_hxcli();
+	start_hxcli();
+}
+#endif
+
 #if defined(APP_DDNSTO)
 void stop_ddnsto(void){
 	eval("/usr/bin/ddnsto.sh","stop");
@@ -840,6 +857,8 @@ stop_services(int stopall)
 #if defined(APP_SMARTDNS)
 	stop_smartdns();
 #endif
+#if defined(APP_HXCLI)
+	stop_hxcli();
 #if defined(APP_ALIDDNS)
 	stop_aliddns();
 #endif
