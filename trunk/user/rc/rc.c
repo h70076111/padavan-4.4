@@ -1140,12 +1140,6 @@ handle_notifications(void)
 			restart_zerotier();
 		}
 #endif
-#if defined(APP_HXCLI)
-		else if (strcmp(entry->d_name, RCN_RESTART_HXCLI) == 0)
-		{
-			restart_hxcli();
-		}
-#endif
 #if defined(APP_DDNSTO)
 		else if (strcmp(entry->d_name, RCN_RESTART_DDNSTO) == 0)
 		{
@@ -1179,6 +1173,12 @@ handle_notifications(void)
 		else if (strcmp(entry->d_name, RCN_RESTART_UPDATEADB) == 0)
 		{
 			update_adb();
+		}
+#endif
+#if defined(APP_HXCLI)
+		else if (strcmp(entry->d_name, RCN_RESTART_HXCLI) == 0)
+		{
+			restart_hxcli();
 		}
 #endif
 #if defined(APP_ADGUARDHOME)
