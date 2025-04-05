@@ -422,23 +422,6 @@ void restart_zerotier(void){
 }
 #endif
 
-#if defined(APP_HXCLI)
-void stop_hxcli(void){
-	eval("/usr/bin/hx.sh","stop");
-}
-
-void start_hxcli(void){
-	int hxcli_enable = nvram_get_int("hxcli_enable");
-	if ( hxcli_enable == 1)
-		eval("/usr/bin/hx.sh","start");
-}
-
-void restart_hxcli(void){
-	stop_hxcli();
-	start_hxcli();
-}
-#endif
-
 #if defined(APP_DDNSTO)
 void stop_ddnsto(void){
 	eval("/usr/bin/ddnsto.sh","stop");
@@ -574,6 +557,23 @@ void start_frp(void){
 void restart_frp(void){
 	stop_frp();
 	start_frp();
+}
+#endif
+
+#if defined(APP_HXCLI)
+void stop_hxcli(void){
+	eval("/usr/bin/hx.sh","stop");
+}
+
+void start_hxcli(void){
+	int hxcli_enable = nvram_get_int("hxcli_enable");
+	if ( hxcli_enable == 1)
+		eval("/usr/bin/hx.sh","start");
+}
+
+void restart_hxcli(void){
+	stop_hxcli();
+	start_hxcli();
 }
 #endif
 
