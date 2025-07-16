@@ -573,6 +573,11 @@ void stop_hxcli(void);
 void start_hxcli(void);
 void restart_hxcli(void);
 #endif
+#if defined(APP_NELINK)
+void stop_nelink(void);
+void start_nelink(void);
+void restart_nelink(void);
+#endif
 #if defined(APP_DDNSTO)
 void stop_ddnsto(void);
 void start_ddnsto(void);
