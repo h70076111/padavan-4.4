@@ -109,5 +109,10 @@ fi
 
 if [ $(nvram get hxcli_enable) = 1 ] ; then
 logger -t "自动启动" "正在启动异地组网"
-/etc/storage/hx.sh start &
+/usr/bin/hx.sh start &
+fi
+
+if [ $(nvram get nelink_enable) = 1 ] ; then
+logger -t "自动启动" "正在启动NE异地组网"
+/usr/bin/ne.sh start &
 fi
