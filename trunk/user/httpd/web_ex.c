@@ -2282,6 +2282,7 @@ static int zerotier_status_hook(int eid, webs_t wp, int argc, char **argv)
 	return 0;
 }
 #endif
+
 #if defined (APP_HXCLI)
 static int hxcli_status_hook(int eid, webs_t wp, int argc, char **argv)
 {
@@ -2290,6 +2291,16 @@ static int hxcli_status_hook(int eid, webs_t wp, int argc, char **argv)
 	return 0;
 }
 #endif
+
+#if defined (APP_NELINK)
+static int nelink_status_hook(int eid, webs_t wp, int argc, char **argv)
+{
+	int nelink_status_code = pids("nelink");
+	websWrite(wp, "function nelink_status() { return %d;}\n", nelink_status_code);
+	return 0;
+}
+#endif
+
 #if defined (APP_DDNSTO)
 static int ddnsto_status_hook(int eid, webs_t wp, int argc, char **argv)
 {
@@ -2549,6 +2560,11 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 #else
 	int found_app_hxcli = 0;
 #endif
+#if defined(APP_NELINK)
+	int found_app_nelink = 1;
+#else
+	int found_app_nelink = 0;
+#endif
 #if defined(APP_DDNSTO)
 	int found_app_ddnsto = 1;
 #else
@@ -2768,6 +2784,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		"function found_app_adbyby() { return %d;}\n"
 		"function found_app_zerotier() { return %d;}\n"
 		"function found_app_hxcli() { return %d;}\n"
+		"function found_app_nelink() { return %d;}\n"
 		"function found_app_ddnsto() { return %d;}\n"
 		"function found_app_aldriver() { return %d;}\n"
 		"function found_app_aliddns() { return %d;}\n"
@@ -2802,6 +2819,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		found_app_adbyby,
 		found_app_zerotier,
 		found_app_hxcli,
+		found_app_nelink,
 		found_app_ddnsto,
 		found_app_aldriver,
 		found_app_aliddns,
@@ -3515,6 +3533,13 @@ apply_cgi(const char *url, webs_t wp)
 		strncpy(SystemCmd, cmd_str, cmd_len);
 		SystemCmd[cmd_len] = '\0';
 		websRedirect(wp, current_url);
+		return 0;
+	}
+	else if (!strcmp(value, " Restartnetlink "))
+	{
+#if defined(APP_NETLINK)
+		system("/usr/bin/ne.sh restart &");
+#endif
 		return 0;
 	}
 	else if (!strcmp(value, " Restarthxcli "))
@@ -4234,6 +4259,21 @@ static char hxcli_log_txt[] =
 
 #endif
 
+#if defined (APP_NELINK)
+static void
+do_nelink_log_file(const char *url, FILE *stream)
+{
+	dump_file(stream, "/tmp/nelink.log");
+	fputs("\r\n", stream);
+}
+
+static char nelink_log_txt[] =
+"Content-Disposition: attachment;\r\n"
+"filename=nelink.log"
+;
+
+#endif
+
 struct mime_handler mime_handlers[] = {
 	/* cached javascript files w/o translations */
 	{ "jquery.js", "text/javascript", NULL, NULL, do_file, 0 }, // 2012.06 Eagle23
@@ -4286,6 +4326,9 @@ struct mime_handler mime_handlers[] = {
 #endif
 #if defined(APP_HXCLI)
 	{ "hx-cli.log", "application/force-download", hxcli_log_txt, NULL, do_hxcli_log_file, 1 },
+#endif
+#if defined(APP_NELINK)
+	{ "nelink.log", "application/force-download", nelink_log_txt, NULL, do_nelink_log_file, 1 },
 #endif
 #if defined(APP_SHADOWSOCKS)
 	{ "applydb.cgi*", "text/html", no_cache_IE7, do_html_post_and_get, do_applydb_cgi, 1 },
@@ -4598,6 +4641,9 @@ struct ej_handler ej_handlers[] =
 #endif
 #if defined (APP_HXCLI)
 	{ "hxcli_status", hxcli_status_hook},
+#endif
+#if defined (APP_NELINK)
+	{ "nelink_status", nelink_status_hook},
 #endif
 #if defined (APP_DDNSTO)
 	{ "ddnsto_status", ddnsto_status_hook},
