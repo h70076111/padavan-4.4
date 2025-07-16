@@ -499,9 +499,9 @@ function button_hxcli_status() {
 										</tr>
 
 										<tr>
-										<th>本机识别码(不要改动) </th>
+										<th>本机识别码(不能改动) </th>
 				<td>
-					<input type="text" class="input" name="hxcli_token" id="hxcli_token" style="width: 200px" value="<% nvram_get_x("","hxcli_token"); %>" />
+					<input type="text" class="input" readonly name="hxcli_token" id="hxcli_token" style="width: 200px" value="<% nvram_get_x("","hxcli_token"); %>" />
 				</td>
 
 										</tr>
