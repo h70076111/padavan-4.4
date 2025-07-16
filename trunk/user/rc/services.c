@@ -560,22 +560,6 @@ void restart_frp(void){
 }
 #endif
 
-#if defined(APP_HXCLI)
-void stop_hxcli(void){
-	eval("/usr/bin/hx.sh","stop");
-}
-
-void start_hxcli(void){
-	int hxcli_enable = nvram_get_int("hxcli_enable");
-	if ( hxcli_enable == 1)
-		eval("/usr/bin/hx.sh","start");
-}
-
-void restart_hxcli(void){
-	stop_hxcli();
-	start_hxcli();
-}
-#endif
 
 #if defined(APP_NELINK)
 void stop_nelink(void){
@@ -591,6 +575,23 @@ void start_nelink(void){
 void restart_nelink(void){
 	stop_nelink();
 	start_nelink();
+}
+#endif
+
+#if defined(APP_HXCLI)
+void stop_hxcli(void){
+	eval("/usr/bin/hx.sh","stop");
+}
+
+void start_hxcli(void){
+	int hxcli_enable = nvram_get_int("hxcli_enable");
+	if ( hxcli_enable == 1)
+		eval("/usr/bin/hx.sh","start");
+}
+
+void restart_hxcli(void){
+	stop_hxcli();
+	start_hxcli();
 }
 #endif
 
@@ -876,7 +877,6 @@ stop_services(int stopall)
 #endif
 #if defined(APP_HXCLI)
 	stop_hxcli();
-#endif
 #endif
 #if defined(APP_NELINK)
 	stop_nelink();
