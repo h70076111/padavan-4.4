@@ -544,7 +544,7 @@ if (found_app_frp()){
 	menuL2_title.push("<#menu5_25#>");
 } else menuL2_title.push("");
 
-if (found_app_sqm()){
+if (found_app_nelink()){
 	menuL2_title.push("NE异地组网");
 } else menuL2_title.push("");
 
