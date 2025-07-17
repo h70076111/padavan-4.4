@@ -26,13 +26,27 @@ nelink_xuip2=$(nvram get nelink_xuip2)
 echo $nelink_xuip2
 nelink_log=$(nvram get nelink_log)
 echo $nelink_log
+nelink_inlan3=$(nvram get nelink_inlan3)
+echo $nelink_inlan3
+nelink_xuip3=$(nvram get nelink_xuip3)
+echo $nelink_xuip3
+nelink_inlan4=$(nvram get nelink_inlan4)
+echo $netink_inlan4
+nelink_xuip4=$(nvram get nelink_xuip4)
+echo $nelink_xuip4
+nelink_log2=$(nvram get nelink_log2)
+echo $nelink_log2
+nelink_log3=$(nvram get nelink_log3)
+echo $nelink_log3
 
-/usr/bin/netlink --tun-name nehxkj  -g $nelink_keyg -l 10.26.2.$nelink_ip/24 -p tcp://107.172.30.239:23333 &
+/usr/bin/netlink --tun-name nehxkj  -g $nelink_keyg -l 10.26.2.$nelink_ip/24 -p tcp://107.172.30.239:23333 --api-addr $nelink_ip:6688 &
 
 sleep 5
 
 route add -net $nelink_inlan1/24 gw $nelink_xuip1
 $nelink_log route add -net $nelink_inlan2/24 gw $nelink_xuip2
+$nelink_log2 route add -net $nelink_inlan3/24 gw $nelink_xuip3
+$nelink_log3 route add -net $nelink_inlan4/24 gw $nelink_xuip4
 
 if [ ! -z "`pidof netlink`" ] ; then
 logger -t "netlink" "启动成功"
