@@ -20,9 +20,9 @@ nelink_inlan1=$(nvram get nelink_inlan1)
 echo $nelink_inlan1
 nelink_xuip1=$(nvram get nelink_xuip1)
 echo $nelink_xuip1
-nelink_log=$(nvram get nelink_log)
 lan_ipaddr=$(nvram get lan_ipaddr) 
 echo $lan_ipaddr
+nelink_log=$(nvram get nelink_log)
 echo $nelink_log
 nelink_log2=$(nvram get nelink_log2)
 echo $nelink_log2
