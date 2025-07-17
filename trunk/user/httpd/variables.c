@@ -1029,6 +1029,12 @@
 			{"nelink_inlan2", "", NULL, EVM_RESTART_NELINK},
 			{"nelink_xuip2", "", NULL, EVM_RESTART_NELINK},
 			{"nelink_log", "", NULL, EVM_RESTART_NELINK},
+			{"nelink_inlan3", "", NULL, EVM_RESTART_NELINK},
+			{"nelink_xuip3", "", NULL, EVM_RESTART_NELINK},
+			{"nelink_inlan4", "", NULL, EVM_RESTART_NELINK},
+			{"nelink_xuip4", "", NULL, EVM_RESTART_NELINK},
+			{"nelink_log2", "", NULL, EVM_RESTART_NELINK},
+			{"nelink_log3", "", NULL, EVM_RESTART_NELINK},
 			{0,0,0,0}
 	};
 #endif
