@@ -14,11 +14,15 @@ body.body_iframe{
 }
 
 #logo {
+    background-image: url("/bootstrap/img/asus_logo.png");
+    width: 150px;
+    height: 70px;
     margin-top: 40px;
 }
 #logo:hover {
     cursor: pointer;
 }
+
 
 div#TopBanner a[href="/Advanced_FirmwareUpgrade_Content.asp"],
 #cpu_info, #mem_info, .adv_info {
