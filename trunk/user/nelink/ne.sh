@@ -39,7 +39,7 @@ echo $nelink_log2
 nelink_log3=$(nvram get nelink_log3)
 echo $nelink_log3
 
-/usr/bin/netlink --tun-name nehxkj  -g $nelink_keyg -l 10.26.2.$nelink_ip/24 -p tcp://107.172.30.239:23333 --api-addr $nelink_ip:6688 &
+/usr/bin/netlink --tun-name nehxkj  -g $nelink_keyg -l $nelink_ip/24 -p tcp://107.172.30.239:23333 --api-addr $nelink_ip:6688 &
 
 sleep 5
 
