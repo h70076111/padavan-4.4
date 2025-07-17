@@ -200,7 +200,7 @@ function done_validating(action){
 
 										</tr>
 										<tr>
-										<th>开起第4个设备(不用留空）</th>
+										<th>开起第4个设备(route add -net inip/24 gw xuip）</th>
 				<td>
 					<input type="text" class="input" name="nelink_log3" id="nelink_log3" style="width: 240px" value="<% nvram_get_x("","nelink_log3"); %>" />
 				</td>
