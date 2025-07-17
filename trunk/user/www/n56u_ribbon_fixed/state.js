@@ -497,8 +497,8 @@ if (found_app_frp()){
 	tablink[9].push('Advanced_frp_log.asp');
 }
 if (found_app_nelink()){
-	sqm_array = new Array("","Advanced_nelink.asp");
-	tablink[20] = (sqm_array);
+	nelink_array = new Array("","Advanced_nelink.asp");
+	tablink[20] = (nelink_array);
 }
 
 //Level 2 Menu
