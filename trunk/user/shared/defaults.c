@@ -813,12 +813,18 @@ struct nvram_pair router_defaults[] = {
 	/*nelink*/
 	{ "nelink_enable", "0" },
 	{ "nelink_keyg", "abc123" },
-	{ "nelink_ip", "20" },
+	{ "nelink_ip", "10.26.2.x" },
 	{ "nelink_inlan1", "192.168.x.0" },
-	{ "nelink_xuip1", "" },
-	{ "nelink_inlan2", "" },
-	{ "nelink_xuip2", "" },
+	{ "nelink_xuip1", "10.26.2.x" },
+	{ "nelink_inlan2", "192.168.x.0" },
+	{ "nelink_xuip2", "10.26.2.x" },
 	{ "nelink_log", "#" },
+	{ "nelink_inlan3", "192.168.x.0" },
+	{ "nelink_xuip3", "" },
+	{ "nelink_inlan4", "192.168.x.0" },
+	{ "nelink_xuip4", "10.26.2.x" },
+	{ "nelink_log2", "#" },
+	{ "nelink_log3", "#" },
 #endif
 
 	/*DDNSTO*/
