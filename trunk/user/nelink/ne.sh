@@ -8,7 +8,7 @@ iptables -D FORWARD -i nehxkj -j ACCEPT 2>/dev/null
 iptables -t nat -D POSTROUTING -o nehxkj -j MASQUERADE 2>/dev/null
 killall netlink
 killall -9 netlink
-sleep 5
+sleep 3
 #清除nelink的虚拟网卡
 ifconfig nehxkj down && ip tuntap del nehxkj mode tun
 
@@ -20,33 +20,23 @@ nelink_inlan1=$(nvram get nelink_inlan1)
 echo $nelink_inlan1
 nelink_xuip1=$(nvram get nelink_xuip1)
 echo $nelink_xuip1
-nelink_inlan2=$(nvram get nelink_inlan2)
-echo $netink_inlan2
-nelink_xuip2=$(nvram get nelink_xuip2)
-echo $nelink_xuip2
 nelink_log=$(nvram get nelink_log)
+lan_ipaddr=$(nvram get lan_ipaddr) 
+echo $lan_ipaddr
 echo $nelink_log
-nelink_inlan3=$(nvram get nelink_inlan3)
-echo $nelink_inlan3
-nelink_xuip3=$(nvram get nelink_xuip3)
-echo $nelink_xuip3
-nelink_inlan4=$(nvram get nelink_inlan4)
-echo $netink_inlan4
-nelink_xuip4=$(nvram get nelink_xuip4)
-echo $nelink_xuip4
 nelink_log2=$(nvram get nelink_log2)
 echo $nelink_log2
 nelink_log3=$(nvram get nelink_log3)
 echo $nelink_log3
 
-/usr/bin/netlink --tun-name nehxkj  -g $nelink_keyg -l $nelink_ip/24 -p tcp://107.172.30.239:23333 --api-addr $nelink_ip:6688 &
+/usr/bin/netlink --tun-name nehxkj  -g $nelink_keyg -l 10.26.2.$nelink_ip/24 -p tcp://107.172.30.239:23333 --api-addr $lan_ipaddr:6688 &
 
-sleep 5
+sleep 3
 
 route add -net $nelink_inlan1/24 gw $nelink_xuip1
-$nelink_log route add -net $nelink_inlan2/24 gw $nelink_xuip2
-$nelink_log2 route add -net $nelink_inlan3/24 gw $nelink_xuip3
-$nelink_log3 route add -net $nelink_inlan4/24 gw $nelink_xuip4
+$nelink_log
+$nelink_log2
+$nelink_log3
 
 if [ ! -z "`pidof netlink`" ] ; then
 logger -t "netlink" "启动成功"
