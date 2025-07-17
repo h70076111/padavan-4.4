@@ -165,7 +165,7 @@ function done_validating(action){
 										<tr>
 										<th>本机虚拟ip（格式 20）</th>
 				<td>
-					<input type="text" class="input" name="nelink_ip" id="nelink_ip" style="width: 60px" value="<% nvram_get_x("","nelink_ip"); %>" />
+					<input type="text" class="input" name="nelink_ip" id="nelink_ip" style="width: 100px" value="<% nvram_get_x("","nelink_ip"); %>" />
 				</td>
 
 										</tr>
@@ -173,77 +173,77 @@ function done_validating(action){
 										<tr>
 										<th>对端的IP（格式 192.168.x.0） </th>
 				<td>
-					<input type="text" class="input" name="nelink_inlan1" id="nelink_inlan1" style="width: 200px" value="<% nvram_get_x("","nelink_inlan1"); %>" />
+					<input type="text" class="input" name="nelink_inlan1" id="nelink_inlan1" style="width: 120px" value="<% nvram_get_x("","nelink_inlan1"); %>" />
 				</td>
 
 										</tr>
 										<tr>
 										<th>对端的虚拟ip（格式 10.26.2.x)</th>
 				<td>
-					<input type="text" class="input" name="nelink_xuip1" id="nelink_xuip1" style="width: 200px" value="<% nvram_get_x("","nelink_xuip1"); %>" />
+					<input type="text" class="input" name="nelink_xuip1" id="nelink_xuip1" style="width: 100px" value="<% nvram_get_x("","nelink_xuip1"); %>" />
 				</td>
 
 										</tr>
 										<tr>
 										<th>开起第2个设备(去除#号开起）</th>
 				<td>
-					<input type="text" class="input" name="nelink_log" id="nelink_log" style="width: 50px" value="<% nvram_get_x("","nelink_log"); %>" />
+					<input type="text" class="input" name="nelink_log" id="nelink_log" style="width: 20px" value="<% nvram_get_x("","nelink_log"); %>" />
 				</td>
 
 										</tr>
 										<tr>
 											<th>对端的IP2（格式 192.168.x.0） </th>
 				<td>
-					<input type="text" class="input" name="nelink_inlan2" id="nelink_inlan2" style="width: 200px" value="<% nvram_get_x("","nelink_inlan2"); %>" />
+					<input type="text" class="input" name="nelink_inlan2" id="nelink_inlan2" style="width: 120px" value="<% nvram_get_x("","nelink_inlan2"); %>" />
 				</td>
 
 										</tr>
 										<tr>
 										<th>对端的虚拟ip2（格式 10.26.2.x)</th>
 				<td>
-					<input type="text" class="input" name="nelink_xuip2" id="nelink_xuip2" style="width: 200px" value="<% nvram_get_x("","nelink_xuip2"); %>" />
+					<input type="text" class="input" name="nelink_xuip2" id="nelink_xuip2" style="width: 100px" value="<% nvram_get_x("","nelink_xuip2"); %>" />
 				</td>
 
 										</tr>
 										<tr>
 										<th>开起第3个设备(去除#号开起）</th>
 				<td>
-					<input type="text" class="input" name="nelink_log2" id="nelink_log2" style="width: 50px" value="<% nvram_get_x("","nelink_log2"); %>" />
+					<input type="text" class="input" name="nelink_log2" id="nelink_log2" style="width: 20px" value="<% nvram_get_x("","nelink_log2"); %>" />
 				</td>
 
 										</tr>
 										<tr>
 											<th>对端的IP3（格式 192.168.x.0） </th>
 				<td>
-					<input type="text" class="input" name="nelink_inlan3" id="nelink_inlan3" style="width: 200px" value="<% nvram_get_x("","nelink_inlan3"); %>" />
+					<input type="text" class="input" name="nelink_inlan3" id="nelink_inlan3" style="width: 120px" value="<% nvram_get_x("","nelink_inlan3"); %>" />
 				</td>
 
 										</tr>
 										<tr>
 										<th>对端的虚拟ip3（格式 10.26.2.x)</th>
 				<td>
-					<input type="text" class="input" name="nelink_xuip3" id="nelink_xuip3" style="width: 200px" value="<% nvram_get_x("","nelink_xuip3"); %>" />
+					<input type="text" class="input" name="nelink_xuip3" id="nelink_xuip3" style="width: 100px" value="<% nvram_get_x("","nelink_xuip3"); %>" />
 				</td>
 
 										</tr>
 										<tr>
 										<th>开起第4个设备(去除#号开起）</th>
 				<td>
-					<input type="text" class="input" name="nelink_log3" id="nelink_log3" style="width: 50px" value="<% nvram_get_x("","nelink_log3"); %>" />
+					<input type="text" class="input" name="nelink_log3" id="nelink_log3" style="width: 20px" value="<% nvram_get_x("","nelink_log3"); %>" />
 				</td>
 
 										</tr>
 										<tr>
 											<th>对端的IP4（格式 192.168.x.0） </th>
 				<td>
-					<input type="text" class="input" name="nelink_inlan4" id="nelink_inlan4" style="width: 200px" value="<% nvram_get_x("","nelink_inlan2"); %>" />
+					<input type="text" class="input" name="nelink_inlan4" id="nelink_inlan4" style="width: 120px" value="<% nvram_get_x("","nelink_inlan2"); %>" />
 				</td>
 
 										</tr>
 										<tr>
 										<th>对端的虚拟ip4（格式 10.26.2.x)</th>
 				<td>
-					<input type="text" class="input" name="nelink_xuip4" id="nelink_xuip4" style="width: 200px" value="<% nvram_get_x("","nelink_xuip4"); %>" />
+					<input type="text" class="input" name="nelink_xuip4" id="nelink_xuip4" style="width: 100px" value="<% nvram_get_x("","nelink_xuip4"); %>" />
 				</td>
 
 										</tr>
