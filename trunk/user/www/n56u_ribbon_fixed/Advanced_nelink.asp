@@ -71,6 +71,13 @@ function  button_restartwg(){
 function done_validating(action){
 	refreshpage();
 }
+
+function button_nelink_web(){
+	var port = '6688';
+	var url = window.location.protocol + "//" + window.location.hostname + ":" + port;
+	window.open(url);
+}
+
 </script>
 </head>
 
@@ -207,11 +214,17 @@ function done_validating(action){
 
 										</tr>
 										<tr>
+
+									<td style="border-top: 0 none;">
+						&nbsp;<input class="btn btn-success" style="" type="button" value="打开管理页面" onclick="button_nelink_web()" />
+												</div>
+										</td>
 										<td colspan="4" style="border-top: 0 none;">
 												<br />
 												<center><input class="btn btn-primary" style="width: 219px" type="button" value="<#CTL_apply#>" onclick="applyRule()" /></center>
-											</td>
-										</tr>														
+										</tr>
+										<tr>
+													
 	</table>
 
 										
