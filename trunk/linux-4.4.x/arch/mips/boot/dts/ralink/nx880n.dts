@@ -7,9 +7,6 @@
 #include "mt7621-pinctrl-default-gpio.dtsi"
 
 / {
-	compatible = "mediatek,mt7621-soc";
-	model = "NX880N";
-
 	chosen {
 		bootargs = "console=ttyS0,115200";
 	};
