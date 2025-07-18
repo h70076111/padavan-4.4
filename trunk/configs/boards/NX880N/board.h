@@ -1,8 +1,8 @@
-/* ZTE NX880N */
+/* NX880N */
 
-#define BOARD_PID		"ZTE-NX880N"
-#define BOARD_NAME		"ZTE-NX880N"
-#define BOARD_DESC		"ZTE NX880N Wireless Router"
+#define BOARD_PID		"NX880N"
+#define BOARD_NAME		"NX880N"
+#define BOARD_DESC		"NX880N Wireless Router"
 #define BOARD_VENDOR_NAME	"ZTE Technology"
 #define BOARD_VENDOR_URL	"http://www.ztehome.com.cn/"
 #define BOARD_MODEL_URL		"http://www.ztehome.com.cn/"
