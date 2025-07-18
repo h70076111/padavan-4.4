@@ -31,7 +31,7 @@
 
 		partition@f80000 {
 			label = "Storage";
-			reg = <0xf80000 0x220000>; /* 512K */
+			reg = <0xf80000 0x80000>; /* 512K */
 		};
 
 		partition@all {
