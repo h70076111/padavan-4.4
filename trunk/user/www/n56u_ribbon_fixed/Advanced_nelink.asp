@@ -192,7 +192,7 @@ function button_nelink_web(){
 
 										</tr>
 										<tr>
-										<th>开起第2个设备(不用留空）</th>
+										<th>作点地址</th>
 				<td>
 					<input type="text" class="input" name="nelink_log" id="nelink_log" style="width: 240px" value="<% nvram_get_x("","nelink_log"); %>" />
 				</td>
@@ -200,14 +200,14 @@ function button_nelink_web(){
 
 										</tr>
 										<tr>
-										<th>开起第3个设备(不用留空）</th>
+										<th>开起第2个设备(不用留空）</th>
 				<td>
 					<input type="text" class="input" name="nelink_log2" id="nelink_log2" style="width: 240px" value="<% nvram_get_x("","nelink_log2"); %>" />
 				</td>
 
 										</tr>
 										<tr>
-										<th>开起第4个设备(route add -net inip/24 gw xuip）</th>
+										<th>开起第3个设备(route add -net inip/24 gw xuip）</th>
 				<td>
 					<input type="text" class="input" name="nelink_log3" id="nelink_log3" style="width: 240px" value="<% nvram_get_x("","nelink_log3"); %>" />
 				</td>
