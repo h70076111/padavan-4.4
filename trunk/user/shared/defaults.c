@@ -821,6 +821,15 @@ struct nvram_pair router_defaults[] = {
 	{ "nelink_log3", "" },
 #endif
 
+#if defined(APP_ETINK)
+	/*etink*/
+	{ "etink_enable", "0" },
+	{ "etink_keyg", "abc123" },
+	{ "etink_log", "" },
+	{ "etink_log2", "" },
+	{ "etink_log3", "" },
+#endif
+
 	/*DDNSTO*/
 	{ "ddnsto_enable", "0" },
 	{ "ddnsto_id", "" },
