@@ -227,6 +227,9 @@ endif
 ifneq ($(CONFIG_FIRMWARE_INCLUDE_NELINK),y)
 	rm -f $(INSTALLDIR)/www/Advanced_nelink.asp
 endif
+ifneq ($(CONFIG_FIRMWARE_INCLUDE_ETINK),y)
+	rm -f $(INSTALLDIR)/www/Advanced_etink.asp
+endif
 ifneq ($(CONFIG_FIRMWARE_INCLUDE_ALDRIVER),y)
 	rm -f $(INSTALLDIR)/www/Advanced_aliyundrive.asp
 endif
