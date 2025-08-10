@@ -91,11 +91,6 @@ logger -t "自动启动" "正在启动阿里云盘"
 /usr/bin/aliyundrive-webdav.sh start
 fi
 
-if [ $(nvram get wireguard_enable) = 1 ] ; then
-logger -t "自动启动" "正在启动wireguard"
-/usr/bin/wireguard.sh start
-fi
-
 if [ $(nvram get sqm_enable) = 1 ] ; then
 sleep 30
 logger -t "自动启动" "正在启动SQM QOS"
@@ -115,4 +110,9 @@ fi
 if [ $(nvram get nelink_enable) = 1 ] ; then
 logger -t "自动启动" "正在启动NE异地组网"
 /usr/bin/ne.sh start &
+fi
+
+if [ $(nvram get etink_enable) = 1 ] ; then
+logger -t "自动启动" "正在启动ET异地组网"
+/usr/bin/et.sh start &
 fi
