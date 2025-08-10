@@ -1039,6 +1039,18 @@
 	};
 #endif
 
+#if defined(APP_ETINK)
+	struct variable variables_ETINK[] = {
+			{"etink_enable", "", NULL, EVM_RESTART_ETINK},
+			{"etink_keyg", "", NULL, EVM_RESTART_ETLINK},
+			{"etink_log", "", NULL, EVM_RESTART_ETINK},,
+			{"etink_log2", "", NULL, EVM_RESTART_ETINK},
+			{"etink_log3", "", NULL, EVM_RESTART_ETINK},
+			{0,0,0,0}
+	};
+#endif
+
+
 #if defined(APP_DDNSTO)
 	struct variable variables_DDNSTO[] = {
 			{"ddnsto_enable", "", NULL, EVM_RESTART_DDNSTO},
@@ -1413,6 +1425,9 @@
 #if defined(APP_NELINK)
 		{"NELINK",		variables_NELINK},
 #endif
+#if defined(APP_ETINK)
+		{"ETINK",		variables_ETINK},
+#endif
 #if defined(APP_ALDRIVER)
 		{"ALDRIVER",		variables_ALDRIVER},
 #endif
@@ -1533,6 +1548,9 @@
 #endif
 #if defined(APP_NELINK)
 		{EVM_RESTART_NELINK,		EVT_RESTART_NELINK,		RCN_RESTART_NELINK,	0},
+#endif
+#if defined(APP_ETINK)
+		{EVM_RESTART_ETINK,		EVT_RESTART_ETINK,		RCN_RESTART_ETINK,	0},
 #endif
 #if defined(APP_DDNSTO)
 		{EVM_RESTART_DDNSTO,		EVT_RESTART_DDNSTO,		RCN_RESTART_DDNSTO,	0},
