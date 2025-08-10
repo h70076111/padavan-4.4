@@ -2572,6 +2572,8 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 #if defined(APP_NELINK)
 	int found_app_nelink = 1;
 #else
+	int found_app_nelink = 0;
+#endif
 #if defined(APP_ETINK)
 	int found_app_etink = 1;
 #else
