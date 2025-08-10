@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><#Web_Title#> - <#menu5_35#></title>
+<title><#Web_Title#> - <#menu5_37#></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -67,8 +67,9 @@ if(m_mapplist.length > 0){
 var isMenuopen = 0;
 function initial(){
 	show_banner(2);
-	show_menu(5,17,0);
-	showmenu();
+	show_menu(5, 27, 0);
+	showROUTEList();
+	showMAPPList();
 	show_footer();
 	fill_status(hxcli_status());
 	change_hxcli_enable(1);
@@ -76,11 +77,6 @@ function initial(){
 	if (!login_safe())
         		textarea_scripts_enabled(0);
 
-}
-function showmenu(){
-showhide_div('allink', found_app_aliddns());
-showhide_div('zelink', found_app_zerotier());
-showhide_div('ddlink', found_app_ddnsto());
 }
 
 function fill_status(status_code){
@@ -441,29 +437,14 @@ function button_hxcli_status() {
 	</ul>
 	</div>
 	</div>
-				<div class="span9">
-				<!--Body content-->
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="box well grad_colour_dark_blue">
-							<h2 class="box_head round_top"><#menu5_30#> - <#menu5_35#></h2>
-							<div class="round_bottom">
-							<div>
-                            <ul class="nav nav-tabs" style="margin-bottom: 10px;">
-								<li id="allink" style="display:none">
-                                    <a href="Advanced_aliddns.asp"><#menu5_23_1#></a>
-                                </li>
-								<li id="zelink" style="display:none">
-                                    <a href="Advanced_vpnkey.asp"><#menu5_32_1#></a>
-                                </li>
-								<li id="ddlink" style="display:none">
-                                    <a href="Advanced_ddnsto.asp"><#menu5_34_1#></a>
-                                </li>
-								<li class="active">
-                                    <a href="Advanced_hxzn.asp"><#menu5_35_1#></a>
-                                </li>
-                            </ul>
-                        </div>
+	<div class="span9">
+	<!--Body content-->
+	<div class="row-fluid">
+	<div class="span12">
+	<div class="box well grad_colour_dark_blue">
+	<h2 class="box_head round_top"><#menu5_37#></h2>
+	<div class="round_bottom">
+	<div>
 	<ul class="nav nav-tabs" style="margin-bottom: 10px;">
 	<li class="active"><a id="tab_hxcli_cfg" href="#cfg">基本设置</a></li>
 	<li><a id="tab_hxcli_sta" href="#sta">运行状态</a></li>
