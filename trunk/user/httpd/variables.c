@@ -1042,7 +1042,7 @@
 #if defined(APP_ETINK)
 	struct variable variables_ETINK[] = {
 			{"etink_enable", "", NULL, EVM_RESTART_ETINK},
-			{"etink_keyg", "", NULL, EVM_RESTART_ETLINK},
+			{"etink_keyg", "", NULL, EVM_RESTART_ETINK},
 			{"etink_log", "", NULL, EVM_RESTART_ETINK},,
 			{"etink_log2", "", NULL, EVM_RESTART_ETINK},
 			{"etink_log3", "", NULL, EVM_RESTART_ETINK},
