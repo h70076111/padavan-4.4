@@ -578,6 +578,23 @@ void restart_nelink(void){
 }
 #endif
 
+#if defined(APP_ETINK)
+void stop_etink(void){
+	eval("/usr/bin/et.sh","stop");
+}
+
+void start_etink(void){
+	int etink_enable = nvram_get_int("etink_enable");
+	if ( etink_enable == 1)
+		eval("/usr/bin/et.sh","start");
+}
+
+void restart_etink(void){
+	stop_etink();
+	start_etink();
+}
+#endif
+
 #if defined(APP_HXCLI)
 void stop_hxcli(void){
 	eval("/usr/bin/hx.sh","stop");
@@ -880,6 +897,9 @@ stop_services(int stopall)
 #endif
 #if defined(APP_NELINK)
 	stop_nelink();
+#endif
+#if defined(APP_ETLINK)
+	stop_etink();
 #endif
 #if defined(APP_ALIDDNS)
 	stop_aliddns();
