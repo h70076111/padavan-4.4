@@ -504,7 +504,7 @@ if (found_app_nelink()){
 	tablink[20] = (nelink_array);
 }
 if (found_app_etink()){
-	nelink_array = new Array("","Advanced_etink.asp");
+	etink_array = new Array("","Advanced_etink.asp");
 	tablink[21] = (etink_array);
 }
 
