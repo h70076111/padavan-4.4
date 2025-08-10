@@ -161,7 +161,7 @@ typedef u_int8_t u8;
 #define EVT_RESTART_SHADOWSOCKS	2
 #define EVT_RESTART_ADBYBY	2
 #define EVT_RESTART_ZEROTIER    2
-#define EVT_RESTART_NEINK     	2
+#define EVT_RESTART_ETINK     	2
 #define EVT_RESTART_ALDRIVER     	2
 #define EVT_RESTART_WIREGUARD     	2
 #define EVT_RESTART_SQM		2
