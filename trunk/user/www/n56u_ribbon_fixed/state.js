@@ -429,6 +429,9 @@ if (found_app_frp()){
 if (found_app_nelink()){
 	tabtitle[20] = new Array("", "NE异地组网");
 }
+if (found_app_etink()){
+	tabtitle[21] = new Array("", "ET异地组网");
+}
 
 //Level 3 Tab title
 
@@ -500,6 +503,10 @@ if (found_app_nelink()){
 	nelink_array = new Array("","Advanced_nelink.asp");
 	tablink[20] = (nelink_array);
 }
+if (found_app_etink()){
+	nelink_array = new Array("","Advanced_etink.asp");
+	tablink[21] = (etink_array);
+}
 
 //Level 2 Menu
 menuL2_title = new Array(20)
@@ -546,6 +553,10 @@ if (found_app_frp()){
 
 if (found_app_nelink()){
 	menuL2_title.push("NE异地组网");
+} else menuL2_title.push("");
+
+if (found_app_etink()){
+	menuL2_title.push("ET异地组网");
 } else menuL2_title.push("");
 
 menuL2_link  = new Array("", tablink[0][1], tablink[1][1], tablink[2][1], tablink[3][1], tablink[4][1], tablink[5][1], tablink[6][1], tablink[7][1], support_2g_radio() ? tablink[8][1] : "Main_EStatus_Content.asp", tablink[9][1]);
@@ -599,6 +610,10 @@ if (found_app_frp()){
 
 if (found_app_nelink()){
 	menuL2_link.push(nelink_array[1]);
+} else menuL2_link.push("");
+
+if (found_app_etink()){
+	menuL2_link.push(etink_array[1]);
 } else menuL2_link.push("");
 
 //Level 1 Menu in Gateway, Router mode
