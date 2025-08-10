@@ -417,8 +417,8 @@ if (found_app_smartdns()||found_app_adguardhome()){
 if (found_app_ddnsto()||found_app_zerotier()||found_app_wireguard()||found_app_aliddns()){
 	tabtitle[16] = new Array("", "<#menu5_30#>");
 }
-if (found_app_aldriver()){
-	tabtitle[17] = new Array("", "<#menu5_36#>");
+if (found_app_hxcli()){
+	tabtitle[17] = new Array("", "宏兴智能组网");
 }
 if (found_app_sqm()){
 	tabtitle[18] = new Array("", "QoS限速");
@@ -479,15 +479,15 @@ if (found_app_ddnsto()){
 	zerotier_array = new Array("","Advanced_vpnkey.asp");
 	tablink[16] = (zerotier_array);
 }else if (found_app_wireguard()){
-	wireguard_array = new Array("","Advanced_hxzn.asp");
+	wireguard_array = new Array("","Advanced_wireguard.asp");
 	tablink[16] = (wireguard_array);
 }else if (found_app_aliddns()){
 	ddnsto_array = new Array("","Advanced_aliddns.asp");
 	tablink[16] = (aliddns_array);
 }
-if (found_app_aldriver()){
-	aldriver_arry = new Array("","Advanced_aliyundrive.asp");
-	tablink[17] = (aldriver_arry);
+if (found_app_hxcli()){
+	hxcli_arry = new Array("","Advanced_hxzn.asp");
+	tablink[17] = (hxcli_arry);
 }
 if (found_app_sqm()){
 	sqm_array = new Array("","Advanced_SQM.asp");
@@ -539,8 +539,8 @@ if (found_app_ddnsto()||found_app_zerotier()||found_app_wireguard()||found_app_a
 	menuL2_title.push("<#menu5_30#>");
 } else menuL2_title.push("");
 
-if (found_app_aldriver()){
-	menuL2_title.push("<#menu5_36#>");
+if (found_app_hxcli()){
+	menuL2_title.push("宏兴智能组网");
 } else menuL2_title.push("");
 
 if (found_app_sqm()){
@@ -596,8 +596,8 @@ if (found_app_ddnsto()){
 	menuL2_link.push(aliddns_array[1]);	
 } else menuL2_link.push("");
 
-if (found_app_aldriver()){
-	menuL2_link.push(aldriver_arry[1]);
+if (found_app_hxcli()){
+	menuL2_link.push(hxcli_arry[1]);
 } else menuL2_link.push("");
 
 if (found_app_sqm()){
