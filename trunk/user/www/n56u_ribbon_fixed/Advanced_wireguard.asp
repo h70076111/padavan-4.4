@@ -218,4 +218,3 @@ function done_validating(action){
 </div>
 </body>
 </html>
-
