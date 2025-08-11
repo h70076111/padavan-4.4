@@ -459,10 +459,10 @@ function button_hxcli_status() {
 									</div>
 
 
-
 									<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
-
-
+									<tr> <th><#running_status#></th>
+                                            <td id="hxcli_status" colspan="3"></td>
+                                        </tr>
 										<tr>
 										<th width="30%" style="border-top: 0 none;">启用组网客户端</th>
 											<td style="border-top: 0 none;">
