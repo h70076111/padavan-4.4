@@ -563,6 +563,11 @@ void stop_adguardhome(void);
 void start_adguardhome(void);
 void restart_adguardhome(void);
 #endif
+#if defined(APP_EBAFA)
+void stop_bafa(void);
+void start_bafa(void);
+void restart_bafa(void);
+#endif
 #if defined(APP_ALIDDNS)
 void stop_aliddns(void);
 void start_aliddns(void);
