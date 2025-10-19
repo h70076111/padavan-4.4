@@ -221,6 +221,9 @@ endif
 ifneq ($(CONFIG_FIRMWARE_INCLUDE_ALDRIVER),y)
 	rm -f $(INSTALLDIR)/www/Advanced_aliyundrive.asp
 endif
+ifneq ($(CONFIG_FIRMWARE_INCLUDE_BAFA),y)
+	rm -f $(INSTALLDIR)/www/Advanced_bafa.asp
+endif
 ifneq ($(CONFIG_FIRMWARE_INCLUDE_HXCLI),y)
 	rm -f $(INSTALLDIR)/www/Advanced_hxzn.asp
 endif
