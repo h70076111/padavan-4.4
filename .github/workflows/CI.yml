@@ -74,7 +74,7 @@ jobs:
 
         ##内网穿透服务##
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config #zerotier ~1.3M
-        echo "CONFIG_FIRMWARE_INCLUDE_AFKEY=y" >> .config #aliddns
+        echo "CONFIG_FIRMWARE_INCLUDE_BAFA=y" >> .config #aliddns
         echo "CONFIG_FIRMWARE_INCLUDE_HXCLI=y" >> .config #wirguard
         echo "CONFIG_FIRMWARE_INCLUDE_NELINK=y" >> .config #gecoac
         #echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
