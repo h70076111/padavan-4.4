@@ -2,7 +2,7 @@
 <!--Copyright by hiboy-->
 <html>
 <head>
-<title><#Web_Title#> - NE异地组网</title>
+<title><#Web_Title#> - NE组网</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -24,30 +24,58 @@
 <script type="text/javascript" src="/help.js"></script>
 <script>
 var $j = jQuery.noConflict();
+
+<% nelink_status(); %>
 <% login_state_hook(); %>
 $j(document).ready(function() {
 	
 	init_itoggle('nelink_enable');
 
+	$j("#tab_nelink_cfg, #tab_nelink_web, #tab_nelink_sta, #tab_nelink_log").click(
+	function () {
+		var newHash = $j(this).attr('href').toLowerCase();
+		showTab(newHash);
+		return false;
+	});
+
 });
+
 
 </script>
 <script>
 
-<% login_state_hook(); %>
-
-
 function initial(){
 	show_banner(2);
-	show_menu(5,17,0);
-	showmenu();
+	show_menu(5,33,0);
 	show_footer();
-	if (!login_safe())
-        		textarea_scripts_enabled(0);
+	fill_status(nelink_status());
+
 }
 
-function textarea_scripts_enabled(v){
-	inputCtrl(document.form['scripts.wg0.conf'], v);
+function fill_status(status_code){
+	var stext = "Unknown";
+	if (status_code == 0)
+		stext = "<#Stopped#>";
+	else if (status_code == 1)
+		stext = "<#Running#>";
+	$("nelink_status").innerHTML = '<span class="label label-' + (status_code != 0 ? 'success' : 'warning') + '">' + stext + '</span>';
+}
+
+var arrHashes = ["cfg","web","sta","log"];
+function showTab(curHash) {
+	var obj = $('tab_nelink_' + curHash.slice(1));
+	if (obj == null || obj.style.display == 'none')
+	curHash = '#cfg';
+	for (var i = 0; i < arrHashes.length; i++) {
+		if (curHash == ('#' + arrHashes[i])) {
+			$j('#tab_nelink_' + arrHashes[i]).parents('li').addClass('active');
+			$j('#wnd_nelink_' + arrHashes[i]).show();
+		} else {
+			$j('#wnd_nelink_' + arrHashes[i]).hide();
+			$j('#tab_nelink_' + arrHashes[i]).parents('li').removeClass('active');
+			}
+		}
+	window.location.hash = curHash;
 }
 
 function applyRule(){
@@ -60,11 +88,11 @@ function applyRule(){
 	document.form.submit();
 }
 
-function  button_restartwg(){
+function  button_restarnelink(){
     	var $j = jQuery.noConflict();
     	$j.post('/apply.cgi',
     	{
-        		'action_mode': ' Restartwg ',
+        		'action_mode': ' Restarnelink ',
     	});
 }
 
@@ -73,7 +101,7 @@ function done_validating(action){
 }
 
 function button_nelink_web(){
-	var port = '6688';
+	var port = '23336';
 	var url = window.location.protocol + "//" + window.location.hostname + ":" + port;
 	window.open(url);
 }
@@ -127,11 +155,15 @@ function button_nelink_web(){
 	<div class="row-fluid">
 	<div class="span12">
 	<div class="box well grad_colour_dark_blue">
-	<h2 class="box_head round_top">宏兴智能组网</h2>
+	<h2 class="box_head round_top">NE智能组网</h2>
 	<div class="round_bottom">
-	<div class="row-fluid">
-	<div id="tabMenu" class="submenuBlock"></div>
-	</ul>
+	<div>
+	<ul class="nav nav-tabs" style="margin-bottom: 10px;">
+	<li class="active"><a id="tab_nelink_cfg" href="#cfg">基本设置</a></li>
+	<li><a id="tab_nelink_log" href="#log">运行日志</a></li>
+	</th>
+	</tr>
+	<tr>
 	</div>
 	<div class="row-fluid">
 									<div id="tabMenu" class="submenuBlock"></div>
@@ -139,12 +171,11 @@ function button_nelink_web(){
 									<p>NE智能组网是一个易于配置异地组网 直连技术支持IPV6<br>
 									</p>
 									</div>
-
-
-
-									<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
-
-
+										<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
+									<tr> <th><#running_status#></th>
+                                            <td id="nelink_status" colspan="3"></td>
+                                        </tr><td></td><td></td><td></td>
+										<tr>
 										<tr>
 										<th width="30%" style="border-top: 0 none;">启用组网客户端</th>
 											<td style="border-top: 0 none;">
@@ -192,9 +223,9 @@ function button_nelink_web(){
 
 										</tr>
 										<tr>
-										<th>作点地址</th>
+										<th>节点地址</th>
 				<td>
-					<input type="text" class="input" name="nelink_log" id="nelink_log" style="width: 240px" value="<% nvram_get_x("","nelink_log"); %>" />
+					<input type="text" class="input" readonly name="nelink_log" id="nelink_log" style="width: 240px" value="<% nvram_get_x("","nelink_log"); %>" />
 				</td>
 
 
@@ -227,19 +258,42 @@ function button_nelink_web(){
 													
 	</table>
 
-										
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	<!-- 日志 -->
+	<div id="wnd_nelink_log" style="display:none">
+	<table width="100%" cellpadding="4" cellspacing="0" class="table">
+	<tr>
+	<td colspan="3" style="border-top: 0 none; padding-bottom: 0px;">
+	<textarea rows="21" class="span12" style="height:377px; font-family:'Courier New', Courier, mono; font-size:13px;" readonly="readonly" wrap="off" id="textarea"><% nvram_dump("nelink.log",""); %></textarea>
+	</td>
+	</tr>
+	<tr>
+	<td width="15%" style="text-align: left; padding-bottom: 0px;">
+	<input type="button" onClick="location.reload()" value="刷新日志" class="btn btn-primary" style="width: 200px">
+	</td>
+	<td width="15%" style="text-align: left; padding-bottom: 0px;">
+	<input type="button" onClick="location.href='nelink.log'" value="<#CTL_onlysave#>" class="btn btn-success" style="width: 200px">
+	</td>
+	<td width="75%" style="text-align: right; padding-bottom: 0px;">
+	<input type="button" onClick="clearLog();" value="清除日志" class="btn btn-info" style="width: 200px">
+	</td>
+	</tr>
+	<br><td colspan="5" style="border-top: 0 none; text-align: center; padding-top: 4px;">
+	<span style="color:#888;">🚫注意：日志可能包含一些隐私信息，切勿随意分享！</span>
+	</td>
+	</table>
 	</div>
 
+	</table>
+	</div>
+	
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
 	</form>
-
 	<div id="footer"></div>
-</div>
+	</div>
 </body>
+
 </html>
