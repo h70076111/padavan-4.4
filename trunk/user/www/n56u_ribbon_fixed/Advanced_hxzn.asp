@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><#Web_Title#> - <#menu5_37#></title>
+<title><#Web_Title#> - 宏兴智能组网</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -23,9 +23,11 @@
 <script type="text/javascript" src="/help.js"></script>
 <script>
 var $j = jQuery.noConflict();
+
 <% hxcli_status(); %>
 <% login_state_hook(); %>
 $j(document).ready(function() {
+
 
 	init_itoggle('hxcli_enable');
 	init_itoggle('hxcli_log');
@@ -46,6 +48,26 @@ $j(document).ready(function() {
 </script>
 <script>
 
+function initial(){
+	show_banner(2);
+	show_menu(5,33,0);
+	fill_status(hxcli_status());
+	change_hxcli_enable(1);
+	change_hxcli_model(1);
+	if (!login_safe())
+        		textarea_scripts_enabled(0);
+
+}
+
+function fill_status(status_code){
+	var stext = "Unknown";
+	if (status_code == 0)
+		stext = "<#Stopped#>";
+	else if (status_code == 1)
+		stext = "<#Running#>";
+	$("hxcli_status").innerHTML = '<span class="label label-' + (status_code != 0 ? 'success' : 'warning') + '">' + stext + '</span>';
+}
+
 var m_routelist = [<% get_nvram_list("HXCLI", "HXCLIroute"); %>];
 var mroutelist_ifield = 4;
 if(m_routelist.length > 0){
@@ -62,30 +84,6 @@ if(m_mapplist.length > 0){
 	for (var i = 0; i < m_mapplist.length; i++) {
 		m_mapplist[i][mmapplist_ifield] = i;
 	}
-}
-
-var isMenuopen = 0;
-function initial(){
-	show_banner(2);
-	show_menu(5, 27, 0);
-	showROUTEList();
-	showMAPPList();
-	show_footer();
-	fill_status(hxcli_status());
-	change_hxcli_enable(1);
-	change_hxcli_model(1);
-	if (!login_safe())
-        		textarea_scripts_enabled(0);
-
-}
-
-function fill_status(status_code){
-	var stext = "Unknown";
-	if (status_code == 0)
-		stext = "<#Stopped#>";
-	else if (status_code == 1)
-		stext = "<#Running#>";
-	$("hxcli_status").innerHTML = '<span class="label label-' + (status_code != 0 ? 'success' : 'warning') + '">' + stext + '</span>';
 }
 
 var arrHashes = ["cfg","pri","sta","log","help"];
@@ -118,11 +116,6 @@ function applyRule(){
 function done_validating(action){
 	refreshpage();
 }
-
-function textarea_scripts_enabled(v){
-    	inputCtrl(document.form['scripts.hx.conf'], v);
-}
-
 
 function change_hxcli_model(mflag){
 	var m = document.form.hxcli_model.value;
@@ -448,21 +441,22 @@ function button_hxcli_status() {
 	<ul class="nav nav-tabs" style="margin-bottom: 10px;">
 	<li class="active"><a id="tab_hxcli_cfg" href="#cfg">基本设置</a></li>
 	<li><a id="tab_hxcli_sta" href="#sta">运行状态</a></li>
-
-	</ul>
+	<li><a id="tab_hxcli_log" href="#log">运行日志</a></li>
+	</th>
+	</tr>
+	<tr>
 	</div>
 	<div class="row-fluid">
 									<div id="tabMenu" class="submenuBlock"></div>
 									<div class="alert alert-info" style="margin: 10px;">
 									<p>宏兴智能组网是一个易于配置异地组网 直连技术支持IPV6<br>
 									</p>
-									</div>
-
-
+										</div>
 									<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
 									<tr> <th><#running_status#></th>
                                             <td id="hxcli_status" colspan="3"></td>
-                                        </tr>
+                                        </tr><td></td><td></td><td></td>
+										<tr>
 										<tr>
 										<th width="30%" style="border-top: 0 none;">启用组网客户端</th>
 											<td style="border-top: 0 none;">
@@ -480,7 +474,7 @@ function button_hxcli_status() {
 										</tr>
 
 										<tr>
-										<th>本机识别码(不能改动) </th>
+										<th>本机识别码(不要改动) </th>
 				<td>
 					<input type="text" class="input" readonly name="hxcli_token" id="hxcli_token" style="width: 200px" value="<% nvram_get_x("","hxcli_token"); %>" />
 				</td>
@@ -551,6 +545,30 @@ function button_hxcli_status() {
 			<span style="color:#888;">🔄 点击上方按钮刷新查看</span>
 		</td>
 	</tr>
+	</table>
+	</div>
+	<!-- 日志 -->
+	<div id="wnd_hxcli_log" style="display:none">
+	<table width="100%" cellpadding="4" cellspacing="0" class="table">
+	<tr>
+	<td colspan="3" style="border-top: 0 none; padding-bottom: 0px;">
+	<textarea rows="21" class="span12" style="height:377px; font-family:'Courier New', Courier, mono; font-size:13px;" readonly="readonly" wrap="off" id="textarea"><% nvram_dump("hx-cli.log",""); %></textarea>
+	</td>
+	</tr>
+	<tr>
+	<td width="15%" style="text-align: left; padding-bottom: 0px;">
+	<input type="button" onClick="location.reload()" value="刷新日志" class="btn btn-primary" style="width: 200px">
+	</td>
+	<td width="15%" style="text-align: left; padding-bottom: 0px;">
+	<input type="button" onClick="location.href='hx-cli.log'" value="<#CTL_onlysave#>" class="btn btn-success" style="width: 200px">
+	</td>
+	<td width="75%" style="text-align: right; padding-bottom: 0px;">
+	<input type="button" onClick="clearLog();" value="清除日志" class="btn btn-info" style="width: 200px">
+	</td>
+	</tr>
+	<br><td colspan="5" style="border-top: 0 none; text-align: center; padding-top: 4px;">
+	<span style="color:#888;">🚫注意：日志包含 token 和 密码 等隐私信息，切勿随意分享！</span>
+	</td>
 	</table>
 	</div>
 </body>
