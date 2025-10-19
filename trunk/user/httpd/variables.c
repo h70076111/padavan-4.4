@@ -1050,6 +1050,20 @@
 	};
 #endif
 
+#if defined(APP_BAFA)
+	struct variable variables_BAFA[] = {
+			{"bafa_enable", "", NULL, EVM_RESTART_BAFA},
+			{"bafa_topics", "", NULL, EVM_RESTART_BAFA},
+			{"bafa_token", "", NULL, EVM_RESTART_BAFA},
+			{"bafa_qos", "", NULL, EVM_RESTART_BAFA},
+			{"bafa_host", "", NULL, EVM_RESTART_BAFA},
+			{"bafa_port", "", NULL, EVM_RESTART_BAFA},
+			{"bafa_show", "", NULL, EVM_RESTART_BAFA},
+			{"bafa_bin", "", NULL, EVM_RESTART_BAFA},
+			{"scripts.bafa_script.sh", "File", NULL, EVM_RESTART_BAFA},
+			{0,0,0,0}
+	};
+#endif
 
 #if defined(APP_DDNSTO)
 	struct variable variables_DDNSTO[] = {
@@ -1431,6 +1445,9 @@
 #if defined(APP_ALDRIVER)
 		{"ALDRIVER",		variables_ALDRIVER},
 #endif
+#if defined(APP_BAFA)
+		{"BAFA",		variables_BAFA},
+#endif
 #if defined(APP_WIREGUARD)
 		{"WIREGUARD",		variables_WIREGUARD},
 #endif
@@ -1560,6 +1577,9 @@
 #endif
 #if defined(APP_SQM)
 		{EVM_RESTART_SQM,		EVT_RESTART_SQM,		RCN_RESTART_SQM,	0},
+#endif
+#if defined(APP_BAFA)
+		{EVM_RESTART_BAFA,		EVT_RESTART_BAFA,		RCN_RESTART_BAFA,	0},
 #endif
 #if defined(APP_WIREGUARD)
 		{EVM_RESTART_WIREGUARD,		EVT_RESTART_WIREGUARD,		RCN_RESTART_WIREGUARD,	0},
