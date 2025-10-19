@@ -24,30 +24,60 @@
 <script type="text/javascript" src="/help.js"></script>
 <script>
 var $j = jQuery.noConflict();
+
+<% etink_status(); %>
 <% login_state_hook(); %>
 $j(document).ready(function() {
 	
 	init_itoggle('etink_enable');
 
+	$j("#tab_etink_cfg, #tab_etink_web, #tab_etink_sta, #tab_etink_log").click(
+	function () {
+		var newHash = $j(this).attr('href').toLowerCase();
+		showTab(newHash);
+		return false;
+	});
+
 });
+
 
 </script>
 <script>
 
-<% login_state_hook(); %>
-
-
 function initial(){
 	show_banner(2);
-	show_menu(5,17,0);
-	showmenu();
+	show_menu(5,33,0);
+	fill_status(etink_status());
 	show_footer();
 	if (!login_safe())
         		textarea_scripts_enabled(0);
+
 }
 
-function textarea_scripts_enabled(v){
-	inputCtrl(document.form['scripts.wg0.conf'], v);
+function fill_status(status_code){
+	var stext = "Unknown";
+	if (status_code == 0)
+		stext = "<#Stopped#>";
+	else if (status_code == 1)
+		stext = "<#Running#>";
+	$("etink_status").innerHTML = '<span class="label label-' + (status_code != 0 ? 'success' : 'warning') + '">' + stext + '</span>';
+}
+
+var arrHashes = ["cfg","web","sta","log"];
+function showTab(curHash) {
+	var obj = $('tab_etink_' + curHash.slice(1));
+	if (obj == null || obj.style.display == 'none')
+	curHash = '#cfg';
+	for (var i = 0; i < arrHashes.length; i++) {
+		if (curHash == ('#' + arrHashes[i])) {
+			$j('#tab_etink_' + arrHashes[i]).parents('li').addClass('active');
+			$j('#wnd_etink_' + arrHashes[i]).show();
+		} else {
+			$j('#wnd_etink_' + arrHashes[i]).hide();
+			$j('#tab_etink_' + arrHashes[i]).parents('li').removeClass('active');
+			}
+		}
+	window.location.hash = curHash;
 }
 
 function applyRule(){
@@ -76,6 +106,144 @@ function button_etink_web(){
 	var port = '6688';
 	var url = window.location.protocol + "//" + window.location.hostname + ":" + port;
 	window.open(url);
+}
+
+function clearLog(){
+	var $j = jQuery.noConflict();
+	$j.post('/apply.cgi', {
+		'action_mode': ' CleareasytierLog ',
+		'next_host': 'Advanced_etink.asp#log'
+	}).always(function() {
+		setTimeout(function() {
+			location.reload(); 
+		}, 3000);
+	});
+}
+
+function button_et_peer(){
+	var $j = jQuery.noConflict();
+	$j('#btn_peer').attr('disabled', 'disabled');
+	$j.post('/apply.cgi', {
+		'action_mode': ' CMDetpeer ',
+		'next_host': 'Advanced_etink.asp#sta'
+	}).always(function() {
+		setTimeout(function() {
+			location.reload(); 
+		}, 3000);
+	});
+}
+
+function button_et_connector(){
+	var $j = jQuery.noConflict();
+	$j('#btn_connector').attr('disabled', 'disabled');
+	$j.post('/apply.cgi', {
+		'action_mode': ' CMDetconnector ',
+		'next_host': 'Advanced_etink.asp#sta'
+	}).always(function() {
+		setTimeout(function() {
+			location.reload(); 
+		}, 3000);
+	});
+}
+
+function button_et_stun(){
+	var $j = jQuery.noConflict();
+	$j('#btn_stun').attr('disabled', 'disabled');
+	$j.post('/apply.cgi', {
+		'action_mode': ' CMDetstun ',
+		'next_host': 'Advanced_etink.asp#sta'
+	}).always(function() {
+		setTimeout(function() {
+			location.reload(); 
+		}, 3000);
+	});
+}
+
+function button_et_route(){
+	var $j = jQuery.noConflict();
+	$j('#btn_route').attr('disabled', 'disabled');
+	$j.post('/apply.cgi', {
+		'action_mode': ' CMDetroute ',
+		'next_host': 'Advanced_etink.asp#sta'
+	}).always(function() {
+		setTimeout(function() {
+			location.reload(); 
+		}, 3000);
+	});
+}
+
+function button_et_peer_center(){
+	var $j = jQuery.noConflict();
+	$j('#btn_peer_center').attr('disabled', 'disabled');
+	$j.post('/apply.cgi', {
+		'action_mode': ' CMDetpeer_center ',
+		'next_host': 'Advanced_etink.asp#sta'
+	}).always(function() {
+		setTimeout(function() {
+			location.reload(); 
+		}, 3000);
+	});
+}
+
+function button_et_vpn_portal(){
+	var $j = jQuery.noConflict();
+	$j('#btn_vpn_portal').attr('disabled', 'disabled');
+	$j.post('/apply.cgi', {
+		'action_mode': ' CMDetvpn_portal ',
+		'next_host': 'Advanced_etink.asp#sta'
+	}).always(function() {
+		setTimeout(function() {
+			location.reload(); 
+		}, 3000);
+	});
+}
+
+function button_et_node(){
+	var $j = jQuery.noConflict();
+	$j('#btn_node').attr('disabled', 'disabled');
+	$j.post('/apply.cgi', {
+		'action_mode': ' CMDetnode ',
+		'next_host': 'Advanced_etink.asp#sta'
+	}).always(function() {
+		setTimeout(function() {
+			location.reload(); 
+		}, 3000);
+	});
+}
+
+function button_et_proxy(){
+	var $j = jQuery.noConflict();
+	$j('#btn_proxy').attr('disabled', 'disabled');
+	$j.post('/apply.cgi', {
+		'action_mode': ' CMDetproxy ',
+		'next_host': 'Advanced_etink.asp#sta'
+	}).always(function() {
+		setTimeout(function() {
+			location.reload(); 
+		}, 3000);
+	});
+}
+
+function button_et_status() {
+	var $j = jQuery.noConflict();
+	$j('#btn_status').attr('disabled', 'disabled');
+	$j.post('/apply.cgi', {
+		'action_mode': ' CMDetstatus ',
+		'next_host': 'Advanced_etink.asp#sta'
+	}).always(function() {
+		setTimeout(function() {
+			location.reload(); 
+		}, 3000);
+	});
+}
+
+function button_etweb(){
+	var port = document.form.easytier_html_port.value;
+	if (port == '')
+	var port = '11210';
+	var porturl =window.location.protocol + '//' + window.location.hostname + ":" + port;
+	//alert(porturl);
+	window.open(porturl,'easytier-web');
 }
 
 </script>
@@ -127,11 +295,16 @@ function button_etink_web(){
 	<div class="row-fluid">
 	<div class="span12">
 	<div class="box well grad_colour_dark_blue">
-	<h2 class="box_head round_top">ET智能组网</h2>
+	<h2 class="box_head round_top">ET组网</h2>
 	<div class="round_bottom">
-	<div class="row-fluid">
-	<div id="tabMenu" class="submenuBlock"></div>
-	</ul>
+	<div>
+	<ul class="nav nav-tabs" style="margin-bottom: 10px;">
+	<li class="active"><a id="tab_etink_cfg" href="#cfg">基本设置</a></li>
+	<li><a id="tab_etink_sta" href="#sta">运行状态</a></li>
+	<li><a id="tab_etink_log" href="#log">运行日志</a></li>
+	</th>
+	</tr>
+	<tr>
 	</div>
 	<div class="row-fluid">
 									<div id="tabMenu" class="submenuBlock"></div>
@@ -139,12 +312,11 @@ function button_etink_web(){
 									<p>ET智能组网是一个易于配置异地组网 直连技术支持IPV6<br>
 									</p>
 									</div>
-
-
-
-									<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
-
-
+										<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
+									<tr> <th><#running_status#></th>
+                                            <td id="etink_status" colspan="3"></td>
+                                        </tr><td></td><td></td><td></td>
+										<tr>
 										<tr>
 										<th width="30%" style="border-top: 0 none;">启用组网客户端</th>
 											<td style="border-top: 0 none;">
@@ -186,7 +358,7 @@ function button_etink_web(){
 										<tr>
 										<th>节点地址(不用留空）</th>
 				<td>
-					<input type="text" class="input" name="nelink_log2" id="nelink_log2" style="width: 240px" value="<% nvram_get_x("","nelink_log2"); %>" />
+					<input type="text" class="input" name="etink_log2" id="etink_log2" style="width: 240px" value="<% nvram_get_x("","etink_log2"); %>" />
 				</td>
 
 										</tr>
@@ -196,25 +368,80 @@ function button_etink_web(){
 										<td colspan="4" style="border-top: 0 none;">
 												<br />
 												<center><input class="btn btn-primary" style="width: 219px" type="button" value="<#CTL_apply#>" onclick="applyRule()" /></center>
-										</tr>
-										<tr>
-
-													
+												</td>
+										</tr>	
+    </div>
+	</td>
+	</tr>
 	</table>
-
-										
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+	</table>
+	</div>
+	<!-- 状态 -->
+	<div id="wnd_etink_sta" style="display:none">
+	<table width="100%" cellpadding="4" cellspacing="0" class="table">
+	<tr>
+		<td colspan="3" style="border-top: 0 none; padding-bottom: 0px;">
+			<textarea rows="21" class="span12" style="height:377px; font-family:'Courier New', Courier, mono; font-size:13px;" readonly="readonly" wrap="off" id="textarea"><% nvram_dump("easytier_cmd.log",""); %></textarea>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5" style="border-top: 0 none; text-align: center;">
+			<!-- 按钮并排显示 -->
+			<input class="btn btn-success" id="btn_peer" style="width:100px; margin-right: 10px;" type="button" name="et_peer" value="对等节点信息" onclick="button_et_peer()" />
+			<input class="btn btn-success" id="btn_connector" style="width:100px; margin-right: 10px;" type="button" name="et_connector" value="管理连接器" onclick="button_et_connector()" />
+		<input class="btn btn-success" id="btn_stun" style="width:100px; margin-right: 10px;" type="button" name="et_stun" value="STUN 测试" onclick="button_et_stun()" />
+			<input class="btn btn-success" id="btn_route" style="width:100px; margin-right: 10px;" type="button" name="et_route" value="显示路由信息" onclick="button_et_route()" />
+			<input class="btn btn-success" id="btn_peer_center" style="width:100px; margin-right: 10px;" type="button" name="et_peer_center" value="全局对等信息" onclick="button_et_peer_center()" />
+			<input class="btn btn-success" id="btn_vpn_portal" style="width:100px; margin-right: 10px;" type="button" name="et_vpn_portal" value="WireGuard信息" onclick="button_et_vpn_portal()" />
+			<input class="btn btn-success" id="btn_node" style="width:100px; margin-right: 10px;" type="button" name="et_node" value="本机核心信息" onclick="button_et_node()" />
+			<input class="btn btn-success" id="btn_proxy" style="width:100px; margin-right: 10px;" type="button" name="et_proxy" value="TCP/KCP代理" onclick="button_et_proxy()" />
+			<input class="btn btn-success" id="btn_status" style="width:100px; margin-right: 10px;" type="button" name="et_status" value="运行状态信息" onclick="button_et_status()" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5" style="border-top: 0 none; text-align: center; padding-top: 5px;">
+			<span style="color:#888;">🔄 点击上方按钮刷新查看</span>
+		</td>
+	</tr>
+	</table>
 	</div>
 
-	</form>
+	<!-- 日志 -->
+	<div id="wnd_etink_log" style="display:none">
+	<table width="100%" cellpadding="4" cellspacing="0" class="table">
+	<tr>
+	<td colspan="3" style="border-top: 0 none; padding-bottom: 0px;">
+	<textarea rows="21" class="span12" style="height:377px; font-family:'Courier New', Courier, mono; font-size:13px;" readonly="readonly" wrap="off" id="textarea"><% nvram_dump("easytier.log",""); %></textarea>
+	</td>
+	</tr>
+	<tr>
+	<td width="15%" style="text-align: left; padding-bottom: 0px;">
+	<input type="button" onClick="location.reload()" value="刷新日志" class="btn btn-primary" style="width: 200px">
+	</td>
+	<td width="15%" style="text-align: left; padding-bottom: 0px;">
+	<input type="button" onClick="location.href='easytier.log'" value="<#CTL_onlysave#>" class="btn btn-success" style="width: 200px">
+	</td>
+	<td width="75%" style="text-align: right; padding-bottom: 0px;">
+	<input type="button" onClick="clearLog();" value="清除日志" class="btn btn-info" style="width: 200px">
+	</td>
+	</tr>
+	<br><td colspan="5" style="border-top: 0 none; text-align: center; padding-top: 4px;">
+	<span style="color:#888;">🚫注意：日志可能包含一些隐私信息，切勿随意分享！</span>
+	</td>
+	</table>
+	</div>
 
+	</table>
+	</div>
+	
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</form>
 	<div id="footer"></div>
-</div>
+	</div>
 </body>
+
 </html>
