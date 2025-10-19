@@ -830,6 +830,18 @@ struct nvram_pair router_defaults[] = {
 	{ "etink_log3", "" },
 #endif
 
+#if defined(APP_BAFA)
+	/*巴法*/
+	{ "bafa_enable", "0" },
+	{ "bafa_topics", "" },
+	{ "bafa_token", "" },
+	{ "bafa_qos", "1" },
+	{ "bafa_host", "bemfa.com" },
+	{ "bafa_port", "9501" },
+	{ "bafa_show", "0" },
+	{ "bafa_bin", "/usr/bin/stdoutsubc" },
+#endif
+
 	/*DDNSTO*/
 	{ "ddnsto_enable", "0" },
 	{ "ddnsto_id", "" },
