@@ -2327,6 +2327,15 @@ static int sqm_status_hook(int eid, webs_t wp, int argc, char **argv)
 }
 #endif
 
+#if defined (APP_BAFA)
+static int bafa_status_hook(int eid, webs_t wp, int argc, char **argv)
+{
+	int bafa_status_code = pids("stdoutsubc") || pids("stdoutsub");
+	websWrite(wp, "function bafa_status() { return %d;}\n", bafa_status_code);
+	return 0;
+}
+#endif
+
 #if defined (APP_ALDRIVER)
 static int aliyundrive_status_hook(int eid, webs_t wp, int argc, char **argv)
 {
@@ -2614,6 +2623,11 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 #else
 	int found_app_xupnpd = 0;
 #endif
+#if defined(APP_BAFA)
+	int found_app_bafa = 1;
+#else
+	int found_app_bafa = 0;
+#endif
 #if defined(APP_WIREGUARD)
 	int found_app_wireguard = 1;
 #else
@@ -2800,6 +2814,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		"function found_app_hxcli() { return %d;}\n"
 		"function found_app_nelink() { return %d;}\n"
 		"function found_app_etink() { return %d;}\n"
+		"function found_app_bafa() { return %d;}\n"
 		"function found_app_ddnsto() { return %d;}\n"
 		"function found_app_aldriver() { return %d;}\n"
 		"function found_app_aliddns() { return %d;}\n"
@@ -2836,6 +2851,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		found_app_hxcli,
 		found_app_nelink,
 		found_app_etink,
+		found_app_bafa,
 		found_app_ddnsto,
 		found_app_aldriver,
 		found_app_aliddns,
@@ -3551,9 +3567,16 @@ apply_cgi(const char *url, webs_t wp)
 		websRedirect(wp, current_url);
 		return 0;
 	}
-	else if (!strcmp(value, " Restartnetlink "))
+	else if (!strcmp(value, " RestartBAFA "))
 	{
-#if defined(APP_NETLINK)
+#if defined(APP_BAFA)
+		system("/usr/bin/bafa.sh restart &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " Restartnelink "))
+	{
+#if defined(APP_NELINK)
 		system("/usr/bin/ne.sh restart &");
 #endif
 		return 0;
@@ -3562,6 +3585,76 @@ apply_cgi(const char *url, webs_t wp)
 	{
 #if defined(APP_ETINK)
 		system("/usr/bin/et.sh restart &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " Updateeasytier "))
+	{
+#if defined(APP_ETINK)
+		system("/usr/bin/easytier.sh update &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDetpeer "))
+	{
+#if defined(APP_ETINK)
+		system("/usr/bin/easytier.sh peer &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDetconnector "))
+	{
+#if defined(APP_ETINK)
+		system("/usr/bin/easytier.sh connector &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDetstun "))
+	{
+#if defined(APP_ETINK)
+		system("/usr/bin/easytier.sh stun &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDetroute "))
+	{
+#if defined(APP_ETINK)
+		system("/usr/bin/easytier.sh route &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDetpeer_center "))
+	{
+#if defined(APP_ETINK)
+		system("/usr/bin/easytier.sh peer-center &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDetvpn_portal "))
+	{
+#if defined(APP_ETINK)
+		system("/usr/bin/easytier.sh vpn-portal &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDetnode "))
+	{
+#if defined(APP_ETINK)
+		system("/usr/bin/easytier.sh node &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDetproxy "))
+	{
+#if defined(APP_ETINK)
+		system("/usr/bin/easytier.sh proxy &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDetstatus "))
+	{
+#if defined(APP_ETINK)
+		system("/usr/bin/et.sh status &");
 #endif
 		return 0;
 	}
@@ -4691,6 +4784,9 @@ struct ej_handler ej_handlers[] =
 #endif
 #if defined (APP_DDNSTO)
 	{ "ddnsto_status", ddnsto_status_hook},
+#endif
+#if defined (APP_BAFA)
+	{ "bafa_status", bafa_status_hook},
 #endif
 #if defined (APP_ALDRIVER)
 	{ "aliyundrive_status", aliyundrive_status_hook},
