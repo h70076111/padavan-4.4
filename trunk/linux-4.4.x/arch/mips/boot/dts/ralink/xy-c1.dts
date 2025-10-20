@@ -16,13 +16,13 @@
 	leds {
 		compatible = "gpio-leds";
 
-		work {
-			label = "lan";
-			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
+		internet {
+			label = "blue:internet";
+			gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
 		};
 
-		sys {
-			label = "power";
+		led_wps: wps {
+			label = "blue:wps";
 			gpios = <&gpio0 7 GPIO_ACTIVE_LOW>;
 		};
 	};
@@ -35,7 +35,7 @@
 
 		reset {
 			label = "reset";
-			gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio0 3 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
 		};
 	};
