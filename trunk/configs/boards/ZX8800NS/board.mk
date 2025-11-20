@@ -4,6 +4,6 @@
 # ZX8800NS # NX8800NS       # MT7621  #
 ##################################################################
 
-CFLAGS += -DBOARD_NX8800NS
-BOARD_NUM_USB_PORTS=2
+CFLAGS += -DBOARD_ZTE-E8820S
+BOARD_NUM_USB_PORTS=1
 CONFIG_BOARD_RAM_SIZE=256
