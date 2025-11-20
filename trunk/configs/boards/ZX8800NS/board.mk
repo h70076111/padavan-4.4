@@ -5,5 +5,5 @@
 ##################################################################
 
 CFLAGS += -DBOARD_NX8800NS
-BOARD_NUM_USB_PORTS=1
+BOARD_NUM_USB_PORTS=2
 CONFIG_BOARD_RAM_SIZE=256
