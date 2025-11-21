@@ -1,5 +1,5 @@
 #修改TNAME: RM2100 中的RM2100为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
-name: ZX8800NS
+name: WR330N
 on: 
   #release:
   #  types: [published]
@@ -38,7 +38,7 @@ jobs:
   
     - name: Build Firmware
       env:
-        TNAME: ZX8800NS
+        TNAME: WR330N
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -70,10 +70,10 @@ jobs:
         #echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config #adbyby plus+
         #echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #adg DNS去AD
         ##内网穿透服务##
-        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config #zerotier ~1.3M
+        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #zerotier ~1.3M
         echo "CONFIG_FIRMWARE_INCLUDE_BAFA=y" >> .config #aliddns
         echo "CONFIG_FIRMWARE_INCLUDE_HXCLI=y" >> .config #wirguard
-        echo "CONFIG_FIRMWARE_INCLUDE_NELINK=y" >> .config #gecoac
+        echo "CONFIG_FIRMWARE_INCLUDE_NELINK=n" >> .config #gecoac
         #echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
         echo "CONFIG_FIRMWARE_INCLUDE_ETINK=y" >> .config #etink
         #echo "CONFIG_FIRMWARE_INCLUDE_NFSD=n" >> .config #iperf3
