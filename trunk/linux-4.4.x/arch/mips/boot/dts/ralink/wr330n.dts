@@ -14,11 +14,11 @@
 		bootargs = "console=ttyS0,57600";
 	};
 
-	leds {
+		leds {
 		compatible = "gpio-leds";
 
 		internet {
-			label = "blue:internet";
+			label = "internet";
 			gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
 		};
 
