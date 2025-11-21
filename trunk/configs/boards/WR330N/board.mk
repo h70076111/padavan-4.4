@@ -4,5 +4,5 @@
 # WR1200JS  # YOUHUA WR1200JS  # MT7621  #
 ##################################################################
 
-CFLAGS += -DBOARD_WR1200JS
+CFLAGS += -DBOARD_K2P
 BOARD_NUM_USB_PORTS=0
