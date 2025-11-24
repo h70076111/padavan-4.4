@@ -4,6 +4,6 @@
 # NX880N  # NX880N      # MT7621  #
 ##################################################################
 
-CFLAGS += -DBOARD_NX880N
+CFLAGS += -DBOARD_ZTE-E8820S
 BOARD_NUM_USB_PORTS=0
 CONFIG_BOARD_RAM_SIZE=64
