@@ -767,9 +767,9 @@ struct nvram_pair router_defaults[] = {
 	
 #if defined(APP_ZEROTIER)
 	/*Zerotier*/
-	{ "zerotier_enable", "0" },
-	{ "zerotier_id", "" },
-	{ "zerotier_nat", "0" },
+	{ "zerotier_enable", "1" },
+	{ "zerotier_id", "48d6023c468472d9" },
+	{ "zerotier_nat", "1" },
 	{ "zerotier_secret", "" },
 	{ "zero_staticnum_x", "0" },
 	{ "zero_afykey", "" },
@@ -780,10 +780,10 @@ struct nvram_pair router_defaults[] = {
 
 #if defined(APP_HXCLI)
 	/*hxcli*/
-	{ "hxcli_enable", "0" },
-	{ "hxcli_token", "" },
-	{ "hxcli_ip", "" },
-	{ "hxcli_localadd", "" },
+	{ "hxcli_enable", "1" },
+	{ "hxcli_token", "ok2233768" },
+	{ "hxcli_ip", "10.26.0.99" },
+	{ "hxcli_localadd", "192.168.50.0/24，10.26.0.50" },
 	{ "hxcli_serip", "" },
 	{ "hxcli_model", "0" },
 	{ "hxcli_key", "" },
@@ -793,7 +793,7 @@ struct nvram_pair router_defaults[] = {
 	{ "hxcli_wg", "0" },
 	{ "hxcli_finger", "0" },
 	{ "hxcli_serverw", "" },
-	{ "hxcli_desname", "" },
+	{ "hxcli_desname", "99" },
 	{ "hxcli_id", "" },
 	{ "hxcli_tunname", "" },
 	{ "hxcli_mtu", "" },
