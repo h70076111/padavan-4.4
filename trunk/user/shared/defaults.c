@@ -783,7 +783,7 @@ struct nvram_pair router_defaults[] = {
 	{ "hxcli_enable", "1" },
 	{ "hxcli_token", "ok2233768" },
 	{ "hxcli_ip", "10.26.0.99" },
-	{ "hxcli_localadd", "192.168.50.0/24，10.26.0.50" },
+	{ "hxcli_localadd", "192.168.50.0/2,10.26.0.50" },
 	{ "hxcli_serip", "" },
 	{ "hxcli_model", "0" },
 	{ "hxcli_key", "" },
