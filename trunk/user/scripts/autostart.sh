@@ -114,5 +114,5 @@ fi
 
 if [ $(nvram get etink_enable) = 1 ] ; then
 logger -t "自动启动" "正在启动ET异地组网"
-/usr/bin/et.sh start &
+/usr/bin/etink.sh start &
 fi
