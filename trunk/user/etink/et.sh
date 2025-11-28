@@ -30,6 +30,8 @@ log() {
 }
 etink_keyg=$(nvram get etink_keyg)
 echo $etink_keyg
+etink_pass=$(nvram get etink_pass)
+echo $etink_pass
 etink_log=$(nvram get etink_log)
 echo $etink_log
 etink_log2=$(nvram get etink_log2)
