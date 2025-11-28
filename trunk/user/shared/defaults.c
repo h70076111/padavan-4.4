@@ -825,7 +825,8 @@ struct nvram_pair router_defaults[] = {
 	/*etink*/
 	{ "etink_enable", "0" },
 	{ "etink_keyg", "abc123" },
-	{ "etink_log", "" },
+	{ "etink_pass", "abc123" },
+	{ "etink_log", "tcp://public.easytier.top:11010" },
 	{ "etink_log2", "" },
 	{ "etink_log3", "" },
 #endif
