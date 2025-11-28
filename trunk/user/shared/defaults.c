@@ -826,9 +826,10 @@ struct nvram_pair router_defaults[] = {
 	{ "etink_enable", "0" },
 	{ "etink_keyg", "abc123" },
 	{ "etink_pass", "abc123" },
+	{ "etink_xyip", "10.126.126.20" },
 	{ "etink_log", "tcp://public.easytier.top:11010" },
-	{ "etink_log2", "" },
-	{ "etink_log3", "" },
+	{ "etink_log2", "--proxy-forward-by-system" },
+	{ "etink_log3", "--disable-encryption" },
 #endif
 
 #if defined(APP_BAFA)
