@@ -373,14 +373,14 @@ function button_etweb(){
 										<tr>
 										<th>服务</th>
 				<td>
-					<input type="text" class="input" name="etink_log2" id="etink_log2" style="width: 800px" value="<% nvram_get_x("","etink_log2"); %>" />
+					<input type="text" class="input" name="etink_log2" id="etink_log2" style="width: 600px" value="<% nvram_get_x("","etink_log2"); %>" />
 				</td>
 
 										</tr>
 										<tr>
 										<th>服务2</th>
 				<td>
-					<input type="text" class="input" name="etink_log3" id="etink_log3" style="width: 800px" value="<% nvram_get_x("","etink_log3"); %>" />
+					<input type="text" class="input" name="etink_log3" id="etink_log3" style="width: 600px" value="<% nvram_get_x("","etink_log3"); %>" />
 				</td>
 
 										</tr>
