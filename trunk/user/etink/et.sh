@@ -32,13 +32,17 @@ etink_keyg=$(nvram get etink_keyg)
 echo $etink_keyg
 etink_pass=$(nvram get etink_pass)
 echo $etink_pass
+etink_xyip=$(nvram get etink_xyip)
+echo $etink_xyip
 etink_log=$(nvram get etink_log)
 echo $etink_log
 etink_log2=$(nvram get etink_log2)
 echo $etink_log2
+etink_log3=$(nvram get etink_log3)
+echo $etink_log3
 
 NETWORK_NAME=$etink_keyg
-NETWORK_SECRET=$etink_ip
+NETWORK_SECRET=$etink_pass
 
 
 if [ -z "$USERNAME" ]; then
@@ -128,7 +132,7 @@ if pidof easytier-core > /dev/null 2>&1; then
 fi
 
 
-CMD="$EASYTIER_BIN -w $etink_keyg --machine-id "$MACHINE_ID" &"
+CMD="$EASYTIER_BIN --network-name $etink_keyg --network-secret $etink_pass -i $etink_xyip -p $etink_log $etink_log2 $etink_log3 --machine-id "$MACHINE_ID" &"
 
 echo $CMD
 log $CMD
