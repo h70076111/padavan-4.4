@@ -2304,7 +2304,7 @@ static int nelink_status_hook(int eid, webs_t wp, int argc, char **argv)
 #if defined (APP_ETINK)
 static int etink_status_hook(int eid, webs_t wp, int argc, char **argv)
 {
-	int etink_status_code = pids("etink");
+	int etink_status_code = pids("easytier-core");
 	websWrite(wp, "function etink_status() { return %d;}\n", etink_status_code);
 	return 0;
 }
@@ -3584,77 +3584,77 @@ apply_cgi(const char *url, webs_t wp)
 	else if (!strcmp(value, " Restartetink "))
 	{
 #if defined(APP_ETINK)
-		system("/usr/bin/et.sh restart &");
+		system("/usr/bin/etink.sh restart &");
 #endif
 		return 0;
 	}
 	else if (!strcmp(value, " Updateeasytier "))
 	{
 #if defined(APP_ETINK)
-		system("/usr/bin/easytier.sh update &");
+		system("/usr/bin/etink.sh update &");
 #endif
 		return 0;
 	}
 	else if (!strcmp(value, " CMDetpeer "))
 	{
 #if defined(APP_ETINK)
-		system("/usr/bin/easytier.sh peer &");
+		system("/usr/bin/etink.sh peer &");
 #endif
 		return 0;
 	}
 	else if (!strcmp(value, " CMDetconnector "))
 	{
 #if defined(APP_ETINK)
-		system("/usr/bin/easytier.sh connector &");
+		system("/usr/bin/etink.sh connector &");
 #endif
 		return 0;
 	}
 	else if (!strcmp(value, " CMDetstun "))
 	{
 #if defined(APP_ETINK)
-		system("/usr/bin/easytier.sh stun &");
+		system("/usr/bin/etink.sh stun &");
 #endif
 		return 0;
 	}
 	else if (!strcmp(value, " CMDetroute "))
 	{
 #if defined(APP_ETINK)
-		system("/usr/bin/easytier.sh route &");
+		system("/usr/bin/etink.sh route &");
 #endif
 		return 0;
 	}
 	else if (!strcmp(value, " CMDetpeer_center "))
 	{
 #if defined(APP_ETINK)
-		system("/usr/bin/easytier.sh peer-center &");
+		system("/usr/bin/etink.sh peer-center &");
 #endif
 		return 0;
 	}
 	else if (!strcmp(value, " CMDetvpn_portal "))
 	{
 #if defined(APP_ETINK)
-		system("/usr/bin/easytier.sh vpn-portal &");
+		system("/usr/bin/etink.sh vpn-portal &");
 #endif
 		return 0;
 	}
 	else if (!strcmp(value, " CMDetnode "))
 	{
 #if defined(APP_ETINK)
-		system("/usr/bin/easytier.sh node &");
+		system("/usr/bin/etink.sh node &");
 #endif
 		return 0;
 	}
 	else if (!strcmp(value, " CMDetproxy "))
 	{
 #if defined(APP_ETINK)
-		system("/usr/bin/easytier.sh proxy &");
+		system("/usr/bin/etink.sh proxy &");
 #endif
 		return 0;
 	}
 	else if (!strcmp(value, " CMDetstatus "))
 	{
 #if defined(APP_ETINK)
-		system("/usr/bin/et.sh status &");
+		system("/usr/bin/etink.sh status &");
 #endif
 		return 0;
 	}
