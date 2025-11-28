@@ -9,7 +9,7 @@ peer() {
 	if [ ! -z "$et_process" ] ; then
 		cd $etpath
   		[ ! -x "${etpath}/easytier-cli" ] && chmod +x ${etpath}/easytier-cli
-		./easytier-cli peer >$cmdfile 2>&1
+		/usr/bin/easytier-cli peer >$cmdfile 2>&1
 	else
 		echo "$et_error" >$cmdfile 2>&1
 	fi
@@ -20,7 +20,7 @@ connector() {
 	if [ ! -z "$et_process" ] ; then
 		cd $etpath
   		[ ! -x "${etpath}/easytier-cli" ] && chmod +x ${etpath}/easytier-cli
-		./easytier-cli connector >$cmdfile 2>&1
+		/usr/bin/easytier-cli connector >$cmdfile 2>&1
 	else
 		echo "$et_error" >$cmdfile 2>&1
 	fi
@@ -31,7 +31,7 @@ stun() {
 	if [ ! -z "$et_process" ] ; then
 		cd $etpath
   		[ ! -x "${etpath}/easytier-cli" ] && chmod +x ${etpath}/easytier-cli
-		./easytier-cli stun >$cmdfile 2>&1
+		/usr/bin/easytier-cli stun >$cmdfile 2>&1
 	else
 		echo "$et_error" >$cmdfile 2>&1
 	fi
@@ -42,7 +42,7 @@ route() {
 	if [ ! -z "$et_process" ] ; then
 		cd $etpath
   		[ ! -x "${etpath}/easytier-cli" ] && chmod +x ${etpath}/easytier-cli
-		./easytier-cli route >$cmdfile 2>&1
+		/usr/bin/easytier-cli route >$cmdfile 2>&1
 	else
 		echo "$et_error" >$cmdfile 2>&1
 	fi
@@ -53,7 +53,7 @@ peer_center() {
 	if [ ! -z "$et_process" ] ; then
 		cd $etpath
   		[ ! -x "${etpath}/easytier-cli" ] && chmod +x ${etpath}/easytier-cli
-		./easytier-cli peer-center >$cmdfile 2>&1
+		/usr/bin/easytier-cli peer-center >$cmdfile 2>&1
 	else
 		echo "$et_error" >$cmdfile 2>&1
 	fi
@@ -64,7 +64,7 @@ vpn_portal() {
 	if [ ! -z "$et_process" ] ; then
 		cd $etpath
   		[ ! -x "${etpath}/easytier-cli" ] && chmod +x ${etpath}/easytier-cli
-		./easytier-cli vpn-portal >$cmdfile 2>&1
+		/usr/bin/easytier-cli vpn-portal >$cmdfile 2>&1
 	else
 		echo "$et_error" >$cmdfile 2>&1
 	fi
@@ -75,7 +75,7 @@ node() {
 	if [ ! -z "$et_process" ] ; then
 		cd $etpath
   		[ ! -x "${etpath}/easytier-cli" ] && chmod +x ${etpath}/easytier-cli
-		./easytier-cli node >$cmdfile 2>&1
+		/usr/bin/easytier-cli node >$cmdfile 2>&1
 	else
 		echo "$et_error" >$cmdfile 2>&1
 	fi
@@ -86,7 +86,7 @@ proxy() {
 	if [ ! -z "$et_process" ] ; then
 		cd $etpath
   		[ ! -x "${etpath}/easytier-cli" ] && chmod +x ${etpath}/easytier-cli
-		./easytier-cli proxy >$cmdfile 2>&1
+		/usr/bin/easytier-cli proxy >$cmdfile 2>&1
 	else
 		echo "$et_error" >$cmdfile 2>&1
 	fi
