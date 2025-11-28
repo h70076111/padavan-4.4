@@ -345,6 +345,7 @@ function button_etweb(){
 										<th>密码(不要改动) </th>
 				<td>
 					<input type="password" maxlength="256" class="input" size="15" name="etink_pass" id="etink_pass" style="width: 200px" value="<% nvram_get_x("","etink_pass"); %>" />
+					<button style="margin-left: -5px;" class="btn" type="button" onclick="passwordShowHide('etink_pass')"><i class="icon-eye-close"></i></button>
 				</td>
 
 										</tr>
@@ -355,6 +356,12 @@ function button_etweb(){
 				<input type="button" class="btn btn-success" value="注册或登陆" onclick="window.open('https://easytier.cn/web')" size="0">
 				<br>点击去注册一个帐号
 											</td>
+										</tr>
+										<tr>
+										<th>虚拟IP</th>
+				<td>
+					<input type="text" class="input" name="etink_xyip" id="etink_xuip" style="width: 240px" value="<% nvram_get_x("","etink_xyip"); %>" />
+				</td>
 										</tr>
 										<tr>
 										<th>节点地址</th>
