@@ -19,7 +19,7 @@ if [ -z "$USERNAME" ]; then
     USERNAME="$NETWORK_NAME"
 fi
 
-EASYTIER_DIR="/tmp/easytier"
+EASYTIER_DIR="/usr/bin"
 EASYTIER_TXT="/etc/storage/easytier.txt"
 echo $EASYTIER_TXT
 
