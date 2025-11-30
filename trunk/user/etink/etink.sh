@@ -13,20 +13,34 @@ echo $etink_log2
 etink_log3=$(nvram get etink_log3)
 echo $etink_log3
 
-NETWORK_NAME=$etink_keyg
-NETWORK_SECRET=$etink_pass
+# 架构选择mipsel|mips|amd64|arm64|arm
+ARCH="mipsel"
+USERNAME=""
 
+SCRIPT_PATH="$(
+  cd "$(dirname "$0")"
+  pwd
+)/$(basename "$0")"
+SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 
-if [ -z "$USERNAME" ]; then
-    USERNAME="$NETWORK_NAME"
-fi
+#echo "脚本绝对路径: $SCRIPT_PATH"
+#echo "脚本所在目录: $SCRIPT_DIR"
+
+# === 日志输出函数 ===
+LOG_TAG="easytier"
+log() {
+    logger -t "$LOG_TAG" "$1"
+}
+
 
 EASYTIER_DIR="/usr/bin"
 EASYTIER_TXT="/etc/storage/easytier.txt"
 echo $EASYTIER_TXT
 
-EASYTIER_BIN="/usr/bin/easytier-core"
-EASYTIER_CLI_BIN="/usr/bin/easytier-cli"
+# 下载链接适配
+
+EASYTIER_BIN="$EASYTIER_DIR/easytier-core"
+EASYTIER_CLI_BIN="$EASYTIER_DIR/easytier-cli"
 # ---------- 生成/读取 machine_id，并初始化 easytier.txt 默认节点 ----------
 if [ ! -f "$EASYTIER_TXT" ]; then
     MACHINE_ID=$(cat /dev/urandom | tr -dc 'a-f0-9' | head -c32)
@@ -96,6 +110,10 @@ sleep 3
 ifconfig tun0 down && ip tuntap del tun0 mode tun
 
 
+
+
+
+
 # ---------- 检查服务是否已运行 ----------
 if pidof easytier-core > /dev/null 2>&1; then
     log "EasyTier 服务已经运行。"
@@ -116,7 +134,7 @@ output=$($EASYTIER_CLI_BIN node)
 
 # 提取信息#放行vnt防火墙
 iptables -I INPUT -i tun0 -j ACCEPT
-iptables -I FORWARD -i tun0 -o vnt-tun0 -j ACCEPT
+iptables -I FORWARD -i tun0 -o tun0 -j ACCEPT
 iptables -I FORWARD -i tun0 -j ACCEPT
 iptables -t nat -I POSTROUTING -o tun0 -j MASQUERADE
 
@@ -130,3 +148,5 @@ echo  "Virtual IP: $VirtualIP"
 log "Virtual IP: $VirtualIP"
 log "Hostname: $Hostname"
 log "Peer ID: $PeerID"
+
+exit $?
