@@ -1,3 +1,16 @@
+#!/bin/sh
+
+etink_keyg=$(nvram get etink_keyg)
+echo $etink_keyg
+etink_pass=$(nvram get etink_pass)
+echo $etink_pass
+etink_log=$(nvram get etink_log)
+echo $etink_log
+etink_log2=$(nvram get etink_log2)
+echo $etink_log2
+etink_log3=$(nvram get etink_log3)
+echo $etink_log3
+
 NETWORK_NAME=$etink_keyg
 NETWORK_SECRET=$etink_pass
 
