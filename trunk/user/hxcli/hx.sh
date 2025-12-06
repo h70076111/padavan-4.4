@@ -149,7 +149,13 @@ stop_hx() {
 		eval $(ps -w | grep "$scriptname" | grep -v $$ | grep -v grep | awk '{print "kill "$1";";}')
 		eval $(ps -w | grep "$scriptname" | grep -v $$ | grep -v grep | awk '{print "kill -9 "$1";";}')
 	fi
+  		sleep 5
+  		hxcli_restart x
+	fi
+	
+	exit 0
 }
+
 
 hx_status() {
 	if [ ! -z "$hx_process" ] ; then
