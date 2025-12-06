@@ -180,7 +180,7 @@ function button_restarthxcli() {
 }
 
 function markrouteRULES(o, c, b) {
-	document.form.group_id.value = "HXTCLIroute";
+	document.form.group_id.value = "HXCLIroute";
 	if(b == " Add "){
 		if (document.form.hxcli_routenum_x_0.value >= c){
 			alert("<#JS_itemlimit1#> " + c + " <#JS_itemlimit2#>");
