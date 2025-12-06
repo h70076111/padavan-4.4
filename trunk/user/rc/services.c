@@ -580,13 +580,13 @@ void restart_nelink(void){
 
 #if defined(APP_ETINK)
 void stop_etink(void){
-	eval("/usr/bin/et.sh","stop");
+	eval("/usr/bin/etink.sh","stop");
 }
 
 void start_etink(void){
 	int etink_enable = nvram_get_int("etink_enable");
 	if ( etink_enable == 1)
-		eval("/usr/bin/et.sh","start");
+		eval("/usr/bin/etink.sh","start");
 }
 
 void restart_etink(void){
