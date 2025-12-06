@@ -49,6 +49,7 @@ function initial(){
 	show_menu(5,33,0);
 	fill_status(etink_status());
 	show_footer();
+	change_etink_enable(1);
 	if (!login_safe())
         		textarea_scripts_enabled(0);
 
@@ -102,11 +103,29 @@ function done_validating(action){
 	refreshpage();
 }
 
+function textarea_scripts_enabled(v){
+    	inputCtrl(document.form['scripts.etink.conf'], v);
+}
+
 function button_etink_web(){
 	var port = '6688';
 	var url = window.location.protocol + "//" + window.location.hostname + ":" + port;
 	window.open(url);
 }
+
+function button_restartetink() {
+    var m = document.form.etink_enable.value;
+
+    var actionMode = (m == "1" || m == "2") ? ' Restartetink ' : ' Updateetink ';
+
+    change_etink_enable(m); 
+
+    var $j = jQuery.noConflict(); 
+    $j.post('/apply.cgi', {
+        'action_mode': actionMode 
+    });
+}
+
 
 function clearLog(){
 	var $j = jQuery.noConflict();
