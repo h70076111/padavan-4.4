@@ -1,15 +1,5 @@
 #!/bin/sh
 
-/usr/bin/hx-cli --stop
-#关闭vnt的防火墙
-iptables -D INPUT -i hxsdwan -j ACCEPT 2>/dev/null
-iptables -D FORWARD -i hxsdwan -o hxsdwan -j ACCEPT 2>/dev/null
-iptables -D FORWARD -i hxsdwan -j ACCEPT 2>/dev/null
-iptables -t nat -D POSTROUTING -o hxsdwan -j MASQUERADE 2>/dev/null
-killall hx-cli
-killall -9 hx-cli
-sleep 4
-
 hxcli_enable=$(nvram get hxcli_enable)
 echo $hxcli_enable
 hxcli_token=$(nvram get hxcli_token)
@@ -148,9 +138,6 @@ stop_hx() {
 	if [ ! -z "$scriptname" ] ; then
 		eval $(ps -w | grep "$scriptname" | grep -v $$ | grep -v grep | awk '{print "kill "$1";";}')
 		eval $(ps -w | grep "$scriptname" | grep -v $$ | grep -v grep | awk '{print "kill -9 "$1";";}')
-	fi
-  		sleep 5
-  		hxcli_restart x
 	fi
 	
 	exit 0
