@@ -48,26 +48,6 @@ $j(document).ready(function() {
 </script>
 <script>
 
-function initial(){
-	show_banner(2);
-	show_menu(5,33,0);
-	fill_status(hxcli_status());
-	change_hxcli_enable(1);
-	change_hxcli_model(1);
-	if (!login_safe())
-        		textarea_scripts_enabled(0);
-
-}
-
-function fill_status(status_code){
-	var stext = "Unknown";
-	if (status_code == 0)
-		stext = "<#Stopped#>";
-	else if (status_code == 1)
-		stext = "<#Running#>";
-	$("hxcli_status").innerHTML = '<span class="label label-' + (status_code != 0 ? 'success' : 'warning') + '">' + stext + '</span>';
-}
-
 var m_routelist = [<% get_nvram_list("HXCLI", "HXCLIroute"); %>];
 var mroutelist_ifield = 4;
 if(m_routelist.length > 0){
@@ -84,6 +64,29 @@ if(m_mapplist.length > 0){
 	for (var i = 0; i < m_mapplist.length; i++) {
 		m_mapplist[i][mmapplist_ifield] = i;
 	}
+}
+
+function initial(){
+	show_banner(2);
+	show_menu(5, 27, 0);
+	showROUTEList();
+	showMAPPList();
+	show_footer();
+	fill_status(hxcli_status());
+	change_hxcli_enable(1);
+	change_hxcli_model(1);
+	if (!login_safe())
+        		textarea_scripts_enabled(0);
+
+}
+
+function fill_status(status_code){
+	var stext = "Unknown";
+	if (status_code == 0)
+		stext = "<#Stopped#>";
+	else if (status_code == 1)
+		stext = "<#Running#>";
+	$("hxcli_status").innerHTML = '<span class="label label-' + (status_code != 0 ? 'success' : 'warning') + '">' + stext + '</span>';
 }
 
 var arrHashes = ["cfg","pri","sta","log","help"];
@@ -210,39 +213,30 @@ function markrouteRULES(o, c, b) {
 	return true;
 }
 
-function markmappRULES(o, c, b) {
-	document.form.group_id.value = "HXCLImapp";
+function markrouteRULES(o, c, b) {
+	document.form.group_id.value = "HXCLIroute";
 	if(b == " Add "){
-		if (document.form.hxcli_mappnum_x_0.value >= c){
+		if (document.form.hxcli_routenum_x_0.value >= c){
 			alert("<#JS_itemlimit1#> " + c + " <#JS_itemlimit2#>");
 			return false;
-		}else if (document.form.hxcli_mappport_x_0.value==""){
+		}else if (document.form.hxcli_route_x_0.value==""){
 			alert("<#JS_fieldblank#>");
-			document.form.hxcli_mappport_x_0.focus();
-			document.form.hxcli_mappport_x_0.select();
+			document.form.hxcli_route_x_0.focus();
+			document.form.hxcli_route_x_0.select();
 			return false;
-		}else if(document.form.hxcli_mappip_x_0.value==""){
+		}else if(document.form.hxcli_ip_x_0.value==""){
 			alert("<#JS_fieldblank#>");
-			document.form.hxcli_mappip_x_0.focus();
-			document.form.hxcli_mappip_x_0.select();
-			return false;
-		}else if(document.form.hxcli_mapeerport_x_0.value==""){
-			alert("<#JS_fieldblank#>");
-			document.form.hxcli_mapeerport_x_0.focus();
-			document.form.hxcli_mapeerport_x_0.select();
+			document.form.hxcli_ip_x_0.focus();
+			document.form.hxcli_ip_x_0.select();
 			return false;
 		}else{
-			for(i=0; i<m_mapplist.length; i++){
-				if(document.form.hxcli_mappnet_x_0.value==m_mapplist[i][0]) {
-					if(document.form.hxcli_mappport_x_0.value==m_mapplist[i][1]) {
-						if(document.form.hxcli_mappip_x_0.value==m_mapplist[i][2]) {
-							if(document.form.hxcli_mapeerport_x_0.value==m_mapplist[i][3]) {
-								alert('<#JS_duplicate#>' + ' (' + m_mapplist[i][1] + ')' );
-								document.form.hxcli_mapeerport_x_0.focus();
-								document.form.hxcli_mapeerport_x_0.select();
-								return false;
-							}
-						}
+			for(i=0; i<m_routelist.length; i++){
+				if(document.form.hxcli_route_x_0.value==m_routelist[i][1]) {
+				if(document.form.hxcli_ip_x_0.value==m_routelist[i][2]) {
+					alert('<#JS_duplicate#>' + ' (' + m_routelist[i][1] + ')' );
+					document.form.hxcli_route_x_0.focus();
+					document.form.hxcli_ip_x_0.select();
+					return false;
 					}
 				}
 			}
@@ -252,6 +246,7 @@ function markmappRULES(o, c, b) {
 	document.form.action_mode.value = b;
 	return true;
 }
+
 
 function showROUTEList(){
 	var code = '<table width="100%" cellspacing="0" cellpadding="4" class="table table-list">';
@@ -508,7 +503,29 @@ function button_hxcli_status() {
 				<td>
 					<input type="text" class="input" name="hxcli_serip" id="hxcli_serip" style="width: 200px" value="<% nvram_get_x("","hxcli_serip"); %>" />
 				</td>
-
+										</tr>
+										<tr>
+	</td>
+	</tr><tr id="hxcli_log_td"><td colspan="3"></td></tr>
+	<table id="hxcli_subnet_table" width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
+	<tr> <th colspan="4" style="background-color: #756c78;">子网配置 (访问对端内网设备，还需对端配置本地网段)</th></tr>
+	<tr id="row_rules_caption">
+	<th width="10%"> 备注名称 </th>
+	<th width="20%">对端目标网段 </th>
+	<th width="20%">对端接口IP </th>
+	<th width="5%"><center><i class="icon-th-list"></i></center></th>
+	</tr>
+	<tr>
+	<th><input type="text" placeholder="可留空" maxlength="128" class="span12" style="width: 100px" size="200" name="hxcli_name_x_0" value="<% nvram_get_x("", "hxcli_name_x_0"); %>"/></th>
+	<th><input type="text" placeholder="192.168.2.0/24" maxlength="255" class="span12" style="width: 150px" size="200" name="hxcli_route_x_0" value="<% nvram_get_x("", "hxcli_route_x_0"); %>"/></th>
+	<th><input type="text" placeholder="10.26.0.2" maxlength="255" class="span12" style="width: 150px" size="200" name="hxcli_ip_x_0" value="<% nvram_get_x("", "hxcli_ip_x_0"); %>" /></th>
+	<th><button class="btn" style="max-width: 219px" type="submit" onclick="return markrouteRULES(this, 64, ' Add ');" name="markrouteRULES2" value="<#CTL_add#>" size="12"><i class="icon icon-plus"></i></button></th>
+	</tr>
+	<tr id="row_rules_body" >
+	<td colspan="4" style="border-top: 0 none; padding: 0px;">
+	<div id="MrouteRULESList_Block"></div>
+	</td>
+	</tr>
 										</tr>
 										<tr>
 									
