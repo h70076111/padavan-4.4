@@ -213,41 +213,6 @@ function markrouteRULES(o, c, b) {
 	return true;
 }
 
-function markrouteRULES(o, c, b) {
-	document.form.group_id.value = "HXCLIroute";
-	if(b == " Add "){
-		if (document.form.hxcli_routenum_x_0.value >= c){
-			alert("<#JS_itemlimit1#> " + c + " <#JS_itemlimit2#>");
-			return false;
-		}else if (document.form.hxcli_route_x_0.value==""){
-			alert("<#JS_fieldblank#>");
-			document.form.hxcli_route_x_0.focus();
-			document.form.hxcli_route_x_0.select();
-			return false;
-		}else if(document.form.hxcli_ip_x_0.value==""){
-			alert("<#JS_fieldblank#>");
-			document.form.hxcli_ip_x_0.focus();
-			document.form.hxcli_ip_x_0.select();
-			return false;
-		}else{
-			for(i=0; i<m_routelist.length; i++){
-				if(document.form.hxcli_route_x_0.value==m_routelist[i][1]) {
-				if(document.form.hxcli_ip_x_0.value==m_routelist[i][2]) {
-					alert('<#JS_duplicate#>' + ' (' + m_routelist[i][1] + ')' );
-					document.form.hxcli_route_x_0.focus();
-					document.form.hxcli_ip_x_0.select();
-					return false;
-					}
-				}
-			}
-		}
-	}
-	pageChanged = 0;
-	document.form.action_mode.value = b;
-	return true;
-}
-
-
 function showROUTEList(){
 	var code = '<table width="100%" cellspacing="0" cellpadding="4" class="table table-list">';
 	if(m_routelist.length == 0)
