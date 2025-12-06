@@ -25,6 +25,11 @@ SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
 
 #echo "脚本绝对路径: $SCRIPT_PATH"
 #echo "脚本所在目录: $SCRIPT_DIR"
+# === 日志输出函数 ===
+LOG_TAG="easytier"
+log() {
+    logger -t "$LOG_TAG" "$1"
+}
 
 EASYTIER_DIR="/usr/bin"
 EASYTIER_TXT="/etc/storage/easytier.txt"
@@ -112,37 +117,8 @@ sleep 3
 $EASYTIER_CLI_BIN node
 output=$($EASYTIER_CLI_BIN node)
 
-sleep 10
-et_rules x
-
-}
-
-stop_et() {
-# ---------- Padavan方式开启网关转发 ----------
-echo 1 > /proc/sys/net/ipv4/ip_forward
-
-# ---------- 自动添加防火墙转发规则，避免重复 ----------
-if [ -n "$PROXY_NET" ]; then
-    iptables -C FORWARD -s "$PROXY_NET" -j ACCEPT 2>/dev/null || iptables -A FORWARD -s "$PROXY_NET" -j ACCEPT
-    iptables -C FORWARD -d "$PROXY_NET" -j ACCEPT 2>/dev/null || iptables -A FORWARD -d "$PROXY_NET" -j ACCEPT
-    log "已放行 $PROXY_NET 的FORWARD转发"
-fi
-
-# 检查并添加 INPUT 规则
-iptables -D INPUT -i tun0 -j ACCEPT 2>/dev/null
-iptables -D FORWARD -i tun0 -o tun0 -j ACCEPT 2>/dev/null
-iptables -D FORWARD -i tun0 -j ACCEPT 2>/dev/null
-iptables -t nat -D POSTROUTING -o tun0 -j MASQUERADE 2>/dev/null
-killall easytier-core
-killall -9 easytier-core
-sleep 3
-#清除vnt的虚拟网卡
-ifconfig tun0 down && ip tuntap del tun0 mode tun
-
-}
-
-et_rules() {
-	if [ -z "$et_tunname" ] ; then
+sleep 5
+if [ -z "$et_tunname" ] ; then
 		tunname="tun0"
 	else
 		tunname="${et_tunname}"
@@ -162,10 +138,7 @@ et_rules() {
 		 	ip6tables -I INPUT -p udp --dport "$et_port" -j ACCEPT 
 		done	
 	fi
-	core_keep
-}
-
-core_keep() {
+sleep 3
 	logg "Core守护进程启动"
 	if [ -s /tmp/script/_opt_script_check ]; then
 	sed -Ei '/【EasyTier_core】|^$/d' /tmp/script/_opt_script_check
@@ -190,7 +163,57 @@ core_keep() {
 	fi
 	fi
 
+
 }
+
+stop_et() {
+	logg  "正在关闭..."
+	scriptname=$(basename $0)
+	if [ -z "$et_tunname" ] ; then
+		tunname="tun0"
+	else
+		tunname="${et_tunname}"
+	fi
+	killall easytier-core >/dev/null 2>&1
+	killall easytier-web >/dev/null 2>&1
+	if [ ! -z "$et_ports" ] ; then
+		et_portss=$(echo $et_ports | tr -d '\r')
+		for et_port in $et_portss ; do
+			[ -z "$et_port" ] && continue
+			iptables -D INPUT -p tcp --dport "$et_port" -j ACCEPT >/dev/null 2>&1
+		 	ip6tables -D INPUT -p tcp --dport "$et_port" -j ACCEPT >/dev/null 2>&1
+		 	iptables -D INPUT -p udp --dport "$et_port" -j ACCEPT >/dev/null 2>&1
+		 	ip6tables -D INPUT -p udp --dport "$et_port" -j ACCEPT >/dev/null 2>&1
+		done
+	fi
+	iptables -D INPUT -i ${tunname} -j ACCEPT 2>/dev/null
+	iptables -D FORWARD -i ${tunname} -o ${tunname} -j ACCEPT 2>/dev/null
+	iptables -D FORWARD -i ${tunname} -j ACCEPT 2>/dev/null
+	iptables -t nat -D POSTROUTING -o ${tunname} -j MASQUERADE 2>/dev/null
+ 	iptables -D INPUT -p tcp --dport "$et_web_port" -j ACCEPT >/dev/null 2>&1
+	ip6tables -D INPUT -p tcp --dport "$et_web_port" -j ACCEPT >/dev/null 2>&1
+	iptables -D INPUT -p udp --dport "$et_web_port" -j ACCEPT >/dev/null 2>&1
+	ip6tables -D INPUT -p udp --dport "$et_web_port" -j ACCEPT >/dev/null 2>&1
+  	iptables -D INPUT -p tcp --dport "$et_web_api" -j ACCEPT >/dev/null 2>&1
+	ip6tables -D INPUT -p tcp --dport "$et_web_api" -j ACCEPT >/dev/null 2>&1
+	iptables -D INPUT -p udp --dport "$et_web_api" -j ACCEPT >/dev/null 2>&1
+	ip6tables -D INPUT -p udp --dport "$et_web_api" -j ACCEPT >/dev/null 2>&1
+	if [ ! -z "$et_html_port" ] ; then
+		iptables -D INPUT -p tcp --dport "$et_html_port" -j ACCEPT >/dev/null 2>&1
+		ip6tables -D INPUT -p tcp --dport "$et_html_port" -j ACCEPT >/dev/null 2>&1
+	fi
+	[ -z "`pidof easytier-core`" ] && [ -z "`pidof easytier-web`" ] && logg "进程已关闭!"
+	if [ ! -z "$scriptname" ] ; then
+		eval $(ps -w | grep "$scriptname" | grep -v $$ | grep -v grep | awk '{print "kill "$1";";}')
+		eval $(ps -w | grep "$scriptname" | grep -v $$ | grep -v grep | awk '{print "kill -9 "$1";";}')
+	fi
+}
+
+et_error="错误：${et_core} 未运行，请运行成功后执行此操作！"
+et_process=$(pidof easytier-core)
+etpath=$(dirname "$et_core")
+cmdfile="/tmp/easytier_cmd.log"
+
 
 case $1 in
 start)
