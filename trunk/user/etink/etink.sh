@@ -209,11 +209,6 @@ stop_et() {
 	fi
 }
 
-et_error="错误：${et_core} 未运行，请运行成功后执行此操作！"
-et_process=$(pidof easytier-core)
-etpath=$(dirname "$et_core")
-cmdfile="/tmp/easytier_cmd.log"
-
 
 case $1 in
 start)
