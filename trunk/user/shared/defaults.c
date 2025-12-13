@@ -806,7 +806,6 @@ struct nvram_pair router_defaults[] = {
 	{ "hxcli_bin", "" },
 	{ "hxcli_wan", "" },
 	{ "hxcli_routenum_x", "0" },
-	{ "hxcli_mappnum_x", "0" },
 #endif
 
 #if defined(APP_NELINK)
