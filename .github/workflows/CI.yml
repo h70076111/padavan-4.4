@@ -73,7 +73,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config #zerotier ~1.3M
         echo "CONFIG_FIRMWARE_INCLUDE_BAFA=y" >> .config #aliddns
         echo "CONFIG_FIRMWARE_INCLUDE_HXCLI=y" >> .config #wirguard
-        echo "CONFIG_FIRMWARE_INCLUDE_NELINK=n" >> .config #gecoac
+        echo "CONFIG_FIRMWARE_INCLUDE_NTWON=y" >> .config #gecoac
         #echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
         echo "CONFIG_FIRMWARE_INCLUDE_ETINK=y" >> .config #etink
         #echo "CONFIG_FIRMWARE_INCLUDE_NFSD=n" >> .config #iperf3
