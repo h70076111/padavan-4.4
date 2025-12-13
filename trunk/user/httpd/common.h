@@ -163,7 +163,7 @@ typedef u_int8_t u8;
 #define EVT_RESTART_ZEROTIER    2
 #define EVT_RESTART_ETINK     	2
 #define EVT_RESTART_BAFA      		2
-#define EVT_RESTART_WIREGUARD     	2
+#define EVT_RESTART_NTWON     	2
 #define EVT_RESTART_SQM		2
 #define EVT_RESTART_ALIDDNS	2
 #define EVT_RESTART_HXCLI      		2
