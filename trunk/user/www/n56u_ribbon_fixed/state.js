@@ -429,11 +429,14 @@ if (found_app_frp()){
 if (found_app_nelink()){
 	tabtitle[20] = new Array("", "NE异地组网");
 }
+if (found_app_ntwon()){
+	tabtitle[21] = new Array("", "N2V2组网");
+}
 if (found_app_etink()){
-	tabtitle[21] = new Array("", "ET异地组网");
+	tabtitle[22] = new Array("", "ET异地组网");
 }
 if (found_app_bafa()){
-	tabtitle[22] = new Array("", "巴法云物联网");
+	tabtitle[23] = new Array("", "巴法云物联网");
 }
 
 //Level 3 Tab title
@@ -506,13 +509,17 @@ if (found_app_nelink()){
 	nelink_array = new Array("","Advanced_nelink.asp");
 	tablink[20] = (nelink_array);
 }
+if (found_app_ntwon()){
+	ntwon_array = new Array("","Advanced_ntwon.asp");
+	tablink[21] = (ntwon_array);
+}
 if (found_app_etink()){
 	etink_array = new Array("","Advanced_etink.asp");
-	tablink[21] = (etink_array);
+	tablink[22] = (etink_array);
 }
 if (found_app_bafa()){
 	bafa_array = new Array("","Advanced_bafa.asp");
-	tablink[22] = (bafa_array);
+	tablink[23] = (bafa_array);
 }
 
 //Level 2 Menu
@@ -560,6 +567,10 @@ if (found_app_frp()){
 
 if (found_app_nelink()){
 	menuL2_title.push("NE异地组网");
+} else menuL2_title.push("");
+
+if (found_app_ntwon()){
+	menuL2_title.push("N2V2组网");
 } else menuL2_title.push("");
 
 if (found_app_etink()){
@@ -621,6 +632,10 @@ if (found_app_frp()){
 
 if (found_app_nelink()){
 	menuL2_link.push(nelink_array[1]);
+} else menuL2_link.push("");
+
+if (found_app_ntwon()){
+	menuL2_link.push(ntwon_array[1]);
 } else menuL2_link.push("");
 
 if (found_app_etink()){
