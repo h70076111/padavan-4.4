@@ -83,11 +83,10 @@
 			{"zero_route_x", "24", NULL, FALSE},
 			{0,0,0,0}
 		};
-	struct variable variables_HXCLI_HXCLImapp[] = {
-			{"hxcli_mappnet_x", "24", NULL, FALSE},
-			{"hxcli_mappport_x", "24", NULL, FALSE},
-			{"hxcli_mappip_x", "24", NULL, FALSE},
-			{"hxcli_mapeerport_x", "24", NULL, FALSE},
+	struct variable variables_NTWON_NTWONinrou[] = {
+			{"ntwon_name_x", "24", NULL, FALSE},
+			{"ntwon_route_x", "24", NULL, FALSE},
+			{"ntwon_ip_x", "24", NULL, FALSE},
 			{0,0,0,0}
 		};
 	struct variable variables_HXCLI_HXCLIroute[] = {
@@ -1039,6 +1038,25 @@
 	};
 #endif
 
+#if defined(APP_NTWON)
+	struct variable variables_NTWON[] = {
+			{"ntwon_enable", "", NULL, EVM_RESTART_NTWON},
+			{"ntwon_keyg", "", NULL, EVM_RESTART_NTWON},
+			{"ntwon_xuip", "", NULL, EVM_RESTART_NTWON},
+			{"ntwon_inlan1", "", NULL, EVM_RESTART_NTWON},
+			{"ntwon_xuip1", "", NULL, EVM_RESTART_NTWON},
+			{"ntwon_inlan2", "", NULL, EVM_RESTART_NTWON},
+			{"ntwon_xuip2", "", NULL, EVM_RESTART_NTWON},
+			{"ntwon_log", "", NULL, EVM_RESTART_NTWON},
+			{"ntwon_log2", "", NULL, EVM_RESTART_NTWON},
+			{"ntwon_log3", "", NULL, EVM_RESTART_NTWON},
+			{"scripts.ntwon.conf", "File", NULL, EVM_RESTART_NTWON},
+			{"ntwon_routenum_x", "", NULL, EVM_RESTART_NTWON},
+			{"NTWONinrou", "Group", ARGV((char*)variables_NTWON_NTWONinrou, "8", "55", "ntwon_routenum_x"), EVM_RESTART_NTWON},
+			{0,0,0,0}
+	};
+#endif
+
 #if defined(APP_ETINK)
 	struct variable variables_ETINK[] = {
 			{"etink_enable", "", NULL, EVM_RESTART_ETINK},
@@ -1441,6 +1459,9 @@
 #if defined(APP_NELINK)
 		{"NELINK",		variables_NELINK},
 #endif
+#if defined(APP_NTWON)
+		{"NTWON",		variables_NTWON},
+#endif
 #if defined(APP_ETINK)
 		{"ETINK",		variables_ETINK},
 #endif
@@ -1567,6 +1588,9 @@
 #endif
 #if defined(APP_NELINK)
 		{EVM_RESTART_NELINK,		EVT_RESTART_NELINK,		RCN_RESTART_NELINK,	0},
+#endif
+#if defined(APP_NTWON)
+		{EVM_RESTART_NTWON,		EVT_RESTART_NTWON,		RCN_RESTART_NTWON,	0},
 #endif
 #if defined(APP_ETINK)
 		{EVM_RESTART_ETINK,		EVT_RESTART_ETINK,		RCN_RESTART_ETINK,	0},
