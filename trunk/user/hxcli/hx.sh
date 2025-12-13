@@ -1,5 +1,15 @@
 #!/bin/sh
 
+/usr/bin/hx-cli --stop
+#关闭vnt的防火墙
+iptables -D INPUT -i hxsdwan -j ACCEPT 2>/dev/null
+iptables -D FORWARD -i hxsdwan -o hxsdwan -j ACCEPT 2>/dev/null
+iptables -D FORWARD -i hxsdwan -j ACCEPT 2>/dev/null
+iptables -t nat -D POSTROUTING -o hxsdwan -j MASQUERADE 2>/dev/null
+killall hx-cli
+killall -9 hx-cli
+sleep 4
+
 hxcli_enable=$(nvram get hxcli_enable)
 echo $hxcli_enable
 hxcli_token=$(nvram get hxcli_token)
@@ -54,9 +64,8 @@ if [ "$1" = "x" ] ; then
 	fi
 	[ -f $relock ] && rm -f $relock
 fi
+start_hxcli
 }
-
-start_hxcli() {
 
 	[ "$hxcli_enable" = "0" ] && exit 1
 	logger -t "【HX客户端】" "正在启动hx-cli"
@@ -85,11 +94,6 @@ iptables -I INPUT -i hxsdwan -j ACCEPT
 iptables -I FORWARD -i hxsdwan -o hxsdwan -j ACCEPT
 iptables -I FORWARD -i hxsdwan -j ACCEPT
 iptables -t nat -I POSTROUTING -o hxsdwan -j MASQUERADE
-	[ "$hxcli_proxy" = "1" ] && sysctl -w net.ipv4.ip_forward=1 >/dev/null 2>&1
-	if [ ! -z "$hx_tcp_port" ] ; then
-		 iptables -I INPUT -p tcp --dport $hx_tcp_port -j ACCEPT
-		 ip6tables -I INPUT -p tcp --dport $hx_tcp_port -j ACCEPT
-	fi
 #开启arp
 ifconfig hxcli arp
 else
@@ -113,7 +117,6 @@ cat >> "/tmp/script/_opt_script_check" <<-OSC
 OSC
 fi
 fi
-}
 
 stop_hx() {
 	logger -t "【HX客户端】" "正在关闭hx-cli..."
@@ -139,10 +142,7 @@ stop_hx() {
 		eval $(ps -w | grep "$scriptname" | grep -v $$ | grep -v grep | awk '{print "kill "$1";";}')
 		eval $(ps -w | grep "$scriptname" | grep -v $$ | grep -v grep | awk '{print "kill -9 "$1";";}')
 	fi
-	
-	exit 0
 }
-
 
 hx_status() {
 	if [ ! -z "$hx_process" ] ; then
