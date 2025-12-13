@@ -583,6 +583,11 @@ void stop_nelink(void);
 void start_nelink(void);
 void restart_nelink(void);
 #endif
+#if defined(APP_NTWON)
+void stop_ntwon(void);
+void start_ntwon(void);
+void restart_ntwon(void);
+#endif
 #if defined(APP_ETINK)
 void stop_etink(void);
 void start_etink(void);
