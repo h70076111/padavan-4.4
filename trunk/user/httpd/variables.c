@@ -1012,8 +1012,6 @@
 			{"scripts.hx.conf", "File", NULL, EVM_RESTART_HXCLI},
 			{"hxcli_routenum_x", "", NULL, EVM_RESTART_HXCLI},
 			{"HXCLIroute", "Group", ARGV((char*)variables_HXCLI_HXCLIroute, "8", "55", "hxcli_routenum_x"), EVM_RESTART_HXCLI},
-			{"hxcli_mappnum_x", "", NULL, EVM_RESTART_HXCLI},
-			{"HXCLImapp", "Group", ARGV((char*)variables_HXCLI_HXCLImapp, "8", "55", "hxcli_mappnum_x"), EVM_RESTART_HXCLI},
 			{0,0,0,0}
 	};
 #endif
