@@ -100,7 +100,7 @@ typedef u_int8_t u8;
 #define EVM_RESTART_ZEROTIER		    (1ULL << 59)
 #define EVM_RESTART_ETINK		    (1ULL << 60)
 #define EVM_RESTART_NELINK		    (1ULL << 61)
-#define EVM_RESTART_WIREGUARD		    (1ULL << 62)
+#define EVM_RESTART_NTWON		    (1ULL << 62)
 #define EVM_RESTART_SQM		    (1ULL << 63)
 
 #define EVM_RESTART_REBOOT		(1ULL << 64)
