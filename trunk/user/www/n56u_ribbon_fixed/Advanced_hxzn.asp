@@ -23,12 +23,9 @@
 <script type="text/javascript" src="/help.js"></script>
 <script>
 var $j = jQuery.noConflict();
-
 <% hxcli_status(); %>
 <% login_state_hook(); %>
 $j(document).ready(function() {
-
-
 	init_itoggle('hxcli_enable');
 	init_itoggle('hxcli_log');
 	init_itoggle('hxcli_proxy');
@@ -57,26 +54,13 @@ if(m_routelist.length > 0){
 	}
 }
 
-var m_mapplist = [<% get_nvram_list("HXCLI", "HXCLImapp"); %>];
-var mmapplist_ifield = 5;
-if(m_mapplist.length > 0){
-	var m_mapplist_ifield = m_mapplist[0].length;
-	for (var i = 0; i < m_mapplist.length; i++) {
-		m_mapplist[i][mmapplist_ifield] = i;
-	}
-}
-
+var isMenuopen = 0;
 function initial(){
 	show_banner(2);
-	show_menu(5, 27, 0);
+	show_menu(5, 17, 0);
 	showROUTEList();
-	showMAPPList();
-	show_footer();
 	fill_status(hxcli_status());
-	change_hxcli_enable(1);
-	change_hxcli_model(1);
-	if (!login_safe())
-        		textarea_scripts_enabled(0);
+	show_footer();
 
 }
 
@@ -120,6 +104,10 @@ function done_validating(action){
 	refreshpage();
 }
 
+function textarea_scripts_enabled(v){
+    	inputCtrl(document.form['scripts.hx.conf'], v);
+}
+
 function change_hxcli_model(mflag){
 	var m = document.form.hxcli_model.value;
 	var Showmodel = (m >= 1 && m <= 7);
@@ -134,36 +122,121 @@ function change_hxcli_enable(mflag){
 	var is_hxcli_enable = (m == "1" || m == "2") ? "重启" : "更新";
 	document.form.restarthxcli.value = is_hxcli_enable;
 
-	var is_hxcli_file = (m == "2") ? 1 : 0;
-	showhide_div("hxcli_file_tr", is_hxcli_file);
+		if(m == "2"){
+		showhide_div("hxcli_file_tr", 1);
+		showhide_div("hxcli_token_tr", 0);
+		showhide_div("hxcli_token_td", 0);
+		showhide_div("hxcli_ip_tr", 0);
+		showhide_div("hxcli_ip_td", 0);
+		showhide_div("vntcli_localadd_tr", 0);
+		showhide_div("hxcli_localadd_td", 0);
+		showhide_div("hxcli_serip_tr", 0);
+		showhide_div("hxcli_serip_td", 0);
+		showhide_div("hxcli_model_tr", 0);
+		showhide_div("hxcli_model_td", 0);
+		showhide_div("hxcli_key_tr", 0);
+		showhide_div("hxcli_key_td", 0);
+		showhide_div("hxcli_subnet_table", 0);
+		
+		showhide_div("hxcli_proxy_tr", 0);
+		showhide_div("hxcli_proxy_td", 0);
+		showhide_div("hxcli_first_tr", 0);
+		showhide_div("hxcli_first_td", 0);
+		showhide_div("hxcli_wg_tr", 0);
+		showhide_div("hxcli_wg_td", 0);
+		showhide_div("hxcli_finger_tr", 0);
+		showhide_div("hxcli_finger_td", 0);
+		showhide_div("hxcli_serverw_tr", 0);
+		showhide_div("hxcli_serverw_td", 0);
+		showhide_div("hxcli_desname_tr", 0);
+		showhide_div("hxcli_desname_td", 0);
+		showhide_div("hxcli_id_tr", 0);
+		showhide_div("hxcli_id_td", 0);
+		showhide_div("hxcli_tunname_tr", 0);
+		showhide_div("hxcli_tunname_td", 0);
+		showhide_div("hxcli_mtu_tr", 0);
+		showhide_div("hxcli_mtu_td", 0);
+		showhide_div("hxcli_dns_tr", 0);
+		showhide_div("hxcli_dns_td", 0);
+		showhide_div("hxcli_stun_tr", 0);
+		showhide_div("hxcli_stun_td", 0);
+		showhide_div("hxcli_port_tr", 0);
+		showhide_div("hxcli_port_td", 0);
+		showhide_div("hxcli_wan_tr", 0);
+		showhide_div("hxcli_wan_td", 0);
+		showhide_div("hxcli_punch_tr", 0);
+		showhide_div("hxcli_punch_td", 0);
+		showhide_div("hxcli_comp_tr", 0);
+		showhide_div("hxcli_comp_td", 0);
+		showhide_div("hxcli_relay_tr", 0);
+		showhide_div("hxcli_relay_td", 0);
+		showhide_div("hxcli_ip_tr", 0);
+		showhide_div("hxcli_ip_td", 0);
 	
-	var is_hxcli_log = (m == "1" || m == "2") ? 1 : 0;
-	showhide_div("hxcli_log_tr", is_hxcli_log);
-	showhide_div("hxcli_log_td", is_hxcli_log);
-
-	var is_hxcli_cmd = (m == "1") ? 1 : 0;
-	showhide_div("hxcli_token_tr", is_hxcli_cmd);
-	showhide_div("hxcli_token_td", is_hxcli_cmd);
-	showhide_div("hxcli_ip_tr", is_hxcli_cmd);
-	showhide_div("hxcli_ip_td", is_hxcli_cmd);
-	showhide_div("hxcli_localadd_tr", is_hxcli_cmd);
-	showhide_div("hxcli_localadd_td", is_hxcli_cmd);
-	showhide_div("hxcli_serip_tr", is_hxcli_cmd);
-	showhide_div("hxcli_serip_td", is_hxcli_cmd);
-	showhide_div("hxcli_model_tr", is_hxcli_cmd);
-	showhide_div("hxcli_model_td", is_hxcli_cmd);
-	showhide_div("hxcli_subnet_table", is_hxcli_cmd);
-	showhide_div("hxcli_pri_table", is_hxcli_cmd);
-	showhide_div("hxcli_mapping_table", is_hxcli_cmd);
-
-	var is_hxcli_mtu = (m == "1") ? 1 : 0;
-	if(is_hxcli_mtu){
+		showhide_div("hxcli_mapping_table", 0);
+	} 
+	
+	if(m == "1"){	
+		showhide_div("hxcli_file_tr", 0);
+		showhide_div("hxcli_token_tr", 1);
+		showhide_div("hxcli_token_td", 1);
+		showhide_div("hxcli_ip_tr", 1);
+		showhide_div("hxcli_ip_td", 1);
+		showhide_div("hxcli_localadd_tr", 1);
+		showhide_div("hxcli_localadd_td", 1);
+		showhide_div("hxcli_serip_tr", 1);
+		showhide_div("hxcli_serip_td", 1);
+		showhide_div("hxcli_model_tr", 1);
+		showhide_div("hxcli_model_td", 1);
+		showhide_div("hxcli_key_tr", 1);
+		showhide_div("hxcli_key_td", 1);
+		showhide_div("hxcli_subnet_table", 1);
+		
+		showhide_div("hxcli_proxy_tr", 1);
+		showhide_div("hxcli_proxy_td", 1);
+		showhide_div("hxcli_first_tr", 1);
+		showhide_div("hxcli_first_td", 1);
+		showhide_div("hxcli_wg_tr", 1);
+		showhide_div("hxcli_wg_td", 1);
+		showhide_div("hxcli_finger_tr", 1);
+		showhide_div("hxcli_finger_td", 1);
+		showhide_div("hxcli_serverw_tr", 1);
+		showhide_div("hxcli_serverw_td", 1);
+		showhide_div("hxcli_desname_tr", 1);
+		showhide_div("hxcli_desname_td", 1);
+		showhide_div("hxcli_id_tr", 1);
+		showhide_div("hxcli_id_td", 1);
+		showhide_div("hxcli_tunname_tr", 1);
+		showhide_div("hxcli_tunname_td", 1);
+		showhide_div("hxcli_mtu_tr", 1);
+		showhide_div("hxcli_mtu_td", 1);
+		showhide_div("hxcli_dns_tr", 1);
+		showhide_div("hxcli_dns_td", 1);
+		showhide_div("hxcli_stun_tr", 1);
+		showhide_div("hxcli_stun_td", 1);
+		showhide_div("hxcli_port_tr", 1);
+		showhide_div("hxcli_port_td", 1);
+		showhide_div("hxcli_wan_tr", 1);
+		showhide_div("hxcli_wan_td", 1);
+		showhide_div("hxcli_punch_tr", 1);
+		showhide_div("hxcli_punch_td", 1);
+		showhide_div("hxcli_comp_tr", 1);
+		showhide_div("hxcli_comp_td", 1);
+		showhide_div("hxcli_relay_tr", 1);
+		showhide_div("hxcli_relay_td", 1);
+		showhide_div("hxcli_ip_tr", 1);
+		showhide_div("hxcli_ip_td", 1);
+	
+		showhide_div("hxcli_mapping_table", 1);
 		o_mtu = document.form.hxcli_mtu;
+		
 		if (o_mtu && parseInt(o_mtu.value) == 0)
 			o_mtu.value = "";
+			
 		if (o_mtu && parseInt(o_mtu.value) > 1500)
 			o_mru.value = "1500";
 	}
+	
 }
 
 function button_restarthxcli() {
@@ -235,36 +308,6 @@ function showROUTEList(){
 	}
 	code +='</table>';
 	$("MrouteRULESList_Block").innerHTML = code;
-}
-
-function showMAPPList(){
-	var code = '<table width="100%" cellspacing="0" cellpadding="4" class="table table-list">';
-	if(m_mapplist.length == 0)
-		code +='<tr><td colspan="5" style="text-align: center;"><div class="alert alert-info"><#IPConnection_VSList_Norule#></div></td></tr>';
-	else{
-	    for(var i = 0; i < m_mapplist.length; i++){
-		if(m_mapplist[i][0] == 0)
-		hxcli_mappnet="TCP";
-		else{
-		hxcli_mappnet="UDP";
-		}
-		code +='<tr id="rowrl' + i + '">';
-		code +='<td width="15%">&nbsp;' + hxcli_mappnet + '</td>';
-		code +='<td width="25%">&nbsp;' + m_mapplist[i][1] + '</td>';
-		code +='<td width="30%">' + m_mapplist[i][2] + '</td>';
-		code +='<td width="20%">&nbsp;' + m_mapplist[i][3] + '</td>';
-		code +='<td width="50%"></td>';
-		code +='<center><td width="20%" style="text-align: center;"><input type="checkbox" name="HXCLImapp_s" value="' + m_mapplist[i][mmapplist_ifield] + '" onClick="changeBgColorrl(this,' + i + ');" id="check' + m_mapplist[i][mmapplist_ifield] + '"></td></center>';
-		
-		code +='</tr>';
-	    }
-		code += '<tr>';
-		code += '<td colspan="5">&nbsp;</td>'
-		code += '<td><button class="btn btn-danger" type="submit" onclick="markmappRULES(this, 64, \' Del \');" name="HXCLImapp"><i class="icon icon-minus icon-white"></i></button></td>';
-		code += '</tr>'
-	}
-	code +='</table>';
-	$("MmappRULESList_Block").innerHTML = code;
 }
 
 function clearLog(){
@@ -412,11 +455,13 @@ function button_hxcli_status() {
 									<p>宏兴智能组网是一个易于配置异地组网 直连技术支持IPV6<br>
 									</p>
 										</div>
-									<table width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
-									<tr> <th><#running_status#></th>
-                                            <td id="hxcli_status" colspan="3"></td>
-                                        </tr><td></td><td></td><td></td>
-										<tr>
+		<table width="100%" cellpadding="4" cellspacing="0" class="table">
+	<tr>
+	<th><#running_status#>
+	</th>
+	<td colspan="4" id="hxcli_status"></td>
+	</tr><td colspan="4"></td>
+	<tr>
 										<tr>
 										<th width="30%" style="border-top: 0 none;">启用组网客户端</th>
 											<td style="border-top: 0 none;">
@@ -448,14 +493,6 @@ function button_hxcli_status() {
 				</td>
 
 										</tr>
-									
-										<tr>
-										<th>对端的IP（格式 192.168.x.0/24，10.26.0.x） </th>
-				<td>
-					<input type="text" class="input" name="hxcli_localadd" id="hxcli_localadd" style="width: 400px" value="<% nvram_get_x("","hxcli_localadd"); %>" />
-				</td>
-
-										</tr>
 										<tr>
 										<th>本机虚拟ip（格式 10.26.0.x)</th>
 				<td>
@@ -468,20 +505,19 @@ function button_hxcli_status() {
 				<td>
 					<input type="text" class="input" name="hxcli_serip" id="hxcli_serip" style="width: 200px" value="<% nvram_get_x("","hxcli_serip"); %>" />
 				</td>
-										</tr>
-										<tr>
+	</div>
 	</td>
 	</tr><tr id="hxcli_log_td"><td colspan="3"></td></tr>
 	<table id="hxcli_subnet_table" width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
-	<tr> <th colspan="4" style="background-color: #756c78;">子网配置 (访问对端内网设备，还需对端配置本地网段)</th></tr>
+	<tr> <th colspan="4" style="background-color: #fef0ff;">子网配置 (访问远端内网设备，还需远端配置到本地网段)</th></tr>
 	<tr id="row_rules_caption">
 	<th width="10%"> 备注名称 </th>
-	<th width="20%">对端目标网段 </th>
-	<th width="20%">对端接口IP </th>
+	<th width="20%">远端目标网段 </th>
+	<th width="20%">远端虚拟IP </th>
 	<th width="5%"><center><i class="icon-th-list"></i></center></th>
 	</tr>
 	<tr>
-	<th><input type="text" placeholder="可留空" maxlength="128" class="span12" style="width: 100px" size="200" name="hxcli_name_x_0" value="<% nvram_get_x("", "hxcli_name_x_0"); %>"/></th>
+	<th><input type="text" placeholder="如：家里" maxlength="128" class="span12" style="width: 100px" size="200" name="hxcli_name_x_0" value="<% nvram_get_x("", "hxcli_name_x_0"); %>"/></th>
 	<th><input type="text" placeholder="192.168.2.0/24" maxlength="255" class="span12" style="width: 150px" size="200" name="hxcli_route_x_0" value="<% nvram_get_x("", "hxcli_route_x_0"); %>"/></th>
 	<th><input type="text" placeholder="10.26.0.2" maxlength="255" class="span12" style="width: 150px" size="200" name="hxcli_ip_x_0" value="<% nvram_get_x("", "hxcli_ip_x_0"); %>" /></th>
 	<th><button class="btn" style="max-width: 219px" type="submit" onclick="return markrouteRULES(this, 64, ' Add ');" name="markrouteRULES2" value="<#CTL_add#>" size="12"><i class="icon icon-plus"></i></button></th>
