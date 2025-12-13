@@ -595,6 +595,23 @@ void restart_etink(void){
 }
 #endif
 
+#if defined(APP_NTWON)
+void stop_ntwon(void){
+	eval("/usr/bin/ntwon.sh","stop");
+}
+
+void start_ntwon(void){
+	int ntwon_enable = nvram_get_int("ntwon_enable");
+	if ( ntwon_enable == 1)
+		eval("/usr/bin/ntwon.sh","start");
+}
+
+void restart_ntwon(void){
+	stop_ntwon();
+	start_ntwon();
+}
+#endif
+
 #if defined(APP_HXCLI)
 void stop_hxcli(void){
 	eval("/usr/bin/hx.sh","stop");
@@ -914,6 +931,9 @@ stop_services(int stopall)
 #endif
 #if defined(APP_NELINK)
 	stop_nelink();
+#endif
+#if defined(APP_NTWON)
+	stop_ntwon();
 #endif
 #if defined(APP_ETLINK)
 	stop_etink();
