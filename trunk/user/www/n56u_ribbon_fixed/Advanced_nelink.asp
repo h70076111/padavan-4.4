@@ -271,9 +271,9 @@ function button_nelink_web(){
 										</tr>
 
 										<tr>
-										<th>本机虚拟ip（格式 20）</th>
+										<th>本机虚拟ip（格式 10.26.3.X）</th>
 				<td>
-					<input type="text" class="input" name="nelink_ip" id="nelink_ip" style="width: 30px" value="<% nvram_get_x("","nelink_ip"); %>" />
+					<input type="text" class="input" name="nelink_ip" id="nelink_ip" style="width: 100px" value="<% nvram_get_x("","nelink_ip"); %>" />
 				</td>
 
 										</tr>
