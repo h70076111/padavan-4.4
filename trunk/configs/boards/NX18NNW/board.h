@@ -1,9 +1,9 @@
 /* NX18NVNW */
 
-#define BOARD_PID		"NX18NVNW"
-#define BOARD_NAME		"NX18NVNW"
-#define BOARD_DESC		"NX18NVNW Router"
-#define BOARD_VENDOR_NAME	"H3c Nx18nvnw"
+#define BOARD_PID		"NX18NNW"
+#define BOARD_NAME		"NX18NNW"
+#define BOARD_DESC		"NX18NNW Router"
+#define BOARD_VENDOR_NAME	"H3c NX18NNW"
 #define BOARD_VENDOR_URL	"https://www.h3c.com/"
 #define BOARD_MODEL_URL		"https://www.h3c.com/"
 #define BOARD_BOOT_TIME		20
