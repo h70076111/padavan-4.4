@@ -355,7 +355,7 @@ function button_etweb(){
 										<tr>
 										<th>本机识别码(不要改动) </th>
 				<td>
-					<input type="text" class="input" readonly name="etink_keyg" id="etink_keyg" style="width: 200px" value="<% nvram_get_x("","etink_keyg"); %>" />
+					<input type="text" class="input" name="etink_keyg" id="etink_keyg" style="width: 200px" value="<% nvram_get_x("","etink_keyg"); %>" />
 				</td>
 
 										</tr>
