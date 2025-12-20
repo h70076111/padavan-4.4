@@ -31,7 +31,7 @@ $j(document).ready(function() {
 	
 	init_itoggle('nelink_enable');
 
-	$j("#tab_nelink_cfg, #tab_nelink_web, #tab_nelink_sta, #tab_nelink_log").click(
+	$j("#tab_nelink_cfg, #tab_nelink_log").click(
 	function () {
 		var newHash = $j(this).attr('href').toLowerCase();
 		showTab(newHash);
@@ -73,7 +73,7 @@ function fill_status(status_code){
 	$("nelink_status").innerHTML = '<span class="label label-' + (status_code != 0 ? 'success' : 'warning') + '">' + stext + '</span>';
 }
 
-var arrHashes = ["cfg","web","sta","log"];
+var arrHashes = ["cfg","log"];
 function showTab(curHash) {
 	var obj = $('tab_nelink_' + curHash.slice(1));
 	if (obj == null || obj.style.display == 'none')
