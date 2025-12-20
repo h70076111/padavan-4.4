@@ -71,7 +71,7 @@ ifconfig nehxkj down && ip tuntap del nehxkj mode tun
 
 case $1 in
 start)
-	start_ne
+	start_ne &
 	;;
 stop)
 	stop_ne &
