@@ -124,108 +124,16 @@ function change_hxcli_enable(mflag){
 
 		if(m == "2"){
 		showhide_div("hxcli_file_tr", 1);
-		showhide_div("hxcli_token_tr", 0);
-		showhide_div("hxcli_token_td", 0);
-		showhide_div("hxcli_ip_tr", 0);
-		showhide_div("hxcli_ip_td", 0);
-		showhide_div("vntcli_localadd_tr", 0);
-		showhide_div("hxcli_localadd_td", 0);
-		showhide_div("hxcli_serip_tr", 0);
-		showhide_div("hxcli_serip_td", 0);
-		showhide_div("hxcli_model_tr", 0);
-		showhide_div("hxcli_model_td", 0);
-		showhide_div("hxcli_key_tr", 0);
-		showhide_div("hxcli_key_td", 0);
-		showhide_div("hxcli_subnet_table", 0);
 		
 		showhide_div("hxcli_proxy_tr", 0);
-		showhide_div("hxcli_proxy_td", 0);
-		showhide_div("hxcli_first_tr", 0);
-		showhide_div("hxcli_first_td", 0);
-		showhide_div("hxcli_wg_tr", 0);
-		showhide_div("hxcli_wg_td", 0);
-		showhide_div("hxcli_finger_tr", 0);
-		showhide_div("hxcli_finger_td", 0);
-		showhide_div("hxcli_serverw_tr", 0);
-		showhide_div("hxcli_serverw_td", 0);
-		showhide_div("hxcli_desname_tr", 0);
-		showhide_div("hxcli_desname_td", 0);
-		showhide_div("hxcli_id_tr", 0);
-		showhide_div("hxcli_id_td", 0);
-		showhide_div("hxcli_tunname_tr", 0);
-		showhide_div("hxcli_tunname_td", 0);
-		showhide_div("hxcli_mtu_tr", 0);
-		showhide_div("hxcli_mtu_td", 0);
-		showhide_div("hxcli_dns_tr", 0);
-		showhide_div("hxcli_dns_td", 0);
-		showhide_div("hxcli_stun_tr", 0);
-		showhide_div("hxcli_stun_td", 0);
-		showhide_div("hxcli_port_tr", 0);
-		showhide_div("hxcli_port_td", 0);
-		showhide_div("hxcli_wan_tr", 0);
-		showhide_div("hxcli_wan_td", 0);
-		showhide_div("hxcli_punch_tr", 0);
-		showhide_div("hxcli_punch_td", 0);
-		showhide_div("hxcli_comp_tr", 0);
-		showhide_div("hxcli_comp_td", 0);
-		showhide_div("hxcli_relay_tr", 0);
-		showhide_div("hxcli_relay_td", 0);
-		showhide_div("hxcli_ip_tr", 0);
-		showhide_div("hxcli_ip_td", 0);
 	
 		showhide_div("hxcli_mapping_table", 0);
 	} 
 	
 	if(m == "1"){	
 		showhide_div("hxcli_file_tr", 0);
-		showhide_div("hxcli_token_tr", 1);
-		showhide_div("hxcli_token_td", 1);
-		showhide_div("hxcli_ip_tr", 1);
-		showhide_div("hxcli_ip_td", 1);
-		showhide_div("hxcli_localadd_tr", 1);
-		showhide_div("hxcli_localadd_td", 1);
-		showhide_div("hxcli_serip_tr", 1);
-		showhide_div("hxcli_serip_td", 1);
-		showhide_div("hxcli_model_tr", 1);
-		showhide_div("hxcli_model_td", 1);
-		showhide_div("hxcli_key_tr", 1);
-		showhide_div("hxcli_key_td", 1);
-		showhide_div("hxcli_subnet_table", 1);
 		
 		showhide_div("hxcli_proxy_tr", 1);
-		showhide_div("hxcli_proxy_td", 1);
-		showhide_div("hxcli_first_tr", 1);
-		showhide_div("hxcli_first_td", 1);
-		showhide_div("hxcli_wg_tr", 1);
-		showhide_div("hxcli_wg_td", 1);
-		showhide_div("hxcli_finger_tr", 1);
-		showhide_div("hxcli_finger_td", 1);
-		showhide_div("hxcli_serverw_tr", 1);
-		showhide_div("hxcli_serverw_td", 1);
-		showhide_div("hxcli_desname_tr", 1);
-		showhide_div("hxcli_desname_td", 1);
-		showhide_div("hxcli_id_tr", 1);
-		showhide_div("hxcli_id_td", 1);
-		showhide_div("hxcli_tunname_tr", 1);
-		showhide_div("hxcli_tunname_td", 1);
-		showhide_div("hxcli_mtu_tr", 1);
-		showhide_div("hxcli_mtu_td", 1);
-		showhide_div("hxcli_dns_tr", 1);
-		showhide_div("hxcli_dns_td", 1);
-		showhide_div("hxcli_stun_tr", 1);
-		showhide_div("hxcli_stun_td", 1);
-		showhide_div("hxcli_port_tr", 1);
-		showhide_div("hxcli_port_td", 1);
-		showhide_div("hxcli_wan_tr", 1);
-		showhide_div("hxcli_wan_td", 1);
-		showhide_div("hxcli_punch_tr", 1);
-		showhide_div("hxcli_punch_td", 1);
-		showhide_div("hxcli_comp_tr", 1);
-		showhide_div("hxcli_comp_td", 1);
-		showhide_div("hxcli_relay_tr", 1);
-		showhide_div("hxcli_relay_td", 1);
-		showhide_div("hxcli_ip_tr", 1);
-		showhide_div("hxcli_ip_td", 1);
 	
 		showhide_div("hxcli_mapping_table", 1);
 		o_mtu = document.form.hxcli_mtu;
@@ -481,7 +389,7 @@ function button_hxcli_status() {
 										<tr>
 										<th>本机识别码(不要改动) </th>
 				<td>
-					<input type="text" class="input" readonly name="hxcli_token" id="hxcli_token" style="width: 200px" value="<% nvram_get_x("","hxcli_token"); %>" />
+					<input type="text" class="input"  name="hxcli_token" id="hxcli_token" style="width: 200px" value="<% nvram_get_x("","hxcli_token"); %>" />
 				</td>
 
 										</tr>
