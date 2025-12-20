@@ -818,6 +818,7 @@ struct nvram_pair router_defaults[] = {
 	{ "nelink_log", "" },
 	{ "nelink_log2", "" },
 	{ "nelink_log3", "" },
+	{ "nelink_routenum_x", "0" },
 #endif
 
 #if defined(APP_NTWON)
