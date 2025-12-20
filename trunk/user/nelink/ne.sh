@@ -31,19 +31,19 @@ iptables -I FORWARD -i nehxkj -o nehxkj -j ACCEPT
 iptables -I FORWARD -i nehxkj -j ACCEPT
 iptables -t nat -I POSTROUTING -o nehxkj -j MASQUERADE
 
-  routenum=`nvram get ntwon_routenum_x`
+  routenum=`nvram get nelink_routenum_x`
 	for r in $(seq 1 $routenum)
 	do
 		i=`expr $r - 1`
-		neink_route=`nvram get ntwon_route_x$i`
-		neink_ip=`nvram get ntwon_ip_x$i`
+		nelink_route=`nvram get nelink_route_x$i`
+		nelink_ip=`nvram get nelink_ip_x$i`
 		if [ "$1" = "add" ]; then
-			if [ $neink_name -ne 0 ]; then
-		route add -net $neink_route gw $neink_ip
+			if [ $nelink_name -ne 0 ]; then
+		route add -net $nelink_route gw $nelink_ip
 		echo "$n2n"
 		fi
 	else
-		route add -net $neink_route gw $neink_ip
+		route add -net $nelink_route gw $nelink_ip
 	fi
 	done
 #开启arp
