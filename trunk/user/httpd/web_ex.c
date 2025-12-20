@@ -2295,7 +2295,7 @@ static int hxcli_status_hook(int eid, webs_t wp, int argc, char **argv)
 #if defined (APP_NELINK)
 static int nelink_status_hook(int eid, webs_t wp, int argc, char **argv)
 {
-	int nelink_status_code = pids("nelink");
+	int nelink_status_code = pids("netlink");
 	websWrite(wp, "function nelink_status() { return %d;}\n", nelink_status_code);
 	return 0;
 }
