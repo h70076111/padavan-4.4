@@ -100,6 +100,40 @@ function applyRule(){
 	document.form.submit();
 }
 
+function textarea_scripts_enabled(v){
+    	inputCtrl(document.form['scripts.nelink.conf'], v);
+}
+
+function change_nelink_enable(mflag){
+	var m = document.form.nelink_enable.value;
+	var is_nelink_enable = (m == "1" || m == "2") ? "重启" : "更新";
+	document.form.restartntwon.value = is_nelink_enable;
+
+		if(m == "2"){
+		showhide_div("nelink_file_tr", 1);
+
+		showhide_div("nelink_ip_td", 0);
+	
+		showhide_div("nelink_mapping_table", 0);
+	} 
+	
+	if(m == "1"){	
+		showhide_div("nelink_file_tr", 0);
+		
+		showhide_div("nelink_ip_td", 1);
+	
+		showhide_div("nelink_mapping_table", 1);
+		o_mtu = document.form.nelink_mtu;
+		
+		if (o_mtu && parseInt(o_mtu.value) == 0)
+			o_mtu.value = "";
+			
+		if (o_mtu && parseInt(o_mtu.value) > 1500)
+			o_mru.value = "1500";
+	}
+	
+}
+
 function  button_restarnelink(){
     	var $j = jQuery.noConflict();
     	$j.post('/apply.cgi',
@@ -200,10 +234,11 @@ function button_nelink_web(){
 	<input type="hidden" name="current_page" value="Advanced_nelink.asp">
 	<input type="hidden" name="next_page" value="">
 	<input type="hidden" name="next_host" value="">
-	<input type="hidden" name="sid_list" value="NELINK;">
-	<input type="hidden" name="group_id" value="">
+	<input type="hidden" name="sid_list" value="NELINK;LANHostConfig;General;">
+	<input type="hidden" name="group_id" value="NELINKtorou;NELINKmapp">
 	<input type="hidden" name="action_mode" value="">
 	<input type="hidden" name="action_script" value="">
+	<input type="hidden" name="nelink_routenum_x_0" value="<% nvram_get_x("NELINKtorou", "nelink_routenum_x"); %>" readonly="1" />
 
 
 	<div class="container-fluid">
