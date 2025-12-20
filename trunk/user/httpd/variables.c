@@ -83,6 +83,12 @@
 			{"zero_route_x", "24", NULL, FALSE},
 			{0,0,0,0}
 		};
+	struct variable variables_NELINK_NELINKtorou[] = {
+			{"nelink_name_x", "24", NULL, FALSE},
+			{"nelink_route_x", "24", NULL, FALSE},
+			{"nelink_ip_x", "24", NULL, FALSE},
+			{0,0,0,0}
+		};
 	struct variable variables_NTWON_NTWONinrou[] = {
 			{"ntwon_name_x", "24", NULL, FALSE},
 			{"ntwon_route_x", "24", NULL, FALSE},
@@ -1032,6 +1038,8 @@
 			{"nelink_xuip4", "", NULL, EVM_RESTART_NELINK},
 			{"nelink_log2", "", NULL, EVM_RESTART_NELINK},
 			{"nelink_log3", "", NULL, EVM_RESTART_NELINK},
+			{"nelink_routenum_x", "", NULL, EVM_RESTART_NTWON},
+			{"NELINKtorou", "Group", ARGV((char*)variables_NELINK_NELINKtorou, "8", "55", "nelink_routenum_x"), EVM_RESTART_NELINK},
 			{0,0,0,0}
 	};
 #endif
