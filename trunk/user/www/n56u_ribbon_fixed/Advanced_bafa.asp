@@ -234,20 +234,6 @@ function button_restartBAFA(){
 	&nbsp;<span style="color:#888;">[9501]</span>
 	</div>
 	</td>
-	</tr><td colspan="4"></td>
-	<tr>
-	<th width="30%" style="border-top: 0 none;" title="在接收到消息的时候输出主题名，此时$1为主题名 $2才是消息内容">输出主题名</th>
-	<td style="border-top: 0 none;">
-	<div class="main_itoggle">
-	<div id="bafa_show_on_of">
-	<input type="checkbox" id="bafa_show_fake" <% nvram_match_x("", "bafa_show", "1", "value=1 checked"); %><% nvram_match_x("", "bafa_show", "0", "value=0"); %> />
-	</div>
-	</div>
-	<div style="position: absolute; margin-left: -10000px;">
-	<input type="radio" value="1" name="bafa_show" id="bafa_show_1" class="input" value="1" <% nvram_match_x("", "bafa_show", "1", "checked"); %> /><#checkbox_Yes#>
-	<input type="radio" value="0" name="bafa_show" id="bafa_show_0" class="input" value="0" <% nvram_match_x("", "bafa_show", "0", "checked"); %> /><#checkbox_No#>
-	</div>
-	</td>
 	</tr>			
 	<tr>
 	<td colspan="4">
