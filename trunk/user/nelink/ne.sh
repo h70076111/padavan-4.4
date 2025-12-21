@@ -19,7 +19,15 @@ nelink_log3=$(nvram get nelink_log3)
 echo $nelink_log3
 
 start_ne() {
-
+#关闭nehxkj的防火墙
+iptables -D INPUT -i nehxkj -j ACCEPT 2>/dev/null
+iptables -D FORWARD -i nehxkj -o nehxkj -j ACCEPT 2>/dev/null
+iptables -D FORWARD -i nehxkj -j ACCEPT 2>/dev/null
+iptables -t nat -D POSTROUTING -o nehxkj -j MASQUERADE 2>/dev/null
+killall netlink
+killall -9 netlink
+sleep 3
+#清除nelink的虚拟网卡
 	[ "$nelink_enable" = "0" ] && exit 1
 	logger -t "【NE客户端】" "正在启动nelink"
 NECMD="/usr/bin/netlink --tun-name nehxkj  -g $nelink_keyg -l $nelink_ip/24 -p $nelink_log --api-addr $lan_ipaddr:23336 >/tmp/nelink.log 2>&1" 
