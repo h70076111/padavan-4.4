@@ -19,8 +19,13 @@ nelink_log3=$(nvram get nelink_log3)
 echo $nelink_log3
 
 start_ne() {
-/usr/bin/netlink --tun-name nehxkj  -g $nelink_keyg -l $nelink_ip/24 -p $nelink_log --api-addr $lan_ipaddr:23336 &
 
+	[ "$nelink_enable" = "0" ] && exit 1
+	logger -t "【NE客户端】" "正在启动nelink"
+NECMD="/usr/bin/netlink --tun-name nehxkj  -g $nelink_keyg -l $nelink_ip/24 -p $nelink_log --api-addr $lan_ipaddr:23336 >/tmp/hx-cli.log 2>&1" 
+echo "$NECMD" 
+logger -t "【NE组网】" "运行${NECMD}"
+eval "$NECMD" &
 sleep 5
 
 if [ ! -z "`pidof netlink`" ] ; then
