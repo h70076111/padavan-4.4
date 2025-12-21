@@ -165,7 +165,7 @@ function button_restartBAFA(){
 	<div id="tabMenu" class="submenuBlock"></div>
 	<div id="wnd_bafa_cfg">
 	<div class="alert alert-info" style="margin: 10px;">
-	通过MQTT协议连接巴法云，可接入米家等智能家居控制系统，实现远程控重起设备。<br>
+	通过MQTT协议连接巴法云，可点APP上的开关，实现远程控重起设备。<br>
 	<div>【官网】：<a href="https://cloud.bemfa.com/" target="blank">cloud.bemfa.com</a>&nbsp;&nbsp;【控制台】：<a href="https://cloud.bemfa.com/tcp/devicemqtt.html" target="blank">cloud.bemfa.com/tcp/devicemqtt.html</a></div>
 	
 	</div>
@@ -246,22 +246,6 @@ function button_restartBAFA(){
 	<div style="position: absolute; margin-left: -10000px;">
 	<input type="radio" value="1" name="bafa_show" id="bafa_show_1" class="input" value="1" <% nvram_match_x("", "bafa_show", "1", "checked"); %> /><#checkbox_Yes#>
 	<input type="radio" value="0" name="bafa_show" id="bafa_show_0" class="input" value="0" <% nvram_match_x("", "bafa_show", "0", "checked"); %> /><#checkbox_No#>
-	</div>
-	</td>
-	</tr><td colspan="4"></td>	
-	<tr>
-	<th width="30%" style="border-top: 0 none;">程序路径</th>
-	<td style="border-top: 0 none;">
-	<div class="input-append">
-	<textarea maxlength="1024" class="input" name="bafa_bin" id="bafa_bin" placeholder="/etc/storage/bin/stdoutsubc" style="width: 210px; height: 20px; resize: both; overflow: auto;"><% nvram_get_x("","bafa_bin"); %></textarea>
-	</div><span style="color:#888;">指定stdoutsubc程序路径和程序名，完整路径</span>
-	</td>
-	</tr>
-	<tr>
-	<td colspan="4" style="border-top: 0 none;">
-	<i class="icon-hand-right"></i> <a href="javascript:spoiler_toggle('bfscript')"><span>点这里自定义 /etc/storage/bafa_script.sh 脚本</span></a>
-	<div id="bfscript" style="display:none;">
-	<textarea rows="24" wrap="off" spellcheck="false" maxlength="81920" class="span12" name="scripts.bafa_script.sh" style="font-family:'Courier New'; font-size:12px;"><% nvram_dump("scripts.bafa_script.sh",""); %></textarea>
 	</div>
 	</td>
 	</tr>			
