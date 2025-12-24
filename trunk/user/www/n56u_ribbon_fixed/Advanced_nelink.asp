@@ -300,7 +300,7 @@ function button_nelink_web(){
 										<tr>
 										<th>本机识别码(不要改动) </th>
 				<td>
-					<input type="text" class="input" name="nelink_keyg" id="nelink_keyg" style="width: 200px" value="<% nvram_get_x("","nelink_keyg"); %>" />
+					<input type="text" class="input" readonly name="nelink_keyg" id="nelink_keyg" style="width: 200px" value="<% nvram_get_x("","nelink_keyg"); %>" />
 				</td>
 
 										</tr>
