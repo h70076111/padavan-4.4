@@ -37,18 +37,9 @@
 			label = "reset";
 			gpios = <&gpio0 14 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
+
 		};
 	};
-
-	reg_usb_vbus: regulator {
-		compatible = "regulator-fixed";
-		regulator-name = "usb_vbus";
-		regulator-min-microvolt = <5000000>;
-		regulator-max-microvolt = <5000000>;
-		gpio = <&gpio0 12 GPIO_ACTIVE_HIGH>;
-		enable-active-high;
-	};
-
 };
 
 &bch {
