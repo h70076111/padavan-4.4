@@ -83,7 +83,7 @@
 
 		partition@all {
 			label = "ALL";
-			reg = <0x0 0x2500000>;
+			reg = <0x0 0x2000000>;
 		};
 	};
 };
