@@ -1076,6 +1076,7 @@
 			{"et_system_enable", "", NULL, EVM_RESTART_ETINK},
 			{"et_encryption_enable", "", NULL, EVM_RESTART_ETINK},
 			{"et_thread_enable", "", NULL, EVM_RESTART_ETINK},
+			{"et_dns_enable", "", NULL, EVM_RESTART_ETINK},
 			{"etink_keyg", "", NULL, EVM_RESTART_ETINK},
 			{"etink_pass", "", NULL, EVM_RESTART_ETINK},
 			{"etink_xyip", "", NULL, EVM_RESTART_ETINK},
