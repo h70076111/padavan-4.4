@@ -30,6 +30,16 @@ var $j = jQuery.noConflict();
 $j(document).ready(function() {
 	
 	init_itoggle('etink_enable');
+	init_itoggle('et_ipv6_enable');
+	init_itoggle('et_use_enable');
+	init_itoggle('et_latency_enable');
+	init_itoggle('et_kcp_enable');
+	init_itoggle('et_quic_enable');
+	init_itoggle('et_p2p_enable');
+	init_itoggle('et_udp_enable');
+	init_itoggle('et_system_enable');
+	init_itoggle('et_encryption_enable');
+	init_itoggle('et_thread_enable');
 
 	$j("#tab_etink_cfg, #tab_etink_web, #tab_etink_sta, #tab_etink_log").click(
 	function () {
@@ -390,18 +400,154 @@ function button_etweb(){
 
 										</tr>
 										<tr>
-										<th>服务</th>
+										<th>加入运行参数</th>
 				<td>
-					<input type="text" class="input" name="etink_log2" id="etink_log2" style="width: 500px" value="<% nvram_get_x("","etink_log2"); %>" />
+					<input type="text" class="input" name="etink_log2" id="etink_log2" style="width: 240px" value="<% nvram_get_x("","etink_log2"); %>" />
 				</td>
 
 										</tr>
 										<tr>
-										<th>服务2</th>
-				<td>
-					<input type="text" class="input" name="etink_log3" id="etink_log3" style="width: 500px" value="<% nvram_get_x("","etink_log3"); %>" />
-				</td>
+										<th width="30%" style="border-top: 0 none;">开启延迟优先模式</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_latency_enable_on_of">
+														<input type="checkbox" id="et_latency_enable_fake" <% nvram_match_x("", "et_latency_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_latency_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_latency_enable" id="et_latency_enable_1" class="input" value="1" <% nvram_match_x("", "et_latency_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_latency_enable" id="et_latency_enable_0" class="input" value="0" <% nvram_match_x("", "et_latency_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
 
+										</tr>
+										<th width="30%" style="border-top: 0 none;">不使用ipv6</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_ipv6_enable_on_of">
+														<input type="checkbox" id="et_ipv6_enable_fake" <% nvram_match_x("", "et_ipv6_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_ipv6_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_ipv6_enable" id="et_ipv6_enable_1" class="input" value="1" <% nvram_match_x("", "et_ipv6_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_ipv6_enable" id="et_ipv6_enable_0" class="input" value="0" <% nvram_match_x("", "et_ipv6_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+
+										</tr>
+										<tr>
+										<th width="30%" style="border-top: 0 none;">使用用户态协议栈</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_use_enable_on_of">
+														<input type="checkbox" id="et_use_enable_fake" <% nvram_match_x("", "et_use_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_use_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_use_enable" id="et_use_enable_1" class="input" value="1" <% nvram_match_x("", "et_use_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_use_enable" id="et_use_enable_0" class="input" value="0" <% nvram_match_x("", "et_use_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+
+										</tr>
+										<th width="30%" style="border-top: 0 none;">启用 KCP 代理</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_kcp_enable_on_of">
+														<input type="checkbox" id="et_kcp_enable_fake" <% nvram_match_x("", "et_kcp_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_kcp_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_kcp_enable" id="et_kcp_enable_1" class="input" value="1" <% nvram_match_x("", "et_kcp_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_kcp_enable" id="et_kcp_enable_0" class="input" value="0" <% nvram_match_x("", "et_kcp_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+
+										</tr>
+										<th width="30%" style="border-top: 0 none;">启用 QUIC代理</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_quic_enable_on_of">
+														<input type="checkbox" id="et_quic_enable_fake" <% nvram_match_x("", "et_quic_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_quic_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_quic_enable" id="et_quic_enable_1" class="input" value="1" <% nvram_match_x("", "et_quic_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_quic_enable" id="et_quic_enable_0" class="input" value="0" <% nvram_match_x("", "et_quic_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+
+										</tr>
+										<th width="30%" style="border-top: 0 none;">禁用 P2P</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_p2p_enable_on_of">
+														<input type="checkbox" id="et_p2p_enable_fake" <% nvram_match_x("", "et_p2p_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_p2p_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_p2p_enable" id="et_p2p_enable_1" class="input" value="1" <% nvram_match_x("", "et_p2p_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_p2p_enable" id="et_p2p_enable_0" class="input" value="0" <% nvram_match_x("", "et_p2p_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+
+										</tr>
+										<th width="30%" style="border-top: 0 none;">禁用UDP打洞</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_udp_enable_on_of">
+														<input type="checkbox" id="et_udp_enable_fake" <% nvram_match_x("", "et_udp_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_udp_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_udp_enable" id="et_udp_enable_1" class="input" value="1" <% nvram_match_x("", "et_udp_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_udp_enable" id="et_udp_enable_0" class="input" value="0" <% nvram_match_x("", "et_udp_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+
+										</tr>
+										<th width="30%" style="border-top: 0 none;">启用系统转发</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_system_enable_on_of">
+														<input type="checkbox" id="et_system_enable_fake" <% nvram_match_x("", "et_system_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_system_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_system_enable" id="et_system_enable_1" class="input" value="1" <% nvram_match_x("", "et_system_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_system_enable" id="et_system_enable_0" class="input" value="0" <% nvram_match_x("", "et_system_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+
+										</tr>
+										<th width="30%" style="border-top: 0 none;">禁用加密</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_encryption_enable_on_of">
+														<input type="checkbox" id="et_encryption_enable_fake" <% nvram_match_x("", "et_encryption_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_encryption_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_encryption_enable" id="et_encryption_enable_1" class="input" value="1" <% nvram_match_x("", "et_encryption_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_encryption_enable" id="et_encryption_enable_0" class="input" value="0" <% nvram_match_x("", "et_encryption_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+
+										</tr>
+										<th width="30%" style="border-top: 0 none;">启用多线程</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_thread_enable_on_of">
+														<input type="checkbox" id="et_thread_enable_fake" <% nvram_match_x("", "et_thread_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_thread_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_thread_enable" id="et_thread_enable_1" class="input" value="1" <% nvram_match_x("", "et_thread_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_thread_enable" id="et_thread_enable_0" class="input" value="0" <% nvram_match_x("", "et_thread_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+
+										</tr>
 										</tr>
 										<tr>
 
