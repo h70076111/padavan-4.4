@@ -1066,6 +1066,16 @@
 #if defined(APP_ETINK)
 	struct variable variables_ETINK[] = {
 			{"etink_enable", "", NULL, EVM_RESTART_ETINK},
+			{"et_ipv6_enable", "", NULL, EVM_RESTART_ETINK},
+			{"et_use_enable", "", NULL, EVM_RESTART_ETINK},
+			{"et_latency_enable", "", NULL, EVM_RESTART_ETINK},
+			{"et_kcp_enable", "", NULL, EVM_RESTART_ETINK},
+			{"et_quic_enable", "", NULL, EVM_RESTART_ETINK},
+			{"et_p2p_enable", "", NULL, EVM_RESTART_ETINK},
+			{"et_udp_enable", "", NULL, EVM_RESTART_ETINK},
+			{"et_system_enable", "", NULL, EVM_RESTART_ETINK},
+			{"et_encryption_enable", "", NULL, EVM_RESTART_ETINK},
+			{"et_thread_enable", "", NULL, EVM_RESTART_ETINK},
 			{"etink_keyg", "", NULL, EVM_RESTART_ETINK},
 			{"etink_pass", "", NULL, EVM_RESTART_ETINK},
 			{"etink_xyip", "", NULL, EVM_RESTART_ETINK},
