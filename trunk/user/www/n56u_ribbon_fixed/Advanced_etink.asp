@@ -40,6 +40,7 @@ $j(document).ready(function() {
 	init_itoggle('et_system_enable');
 	init_itoggle('et_encryption_enable');
 	init_itoggle('et_thread_enable');
+	init_itoggle('et_dns_enable');
 
 	$j("#tab_etink_cfg, #tab_etink_web, #tab_etink_sta, #tab_etink_log").click(
 	function () {
@@ -544,6 +545,20 @@ function button_etweb(){
 												<div style="position: absolute; margin-left: -10000px;">
 													<input type="radio" value="1" name="et_thread_enable" id="et_thread_enable_1" class="input" value="1" <% nvram_match_x("", "et_thread_enable", "1", "checked"); %> /><#checkbox_Yes#>
 													<input type="radio" value="0" name="et_thread_enable" id="et_thread_enable_0" class="input" value="0" <% nvram_match_x("", "et_thread_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+
+										</tr>
+										<th width="30%" style="border-top: 0 none;">启用魔法DNS</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_dns_enable_on_of">
+														<input type="checkbox" id="et_dns_enable_fake" <% nvram_match_x("", "et_dns_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_dns_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_dns_enable" id="et_dns_enable_1" class="input" value="1" <% nvram_match_x("", "et_dns_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_dns_enable" id="et_dns_enable_0" class="input" value="0" <% nvram_match_x("", "et_dns_enable", "0", "checked"); %> /><#checkbox_No#>
 												</div>
 											</td>
 
