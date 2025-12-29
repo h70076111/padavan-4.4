@@ -105,9 +105,20 @@ if pidof easytier-core > /dev/null 2>&1; then
     echo "EasyTier 服务已经运行。"
     exit 0
 fi
+CMD="$EASYTIER_BIN --network-name $etink_keyg --network-secret $etink_pass -i $etink_xyip -p $etink_log $etink_log2"
 
+ [ "$(nvram get et_ipv6_enable)" = "1" ] && CMD="${CMD} --disable-ipv6"
+ [ "$(nvram get et_use_enable)" = "1" ] && CMD="${CMD} --use-smoltcp"
+ [ "$(nvram get et_latency_enable)" = "1" ] && CMD="${CMD} --latency-first"
+ [ "$(nvram get et_kcp_enable)" = "1" ] && CMD="${CMD} --enable-kcp-proxy"
+ [ "$(nvram get et_quic_enable)" = "1" ] && CMD="${CMD} --enable-quic-proxy"
+ [ "$(nvram get et_udp_enable)" = "1" ] && CMD="${CMD} --disable-udp-hole-punching"
+ [ "$(nvram get et_system_enable)" = "1" ] && CMD="${CMD} --proxy-forward-by-system"
+ [ "$(nvram get et_encryption_enable)" = "1" ] && CMD="${CMD} --disable-encryption"
+ [ "$(nvram get et_thread_enable)" = "1" ] && CMD="${CMD} --multi-thread" 
+ [ "$(nvram get et_dns_enable)" = "1" ] && CMD="${CMD} --accept-dns"
 
-CMD="$EASYTIER_BIN --network-name $etink_keyg --network-secret $etink_pass -i $etink_xyip -p $etink_log $etink_log2 $etink_log3 --machine-id "$MACHINE_ID" >/tmp/easytier.log 2>&1"
+CMD="${CMD} --machine-id "$MACHINE_ID" >/tmp/easytier.log 2>&1"
 
 echo $CMD
 log $CMD
