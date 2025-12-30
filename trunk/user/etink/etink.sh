@@ -114,9 +114,12 @@ CMD="$EASYTIER_BIN --network-name $etink_keyg --network-secret $etink_pass -i $e
  [ "$(nvram get et_quic_enable)" = "1" ] && CMD="${CMD} --enable-quic-proxy"
  [ "$(nvram get et_udp_enable)" = "1" ] && CMD="${CMD} --disable-udp-hole-punching"
  [ "$(nvram get et_system_enable)" = "1" ] && CMD="${CMD} --proxy-forward-by-system"
+ [ "$(nvram get et_p2p_enable)" = "1" ] && CMD="${CMD} --disable-p2p"
  [ "$(nvram get et_encryption_enable)" = "1" ] && CMD="${CMD} --disable-encryption"
  [ "$(nvram get et_thread_enable)" = "1" ] && CMD="${CMD} --multi-thread" 
  [ "$(nvram get et_dns_enable)" = "1" ] && CMD="${CMD} --accept-dns"
+ [ "$(nvram get et_rpc_enable)" = "1" ] && CMD="${CMD} --relay-all-peer-rpc"
+ [ "$(nvram get et_mode_enable)" = "1" ] && CMD="${CMD} --private-mode"
 
 CMD="${CMD} --machine-id "$MACHINE_ID" >/tmp/easytier.log 2>&1"
 
