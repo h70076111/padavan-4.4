@@ -41,6 +41,8 @@ $j(document).ready(function() {
 	init_itoggle('et_encryption_enable');
 	init_itoggle('et_thread_enable');
 	init_itoggle('et_dns_enable');
+	init_itoggle('et_mode_enable');
+	init_itoggle('et_rpc_enable');
 
 	$j("#tab_etink_cfg, #tab_etink_web, #tab_etink_sta, #tab_etink_log").click(
 	function () {
@@ -420,8 +422,6 @@ function button_etweb(){
 													<input type="radio" value="0" name="et_latency_enable" id="et_latency_enable_0" class="input" value="0" <% nvram_match_x("", "et_latency_enable", "0", "checked"); %> /><#checkbox_No#>
 												</div>
 											</td>
-
-										</tr>
 										<th width="30%" style="border-top: 0 none;">不使用ipv6</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
@@ -449,8 +449,6 @@ function button_etweb(){
 													<input type="radio" value="0" name="et_use_enable" id="et_use_enable_0" class="input" value="0" <% nvram_match_x("", "et_use_enable", "0", "checked"); %> /><#checkbox_No#>
 												</div>
 											</td>
-
-										</tr>
 										<th width="30%" style="border-top: 0 none;">启用 KCP 代理</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
@@ -477,8 +475,6 @@ function button_etweb(){
 													<input type="radio" value="0" name="et_quic_enable" id="et_quic_enable_0" class="input" value="0" <% nvram_match_x("", "et_quic_enable", "0", "checked"); %> /><#checkbox_No#>
 												</div>
 											</td>
-
-										</tr>
 										<th width="30%" style="border-top: 0 none;">禁用 P2P</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
@@ -505,8 +501,6 @@ function button_etweb(){
 													<input type="radio" value="0" name="et_udp_enable" id="et_udp_enable_0" class="input" value="0" <% nvram_match_x("", "et_udp_enable", "0", "checked"); %> /><#checkbox_No#>
 												</div>
 											</td>
-
-										</tr>
 										<th width="30%" style="border-top: 0 none;">启用系统转发</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
@@ -533,8 +527,6 @@ function button_etweb(){
 													<input type="radio" value="0" name="et_encryption_enable" id="et_encryption_enable_0" class="input" value="0" <% nvram_match_x("", "et_encryption_enable", "0", "checked"); %> /><#checkbox_No#>
 												</div>
 											</td>
-
-										</tr>
 										<th width="30%" style="border-top: 0 none;">启用多线程</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
@@ -561,7 +553,31 @@ function button_etweb(){
 													<input type="radio" value="0" name="et_dns_enable" id="et_dns_enable_0" class="input" value="0" <% nvram_match_x("", "et_dns_enable", "0", "checked"); %> /><#checkbox_No#>
 												</div>
 											</td>
-
+										<th width="30%" style="border-top: 0 none;">启用私有模式</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_mode_enable_on_of">
+														<input type="checkbox" id="et_mode_enable_fake" <% nvram_match_x("", "et_mode_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_mode_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_mode_enable" id="et_mode_enable_1" class="input" value="1" <% nvram_match_x("", "et_mode_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_mode_enable" id="et_mode_enable_0" class="input" value="0" <% nvram_match_x("", "et_mode_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+										</tr>
+										<th width="30%" style="border-top: 0 none;">转发RPC包</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="et_rpc_enable_on_of">
+														<input type="checkbox" id="et_rpc_enable_fake" <% nvram_match_x("", "et_rpc_enable", "1", "value=1 checked"); %><% nvram_match_x("", "et_rpc_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="et_rpc_enable" id="et_rpc_enable_1" class="input" value="1" <% nvram_match_x("", "et_rpc_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="et_rpc_enable" id="et_rpc_enable_0" class="input" value="0" <% nvram_match_x("", "et_rpc_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
 										</tr>
 										</tr>
 										<tr>
