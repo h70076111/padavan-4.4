@@ -846,6 +846,7 @@ struct nvram_pair router_defaults[] = {
 	{ "et_dns_enable", "0" },
 	{ "et_rpc_enable", "0" },
 	{ "et_mode_enable", "0" },
+	{ "et_device_enable", "0" },
 	{ "etink_keyg", "abc123" },
 	{ "etink_pass", "abc123" },
 	{ "etink_xyip", "10.126.126.20" },
