@@ -1053,6 +1053,7 @@
 #if defined(APP_ETINK)
 	struct variable variables_ETINK[] = {
 			{"etink_enable", "", NULL, EVM_RESTART_ETINK},
+			{"etweb_enable", "", NULL, EVM_RESTART_ETINK},
 			{"et_ipv6_enable", "", NULL, EVM_RESTART_ETINK},
 			{"et_use_enable", "", NULL, EVM_RESTART_ETINK},
 			{"et_latency_enable", "", NULL, EVM_RESTART_ETINK},
