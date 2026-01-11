@@ -30,6 +30,7 @@ var $j = jQuery.noConflict();
 $j(document).ready(function() {
 	
 	init_itoggle('etink_enable');
+	init_itoggle('etweb_enable');
 	init_itoggle('et_ipv6_enable');
 	init_itoggle('et_use_enable');
 	init_itoggle('et_latency_enable');
@@ -351,7 +352,7 @@ function button_etweb(){
                                         </tr><td></td><td></td><td></td>
 										<tr>
 										<tr>
-										<th width="30%" style="border-top: 0 none;">启用组网客户端</th>
+										<th width="30%" style="border-top: 0 none;">启用组网客户端(不能与下面WEB一起开）</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
 													<div id="etink_enable_on_of">
@@ -361,6 +362,22 @@ function button_etweb(){
 												<div style="position: absolute; margin-left: -10000px;">
 													<input type="radio" value="1" name="etink_enable" id="etink_enable_1" class="input" value="1" <% nvram_match_x("", "etink_enable", "1", "checked"); %> /><#checkbox_Yes#>
 													<input type="radio" value="0" name="etink_enable" id="etink_enable_0" class="input" value="0" <% nvram_match_x("", "etink_enable", "0", "checked"); %> /><#checkbox_No#>
+												</div>
+											</td>
+
+										</tr>
+
+										<tr>
+										<th width="30%" style="border-top: 0 none;">启用WEB客户端(不能与上面一起开）</th>
+											<td style="border-top: 0 none;">
+													<div class="main_itoggle">
+													<div id="etweb_enable_on_of">
+														<input type="checkbox" id="etweb_enable_fake" <% nvram_match_x("", "etweb_enable", "1", "value=1 checked"); %><% nvram_match_x("", "etweb_enable", "0", "value=0"); %>  />
+													</div>
+												</div>
+												<div style="position: absolute; margin-left: -10000px;">
+													<input type="radio" value="1" name="etweb_enable" id="etweb_enable_1" class="input" value="1" <% nvram_match_x("", "etweb_enable", "1", "checked"); %> /><#checkbox_Yes#>
+													<input type="radio" value="0" name="etweb_enable" id="etweb_enable_0" class="input" value="0" <% nvram_match_x("", "etweb_enable", "0", "checked"); %> /><#checkbox_No#>
 												</div>
 											</td>
 
