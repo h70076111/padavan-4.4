@@ -134,8 +134,7 @@ sleep 3
 # 获取 easytier-cli node 的输出
 $EASYTIER_CLI_BIN node
 output=$($EASYTIER_CLI_BIN node)
-fi
-sleep 10
+sleep 5
 et_restart 
 }
 
@@ -235,8 +234,14 @@ if pidof easytier-core > /dev/null 2>&1; then
     exit 0
 fi
 CMD="$EASYTIER_BIN -w $etink_keyg --machine-id "$MACHINE_ID" >/tmp/easytier.log 2>&1"
-fi
-sleep 10
+echo $CMD
+log $CMD
+eval $CMD
+sleep 3
+# 获取 easytier-cli node 的输出
+$EASYTIER_CLI_BIN node
+output=$($EASYTIER_CLI_BIN node)
+sleep 5
 et_restart 
 }
 
@@ -288,8 +293,8 @@ sleep 3
 
 }
 start_etink() {
-	start_core
-	start_web
+	et_core
+	et_web
 }
 
 stop_et() {
