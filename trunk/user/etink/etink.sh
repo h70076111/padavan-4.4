@@ -8,12 +8,12 @@ etink_xyip=$(nvram get etink_xyip)
 echo $etink_xyip
 etink_log=$(nvram get etink_log)
 echo $etink_log
-etink_log2=$(nvram get etink_log2)
-echo $etink_log2
-etink_log3=$(nvram get etink_log3)
-echo $etink_log3
+etink_enable=$(nvram get etink_enable)
+echo $etink_enable
+etweb_enable=$(nvram get etweb_enable)
+echo $etweb_enable
 
-start_core() {
+et_core() {
 	[ "$etink_enable" = "0" ] && return 1
 	[ "$etweb_enable" = "1" ] && return 1
 	logg "正在启动easytier-core"
@@ -134,13 +134,12 @@ sleep 3
 # 获取 easytier-cli node 的输出
 $EASYTIER_CLI_BIN node
 output=$($EASYTIER_CLI_BIN node)
-sleep 5
-et_restart 
+sleep 10
+et_rules 
 }
 
-start_web() {
+et_web() {
 	[ "$etweb_enable" = "0" ] && return 1
-	[ "$etink_enable" = "1" ] && return 1
 	logg "正在启动easytier-core"
 ARCH="mipsel"
 USERNAME=""
@@ -237,12 +236,8 @@ CMD="$EASYTIER_BIN -w $etink_keyg --machine-id "$MACHINE_ID" >/tmp/easytier.log 
 echo $CMD
 log $CMD
 eval $CMD
-sleep 3
-# 获取 easytier-cli node 的输出
-$EASYTIER_CLI_BIN node
-output=$($EASYTIER_CLI_BIN node)
-sleep 5
-et_restart 
+sleep 10
+et_rules 
 }
 
 et_rules() {
@@ -293,8 +288,8 @@ sleep 3
 
 }
 start_etink() {
-	start_core
-	start_web
+	et_core
+	et_web
 }
 
 stop_et() {
