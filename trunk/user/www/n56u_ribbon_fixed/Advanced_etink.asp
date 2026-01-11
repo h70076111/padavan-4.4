@@ -352,7 +352,7 @@ function button_etweb(){
                                         </tr><td></td><td></td><td></td>
 										<tr>
 										<tr>
-										<th width="30%" style="border-top: 0 none;">启用组网客户端(不能与下面WEB一起开）</th>
+										<th width="30%" style="border-top: 0 none;">启用组网客户端(不能与下面WEB一起开,只能2选1）</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
 													<div id="etink_enable_on_of">
@@ -368,7 +368,7 @@ function button_etweb(){
 										</tr>
 
 										<tr>
-										<th width="30%" style="border-top: 0 none;">启用WEB客户端(不能与上面一起开）</th>
+										<th width="30%" style="border-top: 0 none;">启用WEB客户端(不能与上面客户端一起开,只能2选1）</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
 													<div id="etweb_enable_on_of">
