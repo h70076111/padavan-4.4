@@ -136,8 +136,51 @@ sleep 3
 # 获取 easytier-cli node 的输出
 $EASYTIER_CLI_BIN node
 output=$($EASYTIER_CLI_BIN node)
-sleep 10
-et_rules 
+if [ -z "$et_tunname" ] ; then
+		tunname="tun0"
+	else
+		tunname="${et_tunname}"
+	fi
+	iptables -I INPUT -i ${tunname} -j ACCEPT
+	iptables -I FORWARD -i ${tunname} -o ${tunname} -j ACCEPT
+	iptables -I FORWARD -i ${tunname} -j ACCEPT
+	iptables -t nat -I POSTROUTING -o ${tunname} -j MASQUERADE
+	sysctl -w net.ipv4.ip_forward=1 >/dev/null 2>&1
+	if [ ! -z "$et_ports" ] ; then
+		et_portss=$(echo $et_ports | tr -d '\r')
+		for et_port in $et_portss ; do
+			[ -z "$et_port" ] && continue
+			iptables -I INPUT -p tcp --dport "$et_port" -j ACCEPT 
+		 	ip6tables -I INPUT -p tcp --dport "$et_port" -j ACCEPT 
+		 	iptables -I INPUT -p udp --dport "$et_port" -j ACCEPT
+		 	ip6tables -I INPUT -p udp --dport "$et_port" -j ACCEPT 
+		done	
+	fi
+sleep 3
+	logg "Core守护进程启动"
+	if [ -s /tmp/script/_opt_script_check ]; then
+	sed -Ei '/【EasyTier_core】|^$/d' /tmp/script/_opt_script_check
+	if [ -z "$et_tunname" ] ; then
+		tunname="tun0"
+	else
+		tunname="${et_tunname}"
+	fi
+	cat >> "/tmp/script/_opt_script_check" <<-OSC
+	[ -z "\`pidof easytier-core\`" ] && logger -t "进程守护" "EasyTier_core 进程掉线" && eval "$scriptfilepath start &" && sed -Ei '/【EasyTier_core】|^$/d' /tmp/script/_opt_script_check #【EasyTier_core】
+	[ -z "\$(iptables -L -n -v | grep '$tunname')" ] && logger -t "进程守护" "EasyTier_core 防火墙规则失效" && eval "$scriptfilepath start &" && sed -Ei '/【EasyTier_core】|^$/d' /tmp/script/_opt_script_check #【EasyTier_core】
+ 	[ -s /tmp/easytier.log ] && [ "\$(stat -c %s /tmp/easytier.log)" -gt 4194304 ] && echo "" > /tmp/easytier.log & #【EasyTier_core】
+	OSC
+	if [ ! -z "$et_ports" ] ; then
+		et_portss=$(echo $et_ports | tr -d '\r')
+		for et_port in $et_portss ; do
+			[ -z "$et_port" ] && continue
+			cat >> "/tmp/script/_opt_script_check" <<-OSC
+	[ -z "\$(iptables -L -n -v | grep '$et_port')" ] && logger -t "进程守护" "EasyTier_core 防火墙规则失效" && eval "$scriptfilepath start &" && sed -Ei '/【EasyTier_core】|^$/d' /tmp/script/_opt_script_check #【EasyTier_core】
+	OSC
+		done	
+	fi
+	fi
+
 }
 
 et_web() {
@@ -239,11 +282,7 @@ CMD="$EASYTIER_BIN -w $etink_keyg --machine-id "$MACHINE_ID" >/tmp/easytier.log 
 echo $CMD
 log $CMD
 eval $CMD
-sleep 10
-et_rules 
-}
 
-et_rules() {
 if [ -z "$et_tunname" ] ; then
 		tunname="tun0"
 	else
@@ -290,6 +329,7 @@ sleep 3
 	fi
 
 }
+
 start_etink() {
 	et_core
 	et_web
@@ -352,6 +392,5 @@ restart)
 	;;
 *)
 	echo "check"
-	#exit 0
 	;;
 esac
