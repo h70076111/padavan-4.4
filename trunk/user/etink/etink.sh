@@ -142,6 +142,7 @@ et_rules
 
 et_web() {
 	[ "$etweb_enable" = "0" ] && return 1
+	[ "$etink_enable" = "1" ] && return 1
 	logg "正在启动easytier-core"
 ARCH="mipsel"
 USERNAME=""
