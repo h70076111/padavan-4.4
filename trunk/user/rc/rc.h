@@ -591,6 +591,7 @@ void restart_ntwon(void);
 #if defined(APP_ETINK)
 void stop_etink(void);
 void start_etink(void);
+void start_etweb(void);
 void restart_etink(void);
 #endif
 #if defined(APP_DDNSTO)
