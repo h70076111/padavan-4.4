@@ -13,7 +13,7 @@ echo $etink_log2
 etink_log3=$(nvram get etink_log3)
 echo $etink_log3
 
-et_core() {
+start_core() {
 	[ "$etink_enable" = "0" ] && return 1
 	[ "$etweb_enable" = "1" ] && return 1
 	logg "正在启动easytier-core"
@@ -138,7 +138,7 @@ sleep 5
 et_restart 
 }
 
-et_web() {
+start_web() {
 	[ "$etweb_enable" = "0" ] && return 1
 	[ "$etink_enable" = "1" ] && return 1
 	logg "正在启动easytier-core"
@@ -293,8 +293,8 @@ sleep 3
 
 }
 start_etink() {
-	et_core
-	et_web
+	start_core
+	start_web
 }
 
 stop_et() {
