@@ -8,6 +8,8 @@ etink_xyip=$(nvram get etink_xyip)
 echo $etink_xyip
 etink_log=$(nvram get etink_log)
 echo $etink_log
+etink_log2=$(nvram get etink_log2)
+echo $etink_log2
 etink_enable=$(nvram get etink_enable)
 echo $etink_enable
 etweb_enable=$(nvram get etweb_enable)
