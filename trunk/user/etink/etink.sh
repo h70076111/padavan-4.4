@@ -141,10 +141,11 @@ if [ -z "$et_tunname" ] ; then
 	else
 		tunname="${et_tunname}"
 	fi
-	iptables -I INPUT -i ${tunname} -j ACCEPT
-	iptables -I FORWARD -i ${tunname} -o ${tunname} -j ACCEPT
-	iptables -I FORWARD -i ${tunname} -j ACCEPT
-	iptables -t nat -I POSTROUTING -o ${tunname} -j MASQUERADE
+# 提取信息#放行vnt防火墙
+iptables -I INPUT -i tun0 -j ACCEPT
+iptables -I FORWARD -i tun0 -o tun0 -j ACCEPT
+iptables -I FORWARD -i tun0 -j ACCEPT
+iptables -t nat -I POSTROUTING -o tun0 -j MASQUERADE
 	sysctl -w net.ipv4.ip_forward=1 >/dev/null 2>&1
 	if [ ! -z "$et_ports" ] ; then
 		et_portss=$(echo $et_ports | tr -d '\r')
