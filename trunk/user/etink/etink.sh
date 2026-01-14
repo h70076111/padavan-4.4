@@ -270,8 +270,16 @@ if [ -n "$PROXY_NET" ]; then
     log "已放行 $PROXY_NET 的FORWARD转发"
 fi
 
-
-
+# 检查并添加 INPUT 规则
+iptables -D INPUT -i tun0 -j ACCEPT 2>/dev/null
+iptables -D FORWARD -i tun0 -o tun0 -j ACCEPT 2>/dev/null
+iptables -D FORWARD -i tun0 -j ACCEPT 2>/dev/null
+iptables -t nat -D POSTROUTING -o tun0 -j MASQUERADE 2>/dev/null
+killall easytier-core
+killall -9 easytier-core
+sleep 3
+#清除vnt的虚拟网卡
+ifconfig tun0 down && ip tuntap del tun0 mode tun
 
 # ---------- 检查服务是否已运行 ----------
 if pidof easytier-core > /dev/null 2>&1; then
@@ -279,31 +287,68 @@ if pidof easytier-core > /dev/null 2>&1; then
     echo "EasyTier 服务已经运行。"
     exit 0
 fi
+
+# ---------- 下载与解压 EasyTier ----------
+if [ ! -x "$EASYTIER_BIN" ]; then
+    mkdir -p "$EASYTIER_DIR"
+    cd "$EASYTIER_DIR"
+    log "正在下载 EasyTier 二进制文件: $ZIP_URL"
+    wget -O "$ZIP_NAME" "$ZIP_URL"
+    if [ $? -ne 0 ]; then
+        log "下载失败，请检查网络连接或下载地址。"
+        exit 1
+    fi
+
+    log "正在解压到$ZIP_NAME..."
+    
+    unzip -o "$ZIP_NAME"
+    if [ -d "$ZIP_DIR" ]; then
+        mv "$ZIP_DIR"/* ./
+        log "移动$ZIP_DIR..."
+        rmdir "$ZIP_DIR"
+    fi
+    chmod +x easytier-core 2>/dev/null
+    chmod +x easytier-cli 2>/dev/null
+    cd - > /dev/null
+fi
+# 定义要删除的文件路径
+FILE_PATH="/tmp/easytier/$ZIP_NAME"
+
+# 检查文件是否存在
+if [ -f "$FILE_PATH" ]; then
+    # 删除文件
+    rm -f "$FILE_PATH"
+    echo "文件已删除: $FILE_PATH"
+else
+    echo "文件不存在: $FILE_PATH"
+fi
+
 CMD="$EASYTIER_BIN -w $etink_keyg --machine-id "$MACHINE_ID" >/tmp/easytier.log 2>&1"
 echo $CMD
 log $CMD
 eval $CMD
+sleep 3
+# 获取 easytier-cli node 的输出
+$EASYTIER_CLI_BIN node
+output=$($EASYTIER_CLI_BIN node)
+
 # 提取信息#放行vnt防火墙
 iptables -I INPUT -i tun0 -j ACCEPT
 iptables -I FORWARD -i tun0 -o tun0 -j ACCEPT
 iptables -I FORWARD -i tun0 -j ACCEPT
 iptables -t nat -I POSTROUTING -o tun0 -j MASQUERADE
-if [ -z "$et_tunname" ] ; then
-		tunname="tun0"
-	else
-		tunname="${et_tunname}"
-	fi
-	sysctl -w net.ipv4.ip_forward=1 >/dev/null 2>&1
-	if [ ! -z "$et_ports" ] ; then
-		et_portss=$(echo $et_ports | tr -d '\r')
-		for et_port in $et_portss ; do
-			[ -z "$et_port" ] && continue
-			iptables -I INPUT -p tcp --dport "$et_port" -j ACCEPT 
-		 	ip6tables -I INPUT -p tcp --dport "$et_port" -j ACCEPT 
-		 	iptables -I INPUT -p udp --dport "$et_port" -j ACCEPT
-		 	ip6tables -I INPUT -p udp --dport "$et_port" -j ACCEPT 
-		done	
-	fi
+
+VirtualIP=$(echo "$output" | awk -F'│' '/Virtual IP/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
+Hostname=$(echo "$output" | awk -F'│' '/Hostname/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
+PeerID=$(echo "$output" | awk -F'│' '/Peer ID/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
+
+# 以 log 格式输出
+echo $output
+echo  "Virtual IP: $VirtualIP"
+log "Virtual IP: $VirtualIP"
+log "Hostname: $Hostname"
+log "Peer ID: $PeerID"
+
 sleep 3
 	logg "Core守护进程启动"
 	if [ -s /tmp/script/_opt_script_check ]; then
