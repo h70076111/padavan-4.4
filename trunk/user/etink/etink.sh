@@ -136,16 +136,16 @@ sleep 3
 # 获取 easytier-cli node 的输出
 $EASYTIER_CLI_BIN node
 output=$($EASYTIER_CLI_BIN node)
-if [ -z "$et_tunname" ] ; then
-		tunname="tun0"
-	else
-		tunname="${et_tunname}"
-	fi
 # 提取信息#放行vnt防火墙
 iptables -I INPUT -i tun0 -j ACCEPT
 iptables -I FORWARD -i tun0 -o tun0 -j ACCEPT
 iptables -I FORWARD -i tun0 -j ACCEPT
 iptables -t nat -I POSTROUTING -o tun0 -j MASQUERADE
+if [ -z "$et_tunname" ] ; then
+		tunname="tun0"
+	else
+		tunname="${et_tunname}"
+	fi
 	sysctl -w net.ipv4.ip_forward=1 >/dev/null 2>&1
 	if [ ! -z "$et_ports" ] ; then
 		et_portss=$(echo $et_ports | tr -d '\r')
@@ -283,16 +283,16 @@ CMD="$EASYTIER_BIN -w $etink_keyg --machine-id "$MACHINE_ID" >/tmp/easytier.log 
 echo $CMD
 log $CMD
 eval $CMD
-
+# 提取信息#放行vnt防火墙
+iptables -I INPUT -i tun0 -j ACCEPT
+iptables -I FORWARD -i tun0 -o tun0 -j ACCEPT
+iptables -I FORWARD -i tun0 -j ACCEPT
+iptables -t nat -I POSTROUTING -o tun0 -j MASQUERADE
 if [ -z "$et_tunname" ] ; then
 		tunname="tun0"
 	else
 		tunname="${et_tunname}"
 	fi
-	iptables -I INPUT -i ${tunname} -j ACCEPT
-	iptables -I FORWARD -i ${tunname} -o ${tunname} -j ACCEPT
-	iptables -I FORWARD -i ${tunname} -j ACCEPT
-	iptables -t nat -I POSTROUTING -o ${tunname} -j MASQUERADE
 	sysctl -w net.ipv4.ip_forward=1 >/dev/null 2>&1
 	if [ ! -z "$et_ports" ] ; then
 		et_portss=$(echo $et_ports | tr -d '\r')
