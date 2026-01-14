@@ -101,8 +101,16 @@ if [ -n "$PROXY_NET" ]; then
     log "已放行 $PROXY_NET 的FORWARD转发"
 fi
 
-
-
+# 检查并添加 INPUT 规则
+iptables -D INPUT -i tun0 -j ACCEPT 2>/dev/null
+iptables -D FORWARD -i tun0 -o tun0 -j ACCEPT 2>/dev/null
+iptables -D FORWARD -i tun0 -j ACCEPT 2>/dev/null
+iptables -t nat -D POSTROUTING -o tun0 -j MASQUERADE 2>/dev/null
+killall easytier-core
+killall -9 easytier-core
+sleep 3
+#清除vnt的虚拟网卡
+ifconfig tun0 down && ip tuntap del tun0 mode tun
 
 # ---------- 检查服务是否已运行 ----------
 if pidof easytier-core > /dev/null 2>&1; then
@@ -141,22 +149,18 @@ iptables -I INPUT -i tun0 -j ACCEPT
 iptables -I FORWARD -i tun0 -o tun0 -j ACCEPT
 iptables -I FORWARD -i tun0 -j ACCEPT
 iptables -t nat -I POSTROUTING -o tun0 -j MASQUERADE
-if [ -z "$et_tunname" ] ; then
-		tunname="tun0"
-	else
-		tunname="${et_tunname}"
-	fi
-	sysctl -w net.ipv4.ip_forward=1 >/dev/null 2>&1
-	if [ ! -z "$et_ports" ] ; then
-		et_portss=$(echo $et_ports | tr -d '\r')
-		for et_port in $et_portss ; do
-			[ -z "$et_port" ] && continue
-			iptables -I INPUT -p tcp --dport "$et_port" -j ACCEPT 
-		 	ip6tables -I INPUT -p tcp --dport "$et_port" -j ACCEPT 
-		 	iptables -I INPUT -p udp --dport "$et_port" -j ACCEPT
-		 	ip6tables -I INPUT -p udp --dport "$et_port" -j ACCEPT 
-		done	
-	fi
+
+VirtualIP=$(echo "$output" | awk -F'│' '/Virtual IP/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
+Hostname=$(echo "$output" | awk -F'│' '/Hostname/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
+PeerID=$(echo "$output" | awk -F'│' '/Peer ID/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
+
+# 以 log 格式输出
+echo $output
+echo  "Virtual IP: $VirtualIP"
+log "Virtual IP: $VirtualIP"
+log "Hostname: $Hostname"
+log "Peer ID: $PeerID"
+
 sleep 3
 	logg "Core守护进程启动"
 	if [ -s /tmp/script/_opt_script_check ]; then
