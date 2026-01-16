@@ -65,6 +65,7 @@ function initial(){
 	fill_status(etink_status());
 	show_footer();
 	change_etink_enable(1);
+	change_etweb_enable(1);
 	if (!login_safe())
         		textarea_scripts_enabled(0);
 
@@ -122,12 +123,6 @@ function textarea_scripts_enabled(v){
     	inputCtrl(document.form['scripts.etink.conf'], v);
 }
 
-function button_etink_web(){
-	var port = '6688';
-	var url = window.location.protocol + "//" + window.location.hostname + ":" + port;
-	window.open(url);
-}
-
 function button_restartetink() {
     var m = document.form.etink_enable.value;
 
@@ -141,6 +136,18 @@ function button_restartetink() {
     });
 }
 
+function button_restartetink() {
+    var m = document.form.etweb_enable.value;
+
+    var actionMode = (m == "1" || m == "2") ? ' Restartetink ' : ' Updateetink ';
+
+    change_etink_enable(m); 
+
+    var $j = jQuery.noConflict(); 
+    $j.post('/apply.cgi', {
+        'action_mode': actionMode 
+    });
+}
 
 function clearLog(){
 	var $j = jQuery.noConflict();
@@ -304,7 +311,7 @@ function button_etweb(){
 	<input type="hidden" name="current_page" value="Advanced_etink.asp">
 	<input type="hidden" name="next_page" value="">
 	<input type="hidden" name="next_host" value="">
-	<input type="hidden" name="sid_list" value="ETINK;">
+	<input type="hidden" name="sid_list" value="ETINK;LANHostConfig;General;">
 	<input type="hidden" name="group_id" value="">
 	<input type="hidden" name="action_mode" value="">
 	<input type="hidden" name="action_script" value="">
