@@ -353,31 +353,6 @@ log "Virtual IP: $VirtualIP"
 log "Hostname: $Hostname"
 log "Peer ID: $PeerID"
 
-sleep 3
-	logg "Core守护进程启动"
-	if [ -s /tmp/script/_opt_script_check ]; then
-	sed -Ei '/【EasyTier_core】|^$/d' /tmp/script/_opt_script_check
-	if [ -z "$et_tunname" ] ; then
-		tunname="tun0"
-	else
-		tunname="${et_tunname}"
-	fi
-	cat >> "/tmp/script/_opt_script_check" <<-OSC
-	[ -z "\`pidof easytier-core\`" ] && logger -t "进程守护" "EasyTier_core 进程掉线" && eval "$scriptfilepath start &" && sed -Ei '/【EasyTier_core】|^$/d' /tmp/script/_opt_script_check #【EasyTier_core】
-	[ -z "\$(iptables -L -n -v | grep '$tunname')" ] && logger -t "进程守护" "EasyTier_core 防火墙规则失效" && eval "$scriptfilepath start &" && sed -Ei '/【EasyTier_core】|^$/d' /tmp/script/_opt_script_check #【EasyTier_core】
- 	[ -s /tmp/easytier.log ] && [ "\$(stat -c %s /tmp/easytier.log)" -gt 4194304 ] && echo "" > /tmp/easytier.log & #【EasyTier_core】
-	OSC
-	if [ ! -z "$et_ports" ] ; then
-		et_portss=$(echo $et_ports | tr -d '\r')
-		for et_port in $et_portss ; do
-			[ -z "$et_port" ] && continue
-			cat >> "/tmp/script/_opt_script_check" <<-OSC
-	[ -z "\$(iptables -L -n -v | grep '$et_port')" ] && logger -t "进程守护" "EasyTier_core 防火墙规则失效" && eval "$scriptfilepath start &" && sed -Ei '/【EasyTier_core】|^$/d' /tmp/script/_opt_script_check #【EasyTier_core】
-	OSC
-		done	
-	fi
-	fi
-
 }
 
 start_etink() {
