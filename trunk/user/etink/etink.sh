@@ -47,18 +47,6 @@ fi
 # ---------- 读取 machine_id ----------
 MACHINE_ID=$(grep '^machine_id:' "$EASYTIER_TXT" | sed 's/^machine_id://')
 
-# ---------- 读取节点列表 ----------
-PEER_PARAMS=""
-if [ -f "$EASYTIER_TXT" ]; then
-    while IFS= read -r line; do
-        case "$line" in
-            node\ *)
-                NODE_URL=${line#node }
-                [ -n "$NODE_URL" ] && PEER_PARAMS="$PEER_PARAMS --peers "$NODE_URL""
-                ;;
-        esac
-    done < "$EASYTIER_TXT"
-fi
 
 # ---------- Padavan方式开启网关转发 ----------
 echo 1 > /proc/sys/net/ipv4/ip_forward
@@ -105,7 +93,7 @@ CMD="$EASYTIER_BIN --network-name $etink_keyg --network-secret $etink_pass -i $e
  [ "$(nvram get et_rpc_enable)" = "1" ] && CMD="${CMD} --relay-all-peer-rpc"
  [ "$(nvram get et_mode_enable)" = "1" ] && CMD="${CMD} --private-mode"
 
-CMD="${CMD} --machine-id "$MACHINE_ID" >/tmp/easytier.log 2>&1"
+CMD="${CMD} --machine-id "$MACHINE_ID" &"
 
 echo $CMD
 log $CMD
@@ -119,17 +107,6 @@ iptables -I INPUT -i tun0 -j ACCEPT
 iptables -I FORWARD -i tun0 -o tun0 -j ACCEPT
 iptables -I FORWARD -i tun0 -j ACCEPT
 iptables -t nat -I POSTROUTING -o tun0 -j MASQUERADE
-
-VirtualIP=$(echo "$output" | awk -F'│' '/Virtual IP/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
-Hostname=$(echo "$output" | awk -F'│' '/Hostname/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
-PeerID=$(echo "$output" | awk -F'│' '/Peer ID/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
-
-# 以 log 格式输出
-echo $output
-echo  "Virtual IP: $VirtualIP"
-log "Virtual IP: $VirtualIP"
-log "Hostname: $Hostname"
-log "Peer ID: $PeerID"
 
 sleep 3
 	logg "Core守护进程启动"
