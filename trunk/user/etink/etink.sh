@@ -19,17 +19,6 @@ et_core() {
 	[ "$etink_enable" = "0" ] && return 1
 	[ "$etweb_enable" = "1" ] && return 1
 	logg "正在启动easytier-core"
-ARCH="mipsel"
-USERNAME=""
-
-SCRIPT_PATH="$(
-  cd "$(dirname "$0")"
-  pwd
-)/$(basename "$0")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-
-#echo "脚本绝对路径: $SCRIPT_PATH"
-#echo "脚本所在目录: $SCRIPT_DIR"
 # === 日志输出函数 ===
 LOG_TAG="easytier"
 log() {
@@ -39,9 +28,6 @@ log() {
 EASYTIER_DIR="/usr/bin"
 EASYTIER_TXT="/etc/storage/easytier.txt"
 echo $EASYTIER_TXT
-
-# 下载链接适配
-
 EASYTIER_BIN="$EASYTIER_DIR/easytier-core"
 EASYTIER_CLI_BIN="$EASYTIER_DIR/easytier-cli"
 # ---------- 生成/读取 machine_id，并初始化 easytier.txt 默认节点 ----------
@@ -74,23 +60,6 @@ if [ -f "$EASYTIER_TXT" ]; then
     done < "$EASYTIER_TXT"
 fi
 
-# ---------- 检查并读取 proxy: 配置 ----------
-PROXY_NET=""
-if [ -f "$EASYTIER_TXT" ]; then
-    PROXY_LINE=$(grep '^proxy:' "$EASYTIER_TXT" | head -n1)
-    if [ -n "$PROXY_LINE" ]; then
-        # 去掉注释部分
-        PROXY_NET=$(echo "$PROXY_LINE" | sed -e 's/^proxy://' -e 's/[[:space:]]*#.*$//')
-        PROXY_NET=$(echo "$PROXY_NET" | tr -d ' ')
-    fi
-fi
-
-if [ -n "$etink_inlan1" ]; then
-    PROXY_PARAM="-n $etink_inlan1"
-else
-    PROXY_PARAM=""
-fi
-
 # ---------- Padavan方式开启网关转发 ----------
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
@@ -111,6 +80,7 @@ killall -9 easytier-core
 sleep 3
 #清除vnt的虚拟网卡
 ifconfig tun0 down && ip tuntap del tun0 mode tun
+
 
 # ---------- 检查服务是否已运行 ----------
 if pidof easytier-core > /dev/null 2>&1; then
