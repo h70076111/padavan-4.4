@@ -192,17 +192,6 @@ et_web() {
 	[ "$etweb_enable" = "0" ] && return 1
 	[ "$etink_enable" = "1" ] && return 1
 	logg "正在启动easytier-core"
-ARCH="mipsel"
-USERNAME=""
-
-SCRIPT_PATH="$(
-  cd "$(dirname "$0")"
-  pwd
-)/$(basename "$0")"
-SCRIPT_DIR="$(dirname "$SCRIPT_PATH")"
-
-#echo "脚本绝对路径: $SCRIPT_PATH"
-#echo "脚本所在目录: $SCRIPT_DIR"
 # === 日志输出函数 ===
 LOG_TAG="easytier"
 log() {
@@ -212,9 +201,6 @@ log() {
 EASYTIER_DIR="/usr/bin"
 EASYTIER_TXT="/etc/storage/easytier.txt"
 echo $EASYTIER_TXT
-
-# 下载链接适配
-
 EASYTIER_BIN="$EASYTIER_DIR/easytier-core"
 EASYTIER_CLI_BIN="$EASYTIER_DIR/easytier-cli"
 # ---------- 生成/读取 machine_id，并初始化 easytier.txt 默认节点 ----------
@@ -247,23 +233,6 @@ if [ -f "$EASYTIER_TXT" ]; then
     done < "$EASYTIER_TXT"
 fi
 
-# ---------- 检查并读取 proxy: 配置 ----------
-PROXY_NET=""
-if [ -f "$EASYTIER_TXT" ]; then
-    PROXY_LINE=$(grep '^proxy:' "$EASYTIER_TXT" | head -n1)
-    if [ -n "$PROXY_LINE" ]; then
-        # 去掉注释部分
-        PROXY_NET=$(echo "$PROXY_LINE" | sed -e 's/^proxy://' -e 's/[[:space:]]*#.*$//')
-        PROXY_NET=$(echo "$PROXY_NET" | tr -d ' ')
-    fi
-fi
-
-if [ -n "$etink_inlan1" ]; then
-    PROXY_PARAM="-n $etink_inlan1"
-else
-    PROXY_PARAM=""
-fi
-
 # ---------- Padavan方式开启网关转发 ----------
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
@@ -285,6 +254,7 @@ sleep 3
 #清除vnt的虚拟网卡
 ifconfig tun0 down && ip tuntap del tun0 mode tun
 
+
 # ---------- 检查服务是否已运行 ----------
 if pidof easytier-core > /dev/null 2>&1; then
     log "EasyTier 服务已经运行。"
@@ -292,42 +262,8 @@ if pidof easytier-core > /dev/null 2>&1; then
     exit 0
 fi
 
-# ---------- 下载与解压 EasyTier ----------
-if [ ! -x "$EASYTIER_BIN" ]; then
-    mkdir -p "$EASYTIER_DIR"
-    cd "$EASYTIER_DIR"
-    log "正在下载 EasyTier 二进制文件: $ZIP_URL"
-    wget -O "$ZIP_NAME" "$ZIP_URL"
-    if [ $? -ne 0 ]; then
-        log "下载失败，请检查网络连接或下载地址。"
-        exit 1
-    fi
+CMD="$EASYTIER_BIN -w $etink_keyg --machine-id "$MACHINE_ID" &"
 
-    log "正在解压到$ZIP_NAME..."
-    
-    unzip -o "$ZIP_NAME"
-    if [ -d "$ZIP_DIR" ]; then
-        mv "$ZIP_DIR"/* ./
-        log "移动$ZIP_DIR..."
-        rmdir "$ZIP_DIR"
-    fi
-    chmod +x easytier-core 2>/dev/null
-    chmod +x easytier-cli 2>/dev/null
-    cd - > /dev/null
-fi
-# 定义要删除的文件路径
-FILE_PATH="/tmp/easytier/$ZIP_NAME"
-
-# 检查文件是否存在
-if [ -f "$FILE_PATH" ]; then
-    # 删除文件
-    rm -f "$FILE_PATH"
-    echo "文件已删除: $FILE_PATH"
-else
-    echo "文件不存在: $FILE_PATH"
-fi
-
-CMD="$EASYTIER_BIN -w $etink_keyg --machine-id "$MACHINE_ID" >/tmp/easytier.log 2>&1"
 echo $CMD
 log $CMD
 eval $CMD
@@ -352,6 +288,8 @@ echo  "Virtual IP: $VirtualIP"
 log "Virtual IP: $VirtualIP"
 log "Hostname: $Hostname"
 log "Peer ID: $PeerID"
+
+exit $?
 
 }
 
