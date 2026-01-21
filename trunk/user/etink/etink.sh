@@ -93,11 +93,10 @@ CMD="$EASYTIER_BIN --network-name $etink_keyg --network-secret $etink_pass -i $e
  [ "$(nvram get et_rpc_enable)" = "1" ] && CMD="${CMD} --relay-all-peer-rpc"
  [ "$(nvram get et_mode_enable)" = "1" ] && CMD="${CMD} --private-mode"
 
-CMD="${CMD} --machine-id "$MACHINE_ID" &"
+etcmd="${CMD} --machine-id "$MACHINE_ID" >/tmp/etink.log 2>&1"
 
-echo $CMD
-log $CMD
-eval $CMD
+logg "运行${etcmd}"
+eval "$etcmd" &
 sleep 3
 # 获取 easytier-cli node 的输出
 $EASYTIER_CLI_BIN node
