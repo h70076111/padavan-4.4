@@ -566,7 +566,7 @@ function button_etweb(){
 											</td>
 
 										</tr>
-										<th width="30%" style="border-top: 0 none;">启用魔法DNS</th>
+										<th width="30%" style="border-top: 0 none;">启用子网代理(本机IP送出）</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
 													<div id="et_dns_enable_on_of">
