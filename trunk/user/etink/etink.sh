@@ -14,6 +14,7 @@ etink_enable=$(nvram get etink_enable)
 echo $etink_enable
 etweb_enable=$(nvram get etweb_enable)
 echo $etweb_enable
+lan_ipaddr=$(nvram get lan_ipaddr) 
 
 logg() {
   echo -e "\033[36;33m$(date +'%Y-%m-%d %H:%M:%S'):\033[0m\033[35;1m $1 \033[0m"
@@ -73,6 +74,7 @@ if pidof easytier-core > /dev/null 2>&1; then
 fi
 CMD="$EASYTIER_BIN --network-name $etink_keyg --network-secret $etink_pass -i $etink_xyip -p $etink_log $etink_log2"
 
+ [ "$(nvram get et_dns_enable)" = "1" ] && CMD="${CMD -n lan_ipaddr/24"
  [ "$(nvram get et_ipv6_enable)" = "1" ] && CMD="${CMD} --disable-ipv6"
  [ "$(nvram get et_use_enable)" = "1" ] && CMD="${CMD} --use-smoltcp"
  [ "$(nvram get et_latency_enable)" = "1" ] && CMD="${CMD} --latency-first"
