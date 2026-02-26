@@ -76,7 +76,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_NTWON=y" >> .config #gecoac
         echo "CONFIG_FIRMWARE_INCLUDE_NELINK=y" >> .config #smartdns
         echo "CONFIG_FIRMWARE_INCLUDE_ETINK=y" >> .config #etink
-        echo "CONFIG_FIRMWARE_INCLUDE_GECOAC=n" >> .config #iperf3
+        echo "CONFIG_FIRMWARE_INCLUDE_GECOAC=y" >> .config #iperf3
         #echo "CONFIG_FIRMWARE_INCLUDE_NFSC=n" >> .config #socat
         #echo "CONFIG_FIRMWARE_INCLUDE_SQM=n" >> .config #SQM QOS
         #########################################################################################
