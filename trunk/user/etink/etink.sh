@@ -14,18 +14,17 @@ etink_enable=$(nvram get etink_enable)
 echo $etink_enable
 etweb_enable=$(nvram get etweb_enable)
 echo $etweb_enable
-lan_ipaddr=$(nvram get lan_ipaddr) 
-
-logg() {
-  echo -e "\033[36;33m$(date +'%Y-%m-%d %H:%M:%S'):\033[0m\033[35;1m $1 \033[0m"
-  echo "$(date +'%Y-%m-%d %H:%M:%S'): $1" >>/tmp/natpierce.log
-  logger -t "【EasyTier】" "$1"
-}
 
 et_core() {
 	[ "$etink_enable" = "0" ] && return 1
 	[ "$etweb_enable" = "1" ] && return 1
 	logg "正在启动easytier-core"
+# === 日志输出函数 ===
+LOG_TAG="easytier"
+log() {
+    logger -t "$LOG_TAG" "$1"
+}
+
 EASYTIER_DIR="/usr/bin"
 EASYTIER_TXT="/etc/storage/easytier.txt"
 echo $EASYTIER_TXT
@@ -35,7 +34,12 @@ EASYTIER_CLI_BIN="$EASYTIER_DIR/easytier-cli"
 if [ ! -f "$EASYTIER_TXT" ]; then
     MACHINE_ID=$(cat /dev/urandom | tr -dc 'a-f0-9' | head -c32)
     {
-        echo "machine_id:$MACHINE_ID"        
+        echo "machine_id:$MACHINE_ID"
+        echo "#若需要代理本地网络，在下面添加（仅一行生效）:"
+        echo "#proxy:192.168.100.0/24 "
+        echo "# 可添加更多节点，每行一个，例如："
+        echo "node tcp://public.easytier.cn:11010"
+        
 
     } > "$EASYTIER_TXT"
 fi
@@ -74,7 +78,6 @@ if pidof easytier-core > /dev/null 2>&1; then
 fi
 CMD="$EASYTIER_BIN --network-name $etink_keyg --network-secret $etink_pass -i $etink_xyip -p $etink_log $etink_log2"
 
- [ "$(nvram get et_dns_enable)" = "1" ] && CMD="${CMD -n lan_ipaddr/24"
  [ "$(nvram get et_ipv6_enable)" = "1" ] && CMD="${CMD} --disable-ipv6"
  [ "$(nvram get et_use_enable)" = "1" ] && CMD="${CMD} --use-smoltcp"
  [ "$(nvram get et_latency_enable)" = "1" ] && CMD="${CMD} --latency-first"
@@ -90,10 +93,11 @@ CMD="$EASYTIER_BIN --network-name $etink_keyg --network-secret $etink_pass -i $e
  [ "$(nvram get et_rpc_enable)" = "1" ] && CMD="${CMD} --relay-all-peer-rpc"
  [ "$(nvram get et_mode_enable)" = "1" ] && CMD="${CMD} --private-mode"
 
-etcmd="cd $bin_path ; ${CMD} --machine-id "$MACHINE_ID" >/tmp/easytier.log 2>&1"
-echo "$etcmd" >/tmp/etink.CMD
-logg "运行${etcmd}"
-eval "$etcmd" &
+CMD="${CMD} --machine-id "$MACHINE_ID" &"
+
+echo $CMD
+log $CMD
+eval $CMD
 sleep 3
 # 获取 easytier-cli node 的输出
 $EASYTIER_CLI_BIN node
@@ -134,7 +138,13 @@ sleep 3
 et_web() {
 	[ "$etweb_enable" = "0" ] && return 1
 	[ "$etink_enable" = "1" ] && return 1
-	logg "正在启动WEB ET"
+	logg "正在启动easytier-core"
+# === 日志输出函数 ===
+LOG_TAG="easytier"
+log() {
+    logger -t "$LOG_TAG" "$1"
+}
+
 EASYTIER_DIR="/usr/bin"
 EASYTIER_TXT="/etc/storage/easytier.txt"
 echo $EASYTIER_TXT
@@ -145,6 +155,10 @@ if [ ! -f "$EASYTIER_TXT" ]; then
     MACHINE_ID=$(cat /dev/urandom | tr -dc 'a-f0-9' | head -c32)
     {
         echo "machine_id:$MACHINE_ID"
+        echo "#若需要代理本地网络，在下面添加（仅一行生效）:"
+        echo "#proxy:192.168.100.0/24 "
+        echo "# 可添加更多节点，每行一个，例如："
+        echo "node tcp://public.easytier.cn:11010"
         
 
     } > "$EASYTIER_TXT"
@@ -152,6 +166,19 @@ fi
 
 # ---------- 读取 machine_id ----------
 MACHINE_ID=$(grep '^machine_id:' "$EASYTIER_TXT" | sed 's/^machine_id://')
+
+# ---------- 读取节点列表 ----------
+PEER_PARAMS=""
+if [ -f "$EASYTIER_TXT" ]; then
+    while IFS= read -r line; do
+        case "$line" in
+            node\ *)
+                NODE_URL=${line#node }
+                [ -n "$NODE_URL" ] && PEER_PARAMS="$PEER_PARAMS --peers "$NODE_URL""
+                ;;
+        esac
+    done < "$EASYTIER_TXT"
+fi
 
 # ---------- Padavan方式开启网关转发 ----------
 echo 1 > /proc/sys/net/ipv4/ip_forward
@@ -182,11 +209,11 @@ if pidof easytier-core > /dev/null 2>&1; then
     exit 0
 fi
 
-webcmd="$EASYTIER_BIN -w $etink_keyg --machine-id "$MACHINE_ID" >/tmp/easytier.log 2>&1 &"
+CMD="$EASYTIER_BIN -w $etink_keyg --machine-id "$MACHINE_ID" &"
 
-echo "$webcmd" >/tmp/etink.CMD
-logg "运行${webcmd}"
-eval "$webcmd" &
+echo $CMD
+log $CMD
+eval $CMD
 sleep 3
 # 获取 easytier-cli node 的输出
 $EASYTIER_CLI_BIN node
@@ -197,8 +224,17 @@ iptables -I INPUT -i tun0 -j ACCEPT
 iptables -I FORWARD -i tun0 -o tun0 -j ACCEPT
 iptables -I FORWARD -i tun0 -j ACCEPT
 iptables -t nat -I POSTROUTING -o tun0 -j MASQUERADE
-#开启arp
-ifconfig tun0 arp
+
+VirtualIP=$(echo "$output" | awk -F'│' '/Virtual IP/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
+Hostname=$(echo "$output" | awk -F'│' '/Hostname/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
+PeerID=$(echo "$output" | awk -F'│' '/Peer ID/ {gsub(/^[ \t]+|[ \t]+$/,"",$3); print $3}')
+
+# 以 log 格式输出
+echo $output
+echo  "Virtual IP: $VirtualIP"
+log "Virtual IP: $VirtualIP"
+log "Hostname: $Hostname"
+log "Peer ID: $PeerID"
 
 exit $?
 
