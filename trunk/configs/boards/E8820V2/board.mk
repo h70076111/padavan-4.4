@@ -4,6 +4,6 @@
 # E8820V2   # E8820V2           # MT7621  #
 ##################################################################
 
-CFLAGS += -DBOARD_E8820V2
+CFLAGS += -DBOARD_ZTE-E8820S
 BOARD_NUM_USB_PORTS=1
 CONFIG_BOARD_RAM_SIZE=64
