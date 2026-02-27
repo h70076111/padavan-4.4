@@ -8,7 +8,7 @@
 
 / {
 	compatible = "mediatek,mt7621-soc";
-	model = "ZTE E8820V2";
+	model = "ZX88200NS";
 
 	chosen {
 		bootargs = "console=ttyS0,115200";
@@ -16,18 +16,13 @@
 
 	leds {
 		compatible = "gpio-leds";
-
-		internet {
-			label = "internet";
-			gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
-		};
-
-		power {
+    
+    		sys_white {
 			label = "power";
-			gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio0 3 GPIO_ACTIVE_LOW>;
 		};
 	};
-
+	
 	gpio-keys-polled {
 		compatible = "gpio-keys-polled";
 		#address-cells = <1>;
@@ -39,14 +34,20 @@
 			gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
 		};
-
+		
 		wps {
 			label = "wps";
-			gpios = <&gpio0 24 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_WPS_BUTTON>;
 		};
-
+		
+		wifi {
+			label = "wifi";
+			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_RFKILL>;
+		};
 	};
+	
 };
 
 &pcie {
