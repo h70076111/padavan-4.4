@@ -15,10 +15,15 @@
 
 	leds {
 		compatible = "gpio-leds";
-    
-    		sys_white {
-			label = "power";
-			gpios = <&gpio0 3 GPIO_ACTIVE_LOW>;
+
+		sys_red {
+			label = "power_red";
+			gpios = <&gpio0 3 GPIO_ACTIVE_HIGH>;
+		};
+
+		wan {
+			label = "wan";
+			gpios = <&gpio0 19 GPIO_ACTIVE_LOW>;
 		};
 	};
 	
