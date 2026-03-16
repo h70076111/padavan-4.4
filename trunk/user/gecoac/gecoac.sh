@@ -13,7 +13,7 @@ fi
 
 logg() {
   echo -e "\033[36;33m$(date +'%Y-%m-%d %H:%M:%S'):\033[0m\033[35;1m $1 \033[0m"
-  echo "$(date +'%Y-%m-%d %H:%M:%S'): $1" >>/tmp/bafayun.log
+  echo "$(date +'%Y-%m-%d %H:%M:%S'): $1" >>/tmp/ac_gecoac.log
   logger -t "【集客AC】" "$1"
 }
 
