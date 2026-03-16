@@ -659,40 +659,13 @@ struct nvram_pair router_defaults[] = {
 	{ "ss_keyword", "过期时间/剩余流量" },
 #endif
 	
-	/*Adbyby PlUS+*/
-	{ "adbyby_enable", "0" },
-	{ "adbyby_set", "0" },
-	{ "adbyby_adb_update", "0" },
-	{ "adbyby_update", "2" },
-	{ "hosts_ad", "1" },
-	{ "adbyby_update_hour", "03" },
-	{ "adbyby_update_min", "30" },
-	{ "adbyby_ip_x", "0" },
-	{ "adbyby_rules_x", "0" },
-	{ "adbybyip_staticnum_x", "0" },
-	{ "adbybyrules_staticnum_x", "0" },
-	{ "block_ios", "0" },
-	{ "block_douyin", "0" },
-	{ "anti_ad", "0" },
-	{ "anti_ad_link", "https://anti-ad.net/anti-ad-for-dnsmasq.conf" },
-	{ "anti_ad_count", "0" },
-	/* Pdnsd */
-	{ "dns_enable", "0" },
-	{ "dns_server", "223.5.5.5,114.114.114.114" },
-	{ "dns_server_port", "5333" },
-	{ "dns_server_bind", "0.0.0.0" },
-	/* Aliddns */
-	{ "aliddns_enable", "0" },
-	{ "aliddns_interval", "600" },
-	{ "aliddns_ttl", "600" },
-	{ "aliddns_ak", ""  },
-	{ "aliddns_sk", "" },
-	{ "aliddns_name", "" },
-	{ "aliddns_name2", "" },
-	{ "aliddns_name6", "" },
-	{ "aliddns_domain", "" },
-	{ "aliddns_domain2", "" },
-	{ "aliddns_domain6", "" },
+#if defined(APP_GECOAC)
+	/*集客AC*/
+	{ "gecoac_enable", "0" },
+	{ "gecoac_port", "60650" },
+	{ "gecoac_Save", "/etc/storage/gecoac" },
+	{ "gecoac_bin", "/usr/bin/gecoac" },
+#endif
 	
 #if defined(APP_ADGUARDHOME)	
 	/* AdguargHome */
