@@ -552,11 +552,10 @@ void stop_dnsforwarder(void);
 void start_dnsforwarder(void);
 void restart_dnsforwarder(void);
 #endif
-#if defined(APP_ADBYBY)
-void stop_adbyby(void);
-void start_adbyby(void);
-void restart_adbyby(void);
-void update_adb(void);
+#if defined(APP_GECOAC)
+void stop_gecoac(void);
+void start_gecoac(void);
+void restart_gecoac(void);
 #endif
 #if defined(APP_ADGUARDHOME)
 void stop_adguardhome(void);
