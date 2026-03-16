@@ -1171,14 +1171,10 @@ handle_notifications(void)
 			restart_sqm();
 		}
 #endif
-#if defined(APP_ADBYBY)
-		else if (strcmp(entry->d_name, RCN_RESTART_ADBYBY) == 0)
+#if defined(APP_GECOAC)
+		else if (strcmp(entry->d_name, RCN_RESTART_GECOAC) == 0)
 		{
-			restart_adbyby();
-		}
-		else if (strcmp(entry->d_name, RCN_RESTART_UPDATEADB) == 0)
-		{
-			update_adb();
+			restart_gecoac();
 		}
 #endif
 #if defined(APP_HXCLI)
