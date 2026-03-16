@@ -490,24 +490,20 @@ void restart_wireguard(void){
 }
 #endif
 
-#if defined(APP_ADBYBY)
-void stop_adbyby(void){
-	eval("/usr/bin/adbyby.sh","stop");
+#if defined(APP_GECOAC)
+void stop_gecoac(void){
+	eval("/usr/bin/gecoac.sh","stop");
 }
 
-void start_adbyby(void){
-	int adbyby_mode = nvram_get_int("adbyby_enable");
-	if ( adbyby_mode == 1)
-		eval("/usr/bin/adbyby.sh","start");
+void start_gecoac(void){
+	int gecoac_enable = nvram_get_int("gecoac_enable");
+	if ( gecoac_enable == 1)
+		eval("/usr/bin/gecoac.sh","start");
 }
 
-void restart_adbyby(void){
-	stop_adbyby();
-	start_adbyby();
-}
-
-void update_adb(void){
-	eval("/usr/bin/adbyby.sh","updateadb");
+void restart_gecoac(void){
+	stop_gecoac();
+	start_gecoac();
 }
 #endif
 
@@ -918,8 +914,8 @@ stop_services(int stopall)
 	stop_ss();
 	stop_ss_tunnel();
 #endif
-#if defined(APP_ADBYBY)
-	stop_adbyby();
+#if defined(APP_GECOAC)
+	stop_gecoac();
 #endif
 #if defined(APP_DDNSTO)
 	stop_ddnsto();
