@@ -75,11 +75,11 @@ start_gecoac() {
 	sed -Ei '/【集客AC】|^$/d' /tmp/script/_opt_script_check
 	killall $acname >/dev/null 2>&1
 	CMD=""
-	if [ -z "$gecoac_topics" ] ; then
+	if [ -z "$gecoac_port" ] ; then
 		logg "主题为空，无法运行，退出！"
 		exit 1
 	else
-		CMD="$gecoac_topics"
+		CMD="$gecoac_port"
 	fi
 	gecoaccmd="${gecoac_bin} -p $gecoac_port -f /tmp/ -dbpath ${CMD} -token 1 -lang zh>/tmp/ac_gecoac.log 2>&1"
 	logg "运行${gecoaccmd}"
