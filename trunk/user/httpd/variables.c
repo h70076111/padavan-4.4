@@ -1094,6 +1094,16 @@
 	};
 #endif
 
+#if defined(APP_GECOAC)
+	struct variable variables_GECOAC[] = {
+			{"gecoac_enable", "", NULL, EVM_RESTART_GECOAC},
+			{"gecoac_Save", "", NULL, EVM_RESTART_GECOAC},
+			{"gecoac_port", "", NULL, EVM_RESTART_GECOAC},
+			{"gecoac_bin", "", NULL, EVM_RESTART_GECOAC},
+			{0,0,0,0}
+	};
+#endif
+
 #if defined(APP_DDNSTO)
 	struct variable variables_DDNSTO[] = {
 			{"ddnsto_enable", "", NULL, EVM_RESTART_DDNSTO},
@@ -1480,6 +1490,9 @@
 #if defined(APP_BAFA)
 		{"BAFA",		variables_BAFA},
 #endif
+#if defined(APP_GECOAC)
+		{"GECOAC",		variables_GECOAC},
+#endif
 #if defined(APP_WIREGUARD)
 		{"WIREGUARD",		variables_WIREGUARD},
 #endif
@@ -1622,8 +1635,8 @@
 #if defined(APP_SMARTDNS)
 		{EVM_RESTART_SMARTDNS,		EVT_RESTART_SMARTDNS,		RCN_RESTART_SMARTDNS,	0},
 #endif
-#if defined(APP_ADBYBY)
-		{EVM_RESTART_ADBYBY,		EVT_RESTART_ADBYBY,		RCN_RESTART_ADBYBY,	0},
+#if defined(APP_GECOAC)
+		{EVM_RESTART_GECOAC,		EVT_RESTART_GECOAC,		RCN_RESTART_GECOAC,	0},
 #endif
 #if defined(APP_ALIDDNS)
 		{EVM_RESTART_ALIDDNS,		EVT_RESTART_ALIDDNS,		RCN_RESTART_ALIDDNS,	0},
