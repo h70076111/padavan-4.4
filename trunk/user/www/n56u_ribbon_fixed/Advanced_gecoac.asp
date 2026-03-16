@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><#Web_Title#> - 巴法云物联网</title>
+<title><#Web_Title#> - 集客AC控制台</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -168,7 +168,7 @@ function button_gecoac_web(){
 	</div>
 	<div class="row-fluid">
 	<div id="tabMenu" class="submenuBlock"></div>
-	<div id="wnd_bafa_cfg">
+	<div id="wnd_gecoac_cfg">
 	<div class="alert alert-info" style="margin: 10px;">
 	通过MQTT协议连接巴法云，可接入米家等智能家居控制系统，实现远程控制语言控制设备。<br>
 	
@@ -228,7 +228,7 @@ function button_gecoac_web(){
 	</div>
 	
 	</div>
-	<div id="wnd_bafa_log" style="display:none">
+	<div id="wnd_gecoac_log" style="display:none">
 	<table width="100%" cellpadding="4" cellspacing="0" class="table">
 	<tr>
 	<td colspan="3" style="border-top: 0 none; padding-bottom: 0px;">
