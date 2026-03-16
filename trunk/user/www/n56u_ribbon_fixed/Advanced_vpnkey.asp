@@ -29,8 +29,6 @@ $j(document).ready(function() {
 
 	init_itoggle('zerotier_enable');
 	init_itoggle('zerotier_nat');
-	init_itoggle('afycx_enable');
-	init_itoggle('gecoac_enable');
 
 });
 
