@@ -223,6 +223,14 @@ function button_gecoac_web(){
 	<td style="border-top: 0 none;">
 	&nbsp;<input class="btn btn-success" style="" type="button" value="打开集客管理页面" onclick="button_gecoac_web()" />
 	</div>
+	</td>
+	</tr>			
+	<tr>
+	<td colspan="4">
+	<br />
+	<center><input class="btn btn-primary" style="width: 219px" type="button" value="<#CTL_apply#>" onclick="applyRule()" /></center>
+	</td></td>
+	</tr>																	
 	</table>
 	</div>
 	</div>
