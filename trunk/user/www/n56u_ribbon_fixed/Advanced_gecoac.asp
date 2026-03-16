@@ -29,7 +29,6 @@ var $j = jQuery.noConflict();
 $j(document).ready(function() {
 
 	init_itoggle('gecoac_enable');
-	init_itoggle('bafa_show');
 	$j("#tab_gecoac_cfg, #tab_gecoac_log").click(
 	function () {
 		var newHash = $j(this).attr('href').toLowerCase();
