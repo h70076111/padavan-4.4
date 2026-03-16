@@ -407,7 +407,7 @@ if (found_app_shadowsocks()){
 if (found_app_mentohust()){
 	tabtitle[13] = new Array("", "<#menu5_1_1#>","<#menu5_13_log#>");
 }
-if (found_app_adbyby()){
+if (found_app_gecoac()){
 	tabtitle[14] = new Array("", "<#menu5_20_1#>");
 }
 if (found_app_smartdns()||found_app_adguardhome()){
@@ -438,9 +438,6 @@ if (found_app_etink()){
 if (found_app_bafa()){
 	tabtitle[23] = new Array("", "巴法云物联网");
 }
-if (found_app_gecoac()){
-	tabtitle[24] = new Array("", "集客AC控制台");
-}
 
 //Level 3 Tab title
 
@@ -470,9 +467,9 @@ if (found_app_mentohust()){
 	mentohust_array = new Array("","mentohust.asp","mentohust_log.asp");
 	tablink[13] = (mentohust_array);
 }
-if (found_app_adbyby()){
-	ad_array = new Array("","Advanced_adbyby.asp");
-	tablink[14] = (ad_array);
+if (found_app_gecoac()){
+	gecoac_array = new Array("","Advanced_gecoac.asp");
+	tablink[14] = (gecoac_array);
 }
 if (found_app_smartdns()){
 	smartdns_array = new Array("","Advanced_smartdns.asp");
@@ -524,10 +521,6 @@ if (found_app_bafa()){
 	bafa_array = new Array("","Advanced_bafa.asp");
 	tablink[23] = (bafa_array);
 }
-if (found_app_gecoac()){
-	gecoac_array = new Array("","Advanced_gecoac.asp");
-	tablink[24] = (gecoac_array);
-}
 
 //Level 2 Menu
 menuL2_title = new Array(20)
@@ -548,7 +541,7 @@ if (found_app_mentohust()){
 	menuL2_title.push("mentohust");
 } else menuL2_title.push("");
 
-if (found_app_adbyby()){
+if (found_app_gecoac()){
 	menuL2_title.push("<#menu5_20#>");
 } else menuL2_title.push("");
 
@@ -588,10 +581,6 @@ if (found_app_bafa()){
 	menuL2_title.push("巴法云物联网");
 } else menuL2_title.push("");
 
-if (found_app_gecoac()){
-	menuL2_title.push("集客AC控制台");
-} else menuL2_title.push("");
-
 menuL2_link  = new Array("", tablink[0][1], tablink[1][1], tablink[2][1], tablink[3][1], tablink[4][1], tablink[5][1], tablink[6][1], tablink[7][1], support_2g_radio() ? tablink[8][1] : "Main_EStatus_Content.asp", tablink[9][1]);
 if (found_app_scutclient()){
 	menuL2_link.push(scutclient_array[1]);
@@ -609,8 +598,8 @@ if (found_app_mentohust()){
 	menuL2_link.push(mentohust_array[1]);
 } else menuL2_link.push("");
 
-if (found_app_adbyby()){
-	menuL2_link.push(ad_array[1]);
+if (found_app_gecoac()){
+	menuL2_link.push(gecoac_array[1]);
 }  else menuL2_link.push("");
 
 if (found_app_smartdns()){
@@ -655,10 +644,6 @@ if (found_app_etink()){
 
 if (found_app_bafa()){
 	menuL2_link.push(bafa_array[1]);
-} else menuL2_link.push("");
-
-if (found_app_gecoac()){
-	menuL2_link.push(gecoac_array[1]);
 } else menuL2_link.push("");
 
 //Level 1 Menu in Gateway, Router mode
