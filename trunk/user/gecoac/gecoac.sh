@@ -5,11 +5,7 @@ gecoac_Save="$(nvram get gecoac_Save)"
 gecoac_port="$(nvram get gecoac_port)"
 gecoac_bin="$(nvram get gecoac_bin)"
 gecoac_renum=`nvram get gecoac_renum`
-if [ ! -z "$gecoac_bin" ] ; then
-	acname=$(acgoname $gecoac_bin)
-else
-	acname="gecoac"
-fi
+acname="gecoac"
 
 logg() {
   echo -e "\033[36;33m$(date +'%Y-%m-%d %H:%M:%S'):\033[0m\033[35;1m $1 \033[0m"
@@ -44,6 +40,7 @@ if [ "$1" = "x" ] ; then
 	fi
 	[ -f $relock ] && rm -f $relock
 fi
+
 start_gecoac
 }
 
@@ -54,7 +51,7 @@ gecoac_keep() {
 	if [ -s /tmp/script/_opt_script_check ]; then
 	sed -Ei '/【集客AC】|^$/d' /tmp/script/_opt_script_check
 	cat >> "/tmp/script/_opt_script_check" <<-OSC
-	[ -z "\`pidof ${acname}\`" ] && logger -t "进程守护" "集客AC进程掉线" && eval "$acscriptfilepath start &" && sed -Ei '/【集客AC】|^$/d' /tmp/script/_opt_script_check #【巴法云物联网】
+	[ -z "\`pidof ${acname}\`" ] && logger -t "进程守护" "集客AC进程掉线" && eval "$acscriptfilepath start &" && sed -Ei '/【集客AC】|^$/d' /tmp/script/_opt_script_check #【集客AC】
  	[ -s /tmp/ac_gecoac.log ] && [ "\$(stat -c %s /tmp/ac_gecoac.log)" -gt 1194304 ] && echo "" > /tmp/ac_gecoac.log & #【集客AC】
 	OSC
 	fi
@@ -75,35 +72,29 @@ start_gecoac() {
 	sed -Ei '/【集客AC】|^$/d' /tmp/script/_opt_script_check
 	killall $acname >/dev/null 2>&1
 	CMD=""
-	if [ -z "$gecoac_port" ] ; then
+	if [ -z "$gecoac_Save" ] ; then
 		logg "主题为空，无法运行，退出！"
 		exit 1
 	else
-		CMD="$gecoac_port"
+		CMD="$gecoac_Save"
 	fi
-	gecoaccmd="${gecoac_bin} -p $gecoac_port -f /tmp/ -dbpath ${CMD} -token 1 -lang zh>/tmp/ac_gecoac.log 2>&1"
+	gecoaccmd="${gecoac_bin} -p $gecoac_port -f /tmp/ -dbpath $gecoac_Save -token 1 -lang zh>/tmp/ac_gecoac.log 2>&1"
 	logg "运行${gecoaccmd}"
 	eval "$gecoaccmd" &
 	sleep 4
-	if [ ! -z "`pidof ${acname}`" ] ; then
- 		logg "运行成功！"
-  		gecoac_restart o
-  		gecoac_keep
-	else
-		logg "运行失败, 注意检查${gecoac_bin}是否下载完整,10 秒后自动尝试重新启动"
-  		sleep 10
-  		gecoac_restart x
-	fi
-	return 0
+	logg "运行成功！"
+	gecoac_restart o
+	gecoac_keep
 }
+
 
 
 stop_gecoac() {
 	logg  "正在关闭..."
 	sed -Ei '/【集客AC】|^$/d' /tmp/script/_opt_script_check
 	acscriptname=$(acgoname $0)
-	killall $acname >/dev/null 2>&1
-	[ -z "`pidof ${acname}`" ] && logg "进程已关闭!"
+	killall gecoac >/dev/null 2>&1
+	[ -z "`pidof gecoac`" ] && logg "进程已关闭!"
 	if [ ! -z "$acscriptname" ] ; then
 		eval $(ps -w | grep "$acscriptname" | grep -v $$ | grep -v grep | awk '{print "kill "$1";";}')
 		eval $(ps -w | grep "$acscriptname" | grep -v $$ | grep -v grep | awk '{print "kill -9 "$1";";}')
