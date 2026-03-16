@@ -209,8 +209,7 @@ function button_gecoac_web(){
 	<th width="30%" style="border-top: 0 none;">参数保存路径</th>
 	<td style="border-top: 0 none;">
 	<div class="input-append">
-	<textarea maxlength="1024" class="input" name="gecoac_Save" id="gecoac_Save" placeholder="/etc/storage/gecoac" style="width: 210px; height: 20px; resize: both; overflow: auto;"><% nvram_get_x("","gecoac_Save"); %>
-	</div><span style="color:#888;">指定AC保存数据完整路径</span>
+	<input name="gecoac_Save" type="text" class="input" id="gecoac_Save" placeholder="/etc/storage/gecoac" onkeypress="return is_string(this,event);" value="<% nvram_get_x("","gecoac_Save"); %>" size="32" maxlength="128" />
 	</div>
 	</td>
 	</tr><td colspan="4"></td>	
@@ -218,8 +217,7 @@ function button_gecoac_web(){
 	<th width="30%" style="border-top: 0 none;">程序路径</th>
 	<td style="border-top: 0 none;">
 	<div class="input-append">
-	<textarea maxlength="1024" class="input" name="gecoac_bin" id="gecoac_bin" placeholder="/usr/bin/gecoac" style="width: 210px; height: 20px; resize: both; overflow: auto;"><% nvram_get_x("","gecoac_bin"); %></textarea>
-	</div><span style="color:#888;">指定gecoac程序路径和程序名，完整路径</span>
+	<input name="gecoac_bin" type="text" class="input" id="gecoac_bin" placeholder="/usr/bin/gecoac" onkeypress="return is_string(this,event);" value="<% nvram_get_x("","gecoac_bin"); %>" size="32" maxlength="128" />
 	</td>
 	</tr><td colspan="4"></td>	
 	<tr>
