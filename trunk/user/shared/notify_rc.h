@@ -74,7 +74,7 @@
 #define RCN_RESTART_KOOLPROXY		"restart_koolproxy"
 #define RCN_RESTART_ADGUARDHOME		"restart_adguardhome"
 #define RCN_RESTART_KPUPDATE	"update_kp"
-#define RCN_RESTART_ADBYBY		"restart_adbyby"
+#define RCN_RESTART_GECOAC		"restart_gecoac"
 #define RCN_RESTART_ADGUARDHOME		"restart_adguardhome"
 #define RCN_RESTART_UPDATEADB	"update_adb"
 #define RCN_RESTART_PDNSD		"restart_pdnsd"
