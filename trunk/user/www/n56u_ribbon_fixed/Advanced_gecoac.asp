@@ -170,7 +170,7 @@ function button_gecoac_web(){
 	<div id="tabMenu" class="submenuBlock"></div>
 	<div id="wnd_gecoac_cfg">
 	<div class="alert alert-info" style="margin: 10px;">
-	通过WEB面方便快捷管理集客AP设备，并自动漫游移动设备。<br>
+	通过WEB页面方便快捷管理集客AP设备，并自动漫游移动设备<br>
 	
 	</div>
 	<table width="100%" cellpadding="4" cellspacing="0" class="table">
