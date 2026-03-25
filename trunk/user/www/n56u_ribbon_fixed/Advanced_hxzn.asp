@@ -360,7 +360,7 @@ function button_hxcli_status() {
 	<div class="row-fluid">
 									<div id="tabMenu" class="submenuBlock"></div>
 									<div class="alert alert-info" style="margin: 10px;">
-									<p>宏兴智能组网是一个易于配置异地组网 直连技术支持IPV6【安卓 电脑 百度网盘下载 】：<a href="https://pan.baidu.com/s/1JR-JZm09dJ3Og487o9b2AQ?pwd=3388" target="blank">pan.baidu.com/s/1JR-JZm09dJ3Og487o9b2AQ?pwd=3388<br>
+									<p>宏兴智能组网是一个易于配置异地组网 直连技术支持IPV6【安卓 电脑 MACOS 】：<a href="https://pan.baidu.com/s/1JR-JZm09dJ3Og487o9b2AQ?pwd=3388" target="blank">点击百度网盘下载<br>
 									</p>
 										</div>
 		<table width="100%" cellpadding="4" cellspacing="0" class="table">
