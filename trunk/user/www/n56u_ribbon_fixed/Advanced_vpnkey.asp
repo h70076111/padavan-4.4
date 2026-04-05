@@ -29,6 +29,7 @@ $j(document).ready(function() {
 
 	init_itoggle('zerotier_enable');
 	init_itoggle('zerotier_nat');
+	init_itoggle('zerotiermoon_enable');
 
 });
 
