@@ -1,5 +1,5 @@
 #修改TNAME: RM2100 中的RM2100为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
-name: ZX8800NS
+name: NX18NNW
 on: 
   #release:
   #  types: [published]
@@ -38,7 +38,7 @@ jobs:
   
     - name: Build Firmware
       env:
-        TNAME: ZX8800NS
+        TNAME: NX18NNW
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -74,9 +74,9 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_BAFA=y" >> .config #aliddns
         echo "CONFIG_FIRMWARE_INCLUDE_HXCLI=y" >> .config #wirguard
         echo "CONFIG_FIRMWARE_INCLUDE_NTWON=y" >> .config #gecoac
-        echo "CONFIG_FIRMWARE_INCLUDE_NELINK=n" >> .config #smartdns
+        echo "CONFIG_FIRMWARE_INCLUDE_NELINK=y" >> .config #smartdns
         echo "CONFIG_FIRMWARE_INCLUDE_ETINK=y" >> .config #etink
-        echo "CONFIG_FIRMWARE_INCLUDE_GECOAC=n" >> .config #iperf3
+        echo "CONFIG_FIRMWARE_INCLUDE_GECOAC=y" >> .config #iperf3
         #echo "CONFIG_FIRMWARE_INCLUDE_NFSC=n" >> .config #socat
         #echo "CONFIG_FIRMWARE_INCLUDE_SQM=n" >> .config #SQM QOS
         #########################################################################################
