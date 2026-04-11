@@ -64,8 +64,8 @@ if [ "$1" = "x" ] ; then
 	fi
 	[ -f $relock ] && rm -f $relock
 fi
-start_hxcli
-}
+
+start_hxcli() {
 
 	[ "$hxcli_enable" = "0" ] && exit 1
 	logger -t "【HX客户端】" "正在启动hx-cli"
