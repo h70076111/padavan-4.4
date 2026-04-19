@@ -56,6 +56,7 @@ start_hxcli() {
 	[ "$hxcli_enable" = "0" ] && exit 1
 	logger -t "【HX客户端】" "正在启动hx-cli"
 CMD="/usr/bin/hx-cli -k $hxcli_token $hxcli_serverw -d $hxcli_desname --nic hxsdwan"
+ [ "$(nvram get hxcli_ipv6_enable)" = "1" ] && CMD="${CMD} --punch ipv6"
 	routenum=`nvram get hxcli_routenum_x`
 	for r in $(seq 1 $routenum)
 	do
