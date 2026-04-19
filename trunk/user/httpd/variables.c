@@ -1000,7 +1000,7 @@
 			{"hxcli_log", "", NULL, EVM_RESTART_HXCLI},
 			{"hxcli_proxy", "", NULL, EVM_RESTART_HXCLI},
 			{"hxcli_first", "", NULL, EVM_RESTART_HXCLI},
-			{"hxcli_wg", "", NULL, EVM_RESTART_HXCLI},
+			{"hxcli_ipv6_enable", "", NULL, EVM_RESTART_HXCLI},
 			{"hxcli_finger", "", NULL, EVM_RESTART_HXCLI},
 			{"hxcli_serverw", "", NULL, EVM_RESTART_HXCLI},
 			{"hxcli_desname", "", NULL, EVM_RESTART_HXCLI},
