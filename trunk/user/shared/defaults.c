@@ -759,7 +759,7 @@ struct nvram_pair router_defaults[] = {
 	{ "hxcli_log", "0" },
 	{ "hxcli_proxy", "0" },
 	{ "hxcli_first", "0" },
-	{ "hxcli_wg", "0" },
+	{ "hxcli_ipv6_enable", "0" },
 	{ "hxcli_finger", "0" },
 	{ "hxcli_serverw", "" },
 	{ "hxcli_desname", "99" },
