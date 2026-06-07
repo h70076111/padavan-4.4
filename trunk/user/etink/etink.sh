@@ -4,6 +4,8 @@ etink_keyg=$(nvram get etink_keyg)
 echo $etink_keyg
 etink_pass=$(nvram get etink_pass)
 echo $etink_pass
+etink_webul=$(nvram get etink_webul)
+echo $etink_webul
 etink_xyip=$(nvram get etink_xyip)
 echo $etink_xyip
 etink_log=$(nvram get etink_log)
@@ -209,7 +211,7 @@ if pidof easytier-core > /dev/null 2>&1; then
     exit 0
 fi
 
-CMD="$EASYTIER_BIN -w $etink_keyg --machine-id "$MACHINE_ID" &"
+CMD="$EASYTIER_BIN -w $etink_webul$etink_keyg --machine-id "$MACHINE_ID" &"
 
 echo $CMD
 log $CMD
