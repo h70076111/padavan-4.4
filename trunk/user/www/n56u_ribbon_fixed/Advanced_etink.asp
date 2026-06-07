@@ -410,9 +410,15 @@ function button_etweb(){
 										<tr>
 											<th>平台云注册</th>
 				<td>
-				<input type="button" class="btn btn-success" value="注册或登陆" onclick="window.open('https://easytier.cn/web')" size="0">
+				<input type="button" class="btn btn-success" value="注册或登陆" onclick="window.open('https://etweb1.ruixuan.online')" size="0">
 				<br>点击去注册一个帐号
 											</td>
+										</tr>
+										<tr>
+										<th>WEB控制台地址</th>
+				<td>
+					<input type="text" class="input" name="etink_webul" id="etink_webul" style="width: 240px" value="<% nvram_get_x("","etink_webul"); %>" />
+				</td>
 										</tr>
 										<tr>
 										<th>虚拟IP</th>
