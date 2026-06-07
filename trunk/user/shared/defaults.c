@@ -819,8 +819,9 @@ struct nvram_pair router_defaults[] = {
 	{ "et_device_enable", "0" },
 	{ "etink_keyg", "abc123" },
 	{ "etink_pass", "abc123" },
+	{ "etink_webul", "tcp://ethd.ruixuan.online:22020/" },
 	{ "etink_xyip", "10.126.126.20" },
-	{ "etink_log", "tcp://public.easytier.top:11010" },
+	{ "etink_log", "tcp://39.108.52.138:11010" },
 	{ "etink_log2", "--proxy-forward-by-system" },
 	{ "etink_log3", "--disable-encryption" },
 #endif
