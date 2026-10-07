@@ -15,7 +15,7 @@ sleep 3
 
 #清除vnt的虚拟网卡
 
-n6cmd="/usr/bin/ntwon -d $nv6name -c $n2v6_keyg -a $ntwon_xuip -R $n2v6_inlan1 -l $ntwon_log -r >/tmp/n2v6.log 2>&1"
+n6cmd="/usr/bin/ntwon -d $nv6name -c $n2v6_keyg -a $n2v6_xuip -R $n2v6_inlan1 -l $n2v6_log -r >/tmp/n2v6.log 2>&1"
 echo "$n6cmd" >/tmp/n2v6.CMD 
 logger -t "【N2V6智能组网】" "运行${n6cmd}"
 eval "$n6cmd" &
