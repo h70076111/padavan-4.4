@@ -1,14 +1,11 @@
 #!/bin/sh
 
-n2v6_enable=$(nvram get ntwon_enable)
-n2v6_keyg=$(nvram get ntwon_keyg)
-n2v6_xuip=$(nvram get ntwon_xuip)
-n2v6_inlan1=$(nvram get ntwon_inlan1)
-ntwon_xuip1=$(nvram get ntwon_xuip1)
-lan_ipaddr=$(nvram get lan_ipaddr) 
-n2v6_log=$(nvram get ntwon_log)
-ntwon_log2=$(nvram get ntwon_log2)
-ntwon_log3=$(nvram get ntwon_log3)
+n2v6_enable=$(nvram get n2v6_enable)
+n2v6_keyg=$(nvram get n2v6_keyg)
+n2v6_xuip=$(nvram get n2v6_xuip)
+n2v6_inlan1=$(nvram get n2v6_inlan1)
+n2v6_ipaddr=$(nvram get n2v6_ipaddr) 
+n2v6_log=$(nvram get n2v6_log)
 nv6name=nv6_tun
 
 start_nv6() {
