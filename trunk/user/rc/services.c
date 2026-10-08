@@ -607,7 +607,7 @@ void stop_n2v6(void){
 	eval("/usr/bin/nv6.sh","stop");
 }
 
-void start_ntwon(void){
+void start_n2v6(void){
 	int n2v6_enable = nvram_get_int("n2v6_enable");
 	if ( n2v6_enable == 1)
 		eval("/usr/bin/nv6.sh","start");
