@@ -92,7 +92,7 @@
 #define RCN_RESTART_ALDRIVER	"restart_aldriver"
 #define RCN_RESTART_BAFA	"restart_bafa"
 #define RCN_RESTART_WIREGUARD	"restart_wireguard"
-#define RCN_RESTART_SQM		"restart_sqm"
+#define RCN_RESTART_N2V6		"restart_n2v6"
 #define RCN_RESTART_REBOOT		"restart_reboot"
 
 ////////////////////////////////////////////////////////////
