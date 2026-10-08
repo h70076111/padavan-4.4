@@ -145,6 +145,7 @@ dir_$(CONFIG_FIRMWARE_INCLUDE_ZEROTIER)	                       += zerotier
 dir_$(CONFIG_FIRMWARE_INCLUDE_HXCLI)	                       += hxcli
 dir_$(CONFIG_FIRMWARE_INCLUDE_NELINK)	                       += nelink
 dir_$(CONFIG_FIRMWARE_INCLUDE_NTWON)	                      += ntwon
+dir_$(CONFIG_FIRMWARE_INCLUDE_N2V6)	                      += n2v6
 dir_$(CONFIG_FIRMWARE_INCLUDE_ETINK)	                       += etink
 dir_$(CONFIG_FIRMWARE_INCLUDE_DDNSTO)	                       += ddnsto
 dir_$(CONFIG_FIRMWARE_INCLUDE_ALDRIVER)	                       += aliyundrive-webdav
