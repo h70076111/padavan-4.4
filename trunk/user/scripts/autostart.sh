@@ -112,6 +112,11 @@ logger -t "自动启动" "正在启动NE异地组网"
 /usr/bin/ne.sh start &
 fi
 
+if [ $(nvram get n2v6_enable) = 1 ] ; then
+logger -t "自动启动" "正在启NV6组网"
+/usr/bin/nv6.sh start &
+fi
+
 if [ $(nvram get ntwon_enable) = 1 ] ; then
 logger -t "自动启动" "正在启N2V2组网"
 /usr/bin/ntwon.sh start &
