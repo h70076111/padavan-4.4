@@ -321,15 +321,15 @@ function clearLog(){
 										</tr>
 
 										<tr>
-										<th>本机虚拟ip（格式 20）</th>
+										<th>本机虚拟ip（格式 10.0.0.x）</th>
 				<td>
 					<input type="text" class="input" name="n2v6_xuip" id="n2v6_uxip" style="width: 200px" value="<% nvram_get_x("","n2v6_xuip"); %>" />
 				</td>
 
 										<tr>
-										<th>本机虚拟ip（格式 20）</th>
+										<th>对端面网段,虚拟ip（格式 192.168.x.0/24,10.0.0.x）</th>
 				<td>
-					<input type="text" class="input" name="ntwon_xuip" id="ntwon_uxip" style="width: 200px" value="<% nvram_get_x("","n2v6_xuip"); %>" />
+					<input type="text" class="input" name="n2v6_inlan1" id="n2v6_inlan1" style="width: 200px" value="<% nvram_get_x("","n2v6_inlan1"); %>" />
 				</td>
 
 										</tr>
