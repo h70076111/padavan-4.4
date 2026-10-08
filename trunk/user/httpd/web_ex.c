@@ -4438,7 +4438,7 @@ do_n2v6_log_file(const char *url, FILE *stream)
 	fputs("\r\n", stream);
 }
 
-static char n2v6log_txt[] =
+static char n2v6_log_txt[] =
 "Content-Disposition: attachment;\r\n"
 "filename=n2v6.log"
 ;
