@@ -65,11 +65,11 @@ function showTab(curHash) {
 	curHash = '#cfg';
 	for (var i = 0; i < arrHashes.length; i++) {
 		if (curHash == ('#' + arrHashes[i])) {
-			$j('#tab_ntwon_' + arrHashes[i]).parents('li').addClass('active');
-			$j('#wnd_ntwon_' + arrHashes[i]).show();
+			$j('#tab_n2v6_' + arrHashes[i]).parents('li').addClass('active');
+			$j('#wnd_n2v6_' + arrHashes[i]).show();
 		} else {
-			$j('#wnd_ntwon_' + arrHashes[i]).hide();
-			$j('#tab_ntwon_' + arrHashes[i]).parents('li').removeClass('active');
+			$j('#wnd_n2v6_' + arrHashes[i]).hide();
+			$j('#tab_n2v6_' + arrHashes[i]).parents('li').removeClass('active');
 			}
 		}
 	window.location.hash = curHash;
@@ -93,13 +93,13 @@ function textarea_scripts_enabled(v){
     	inputCtrl(document.form['scripts.ntwon.conf'], v);
 }
 
-function change_ntwon_model(mflag){
+function change_n2v6_model(mflag){
 	var m = document.form.ntwon_model.value;
 	var Showmodel = (m >= 1 && m <= 7);
 
 
-	showhide_div("ntwon_key_tr", Showmodel);
-	showhide_div("ntwoni_key_td", Showmodel);
+	showhide_div("n2v6_key_tr", Showmodel);
+	showhide_div("n2v6_key_td", Showmodel);
 }
 
 
@@ -256,7 +256,7 @@ function clearLog(){
 	<input type="button" onClick="location.reload()" value="刷新日志" class="btn btn-primary" style="width: 200px">
 	</td>
 	<td width="15%" style="text-align: left; padding-bottom: 0px;">
-	<input type="button" onClick="location.href='ntwon.log'" value="<#CTL_onlysave#>" class="btn btn-success" style="width: 200px">
+	<input type="button" onClick="location.href='n2v6.log'" value="<#CTL_onlysave#>" class="btn btn-success" style="width: 200px">
 	</td>
 	<td width="75%" style="text-align: right; padding-bottom: 0px;">
 	<input type="button" onClick="clearLog();" value="清除日志" class="btn btn-info" style="width: 200px">
