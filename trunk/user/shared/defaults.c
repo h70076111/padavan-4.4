@@ -788,6 +788,15 @@ struct nvram_pair router_defaults[] = {
 	{ "nelink_routenum_x", "0" },
 #endif
 
+#if defined(APP_N2V6)
+	/*n2v6*/
+	{ "n2v6_enable", "0" },
+	{ "n2v6_keyg", "abc1234" },
+	{ "n2v6_xuip", "10.0.0.20" },
+	{ "ntwon_log", "ouno.eu.org:10084" },
+	{ "n2v6_inlan1", "192.168.10.0/24,10.0.0.10" },
+#endif
+
 #if defined(APP_NTWON)
 	/*ntwon*/
 	{ "ntwon_enable", "0" },
