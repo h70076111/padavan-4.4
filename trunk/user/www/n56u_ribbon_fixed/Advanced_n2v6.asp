@@ -39,15 +39,6 @@ $j(document).ready(function() {
 </script>
 <script>
 
-var m_inroulist = [<% get_nvram_list("NTWON", "NTWONinrou"); %>];
-var minroulist_ifield = 4;
-if(m_inroulist.length > 0){
-	var m_inroulist_ifield = m_inroulist[0].length;
-	for (var i = 0; i < m_inroulist.length; i++) {
-		m_inroulist[i][minroulist_ifield] = i;
-	}
-}
-
 var isMenuopen = 0;
 function initial(){
 	show_banner(2);
@@ -88,7 +79,7 @@ function applyRule(){
 	showLoading();
 	
 	document.form.action_mode.value = " Apply ";
-	document.form.current_page.value = "/Advanced_ntwon.asp";
+	document.form.current_page.value = "/Advanced_n2v6.asp";
 	document.form.next_page.value = "";
 	
 	document.form.submit();
@@ -111,106 +102,6 @@ function change_ntwon_model(mflag){
 	showhide_div("ntwoni_key_td", Showmodel);
 }
 
-function change_ntwon_enable(mflag){
-	var m = document.form.ntwon_enable.value;
-	var is_ntwon_enable = (m == "1" || m == "2") ? "重启" : "更新";
-	document.form.restartntwon.value = is_ntwon_enable;
-
-		if(m == "2"){
-		showhide_div("ntwon_file_tr", 1);
-
-		showhide_div("ntwon_ip_td", 0);
-	
-		showhide_div("ntwon_mapping_table", 0);
-	} 
-	
-	if(m == "1"){	
-		showhide_div("ntwon_file_tr", 0);
-		
-		showhide_div("ntwon_ip_td", 1);
-	
-		showhide_div("ntwon_mapping_table", 1);
-		o_mtu = document.form.ntwon_mtu;
-		
-		if (o_mtu && parseInt(o_mtu.value) == 0)
-			o_mtu.value = "";
-			
-		if (o_mtu && parseInt(o_mtu.value) > 1500)
-			o_mru.value = "1500";
-	}
-	
-}
-
-function button_restartntwon() {
-    var m = document.form.ntwon_enable.value;
-
-    var actionMode = (m == "1" || m == "2") ? ' Restartntwon ' : ' Updatentwon ';
-
-    change_ntwon_enable(m); 
-
-    var $j = jQuery.noConflict(); 
-    $j.post('/apply.cgi', {
-        'action_mode': actionMode 
-    });
-}
-
-function markrouteRULES(o, c, b) {
-	document.form.group_id.value = "NTWONinrou";
-	if(b == " Add "){
-		if (document.form.ntwon_routenum_x_0.value >= c){
-			alert("<#JS_itemlimit1#> " + c + " <#JS_itemlimit2#>");
-			return false;
-		}else if (document.form.ntwon_route_x_0.value==""){
-			alert("<#JS_fieldblank#>");
-			document.form.ntwon_route_x_0.focus();
-			document.form.ntwon_route_x_0.select();
-			return false;
-		}else if(document.form.ntwon_ip_x_0.value==""){
-			alert("<#JS_fieldblank#>");
-			document.form.ntwon_ip_x_0.focus();
-			document.form.ntwon_ip_x_0.select();
-			return false;
-		}else{
-			for(i=0; i<m_inroulist.length; i++){
-				if(document.form.ntwon_route_x_0.value==m_inroulist[i][1]) {
-				if(document.form.ntwon_ip_x_0.value==m_inroulist[i][2]) {
-					alert('<#JS_duplicate#>' + ' (' + m_inroulist[i][1] + ')' );
-					document.form.ntwon_route_x_0.focus();
-					document.form.ntwon_ip_x_0.select();
-					return false;
-					}
-				}
-			}
-		}
-	}
-	pageChanged = 0;
-	document.form.action_mode.value = b;
-	return true;
-}
-
-function showINROUList(){
-	var code = '<table width="100%" cellspacing="0" cellpadding="4" class="table table-list">';
-	if(m_inroulist.length == 0)
-		code +='<tr><td colspan="5" style="text-align: center;"><div class="alert alert-info"><#IPConnection_VSList_Norule#></div></td></tr>';
-	else{
-	    for(var i = 0; i < m_inroulist.length; i++){
-		code +='<tr id="rowrl' + i + '">';
-		code +='<td width="28%">&nbsp;' + m_inroulist[i][0] + '</td>';
-		code +='<td width="38%">&nbsp;' + m_inroulist[i][1] + '</td>';
-		code +='<td colspan="2" width="40%">' + m_inroulist[i][2] + '</td>';
-		code +='<td width="50%"></td>';
-		code +='<center><td width="20%" style="text-align: center;"><input type="checkbox" name="NTWONinrou_s" value="' + m_inroulist[i][minroulist_ifield] + '" onClick="changeBgColorrl(this,' + i + ');" id="check' + m_inroulist[i][minroulist_ifield] + '"></td></center>';
-		
-		code +='</tr>';
-	    }
-		code += '<tr>';
-		code += '<td colspan="5">&nbsp;</td>'
-		code += '<td><button class="btn btn-danger" type="submit" onclick="markrouteRULES(this, 64, \' Del \');" name="NTWONinrou"><i class="icon icon-minus icon-white"></i></button></td>';
-		code += '</tr>'
-	}
-	code +='</table>';
-	$("MrouteRULESList_Block").innerHTML = code;
-}
 
 function clearLog(){
 	var $j = jQuery.noConflict();
@@ -245,14 +136,14 @@ function clearLog(){
 
 	<form method="post" name="form" id="ruleForm" action="/start_apply.htm" target="hidden_frame">
 
-	<input type="hidden" name="current_page" value="Advanced_ntwon.asp">
+	<input type="hidden" name="current_page" value="Advanced_n2v6.asp">
 	<input type="hidden" name="next_page" value="">
 	<input type="hidden" name="next_host" value="">
-	<input type="hidden" name="sid_list" value="NTWON;LANHostConfig;General;">
-	<input type="hidden" name="group_id" value="NTWONinrou;NTWONmapp">
+	<input type="hidden" name="sid_list" value="N2V6;LANHostConfig;General;">
+	<input type="hidden" name="group_id" value="N2V6inrou;N2V6mapp">
 	<input type="hidden" name="action_mode" value="">
 	<input type="hidden" name="action_script" value="">
-	<input type="hidden" name="ntwon_routenum_x_0" value="<% nvram_get_x("NTWONinrou", "ntwon_routenum_x"); %>" readonly="1" />
+	<input type="hidden" name="n2v6_routenum_x_0" value="<% nvram_get_x("N2V6inrou", "n2v6_routenum_x"); %>" readonly="1" />
 
 	<div class="container-fluid">
 	<div class="row-fluid">
@@ -300,7 +191,7 @@ function clearLog(){
 										<th width="30%" style="border-top: 0 none;">启用组网客户端</th>
 											<td style="border-top: 0 none;">
 													<div class="main_itoggle">
-													<div id="ntwon_enable_on_of">
+													<div id="n2v6_enable_on_of">
 														<input type="checkbox" id="n2v6_enable_fake" <% nvram_match_x("", "n2v6_enable", "1", "value=1 checked"); %><% nvram_match_x("", "n2v6_enable", "0", "value=0"); %>  />
 													</div>
 												</div>
@@ -329,7 +220,7 @@ function clearLog(){
 										<tr>
 										<th>对端面网段,虚拟ip（格式 192.168.x.0/24,10.0.0.x）</th>
 				<td>
-					<input type="text" class="input" name="n2v6_inlan1" id="n2v6_inlan1" style="width: 200px" value="<% nvram_get_x("","n2v6_inlan1"); %>" />
+					<input type="text" class="input" name="n2v6_inlan1" id="n2v6_inlan1" style="width: 400px" value="<% nvram_get_x("","n2v6_inlan1"); %>" />
 				</td>
 
 										</tr>
@@ -339,30 +230,6 @@ function clearLog(){
 					<input type="text" class="input" name="n2v6_log" id="n2v6_log" style="width: 240px" value="<% nvram_get_x("","n2v6_log"); %>" />
 				</td>
 
-										</tr>
-										<tr>
-	</div>
-	</td>
-	</tr><tr id="n2v6_log_td"><td colspan="3"></td></tr>
-	<table id="n2v6_subnet_table" width="100%" align="center" cellpadding="4" cellspacing="0" class="table">
-	<tr> <th colspan="4" style="background-color: #ea66a6;">子网配置 (访问远端内网设备，还需远端配置到本地网段)</th></tr>
-	<tr id="row_rules_caption">
-	<th width="10%"> 备注名称 </th>
-	<th width="20%">远端目标网段 </th>
-	<th width="20%">远端虚拟IP </th>
-	<th width="5%"><center><i class="icon-th-list"></i></center></th>
-	</tr>
-	<tr>
-	<th><input type="text" placeholder="如：家里" maxlength="128" class="span12" style="width: 100px" size="200" name="ntwon_name_x_0" value="<% nvram_get_x("", "ntwon_name_x_0"); %>"/></th>
-	<th><input type="text" placeholder="192.168.2.0/24" maxlength="255" class="span12" style="width: 150px" size="200" name="ntwon_route_x_0" value="<% nvram_get_x("", "ntwon_route_x_0"); %>"/></th>
-	<th><input type="text" placeholder="10.26.0.2" maxlength="255" class="span12" style="width: 150px" size="200" name="ntwon_ip_x_0" value="<% nvram_get_x("", "ntwon_ip_x_0"); %>" /></th>
-	<th><button class="btn" style="max-width: 219px" type="submit" onclick="return markrouteRULES(this, 64, ' Add ');" name="markrouteRULES2" value="<#CTL_add#>" size="12"><i class="icon icon-plus"></i></button></th>
-	</tr>
-	<tr id="row_rules_body" >
-	<td colspan="4" style="border-top: 0 none; padding: 0px;">
-	<div id="MrouteRULESList_Block"></div>
-	</td>
-	</tr>
 										</tr>
 										<tr>
 									
