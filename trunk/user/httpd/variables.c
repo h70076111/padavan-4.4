@@ -1050,6 +1050,18 @@
 	};
 #endif
 
+#if defined(APP_N2V6)
+	struct variable variables_N2V6[] = {
+			{"n2v6_enable", "", NULL, EVM_RESTART_NTWON},
+			{"n2v6_keyg", "", NULL, EVM_RESTART_NTWON},
+			{"n2v6_xuip", "", NULL, EVM_RESTART_NTWON},
+			{"n2v6_log", "", NULL, EVM_RESTART_NTWON},
+			{"n2v6_inlan1", "", NULL, EVM_RESTART_NTWON},
+			{"scripts.n2v6.conf", "File", NULL, EVM_RESTART_NTWON},
+			{0,0,0,0}
+	};
+#endif
+
 #if defined(APP_ETINK)
 	struct variable variables_ETINK[] = {
 			{"etink_enable", "", NULL, EVM_RESTART_ETINK},
@@ -1482,6 +1494,9 @@
 #if defined(APP_NTWON)
 		{"NTWON",		variables_NTWON},
 #endif
+#if defined(APP_N2V6)
+		{"N2V6",		variables_N2V6},
+#endif
 #if defined(APP_ETINK)
 		{"ETINK",		variables_ETINK},
 #endif
@@ -1614,6 +1629,9 @@
 #endif
 #if defined(APP_NTWON)
 		{EVM_RESTART_NTWON,		EVT_RESTART_NTWON,		RCN_RESTART_NTWON,	0},
+#endif
+#if defined(APP_N2V6)
+		{EVM_RESTART_N2V6,		EVT_RESTART_N2V6,		RCN_RESTART_N2V6,	0},
 #endif
 #if defined(APP_ETINK)
 		{EVM_RESTART_ETINK,		EVT_RESTART_ETINK,		RCN_RESTART_ETINK,	0},
