@@ -44,7 +44,7 @@ function initial(){
 	show_banner(2);
 	show_menu(5, 17, 0);
 	showINROUList();
-	fill_status(ntwon_status());
+	fill_status(n2v6_status());
 	show_footer();
 
 }
