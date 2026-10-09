@@ -208,7 +208,7 @@ function clearLog(){
 										<tr>
 										<th>本机识别码(不要改动) </th>
 				<td>
-					<input type="text" class="input" name="n2v6_keyg" id="n2v6_keyg" style="width: 200px" value="<% nvram_get_x("","n2v6_keyg"); %>" />
+					<input type="text" class="input" readonly name="n2v6_keyg" id="n2v6_keyg" style="width: 200px" value="<% nvram_get_x("","n2v6_keyg"); %>" />
 				</td>
 
 										</tr>
