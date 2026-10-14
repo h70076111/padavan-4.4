@@ -4,18 +4,31 @@ n2v6_enable=$(nvram get n2v6_enable)
 n2v6_keyg=$(nvram get n2v6_keyg)
 n2v6_xuip=$(nvram get n2v6_xuip)
 n2v6_inlan1=$(nvram get n2v6_inlan1)
+n2v6_inlan2=$(nvram get n2v6_inlan2)
+n2v6_inlan3=$(nvram get n2v6_inlan3)
 n2v6_ipaddr=$(nvram get n2v6_ipaddr) 
 n2v6_log=$(nvram get n2v6_log)
 nv6name=nv6_tun
 
 start_nv6() {
+	[ "$N2V6_enable" = "0" ] && exit 1
+	logger -t "【N2V6客户端】" "正在启动edge6"
 killall edge6
 killall -9 edge6
 sleep 3
 
 #清除vnt的虚拟网卡
-
-n6cmd="/usr/bin/edge6 -d $nv6name -c $n2v6_keyg -a $n2v6_xuip -R $n2v6_inlan1 -l $n2v6_log -r >/tmp/n2v6.log 2>&1"
+CMD="/usr/bin/edge6 -d $nv6name -c $n2v6_keyg -a $n2v6_xuip"
+if [ -n "$n2v6_inlan1" ]; then
+  CMD="${CMD} -R $n2v6_inlan1"
+fi
+if [ -n "$n2v6_inlan2" ]; then
+  CMD="${CMD} -R $n2v6_inlan2"
+fi
+if [ -n "$n2v6_inlan3" ]; then
+  CMD="${CMD} -R $n2v6_inlan3"
+fi
+n6cmd="${CMD} -l $n2v6_log -r >/tmp/n2v6.log 2>&1"
 echo "$n6cmd" >/tmp/n2v6.CMD 
 logger -t "【N2V6智能组网】" "运行${n6cmd}"
 eval "$n6cmd" &
