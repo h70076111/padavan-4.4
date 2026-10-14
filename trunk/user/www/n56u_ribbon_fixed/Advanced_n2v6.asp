@@ -227,6 +227,20 @@ function clearLog(){
 
 										</tr>
 										<tr>
+										<th>对端面网段2,虚拟ip2（同上，如果不用则为空白）</th>
+				<td>
+					<input type="text" class="input" name="n2v6_inlan2" id="n2v6_inlan2" style="width: 300px" value="<% nvram_get_x("","n2v6_inlan2"); %>" />
+				</td>
+
+										</tr>
+										<tr>
+										<th>对端面网段3,虚拟ip3（同上，如果不用则为空白）</th>
+				<td>
+					<input type="text" class="input" name="n2v6_inlan3" id="n2v6_inlan3" style="width: 400px" value="<% nvram_get_x("","n2v6_inlan3"); %>" />
+				</td>
+
+										</tr>
+										<tr>
 										<th>节点地址</th>
 				<td>
 					<input type="text" class="input" name="n2v6_log" id="n2v6_log" style="width: 240px" value="<% nvram_get_x("","n2v6_log"); %>" />
