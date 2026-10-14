@@ -795,6 +795,8 @@ struct nvram_pair router_defaults[] = {
 	{ "n2v6_xuip", "10.0.0.20" },
 	{ "n2v6_log", "ouno.eu.org:10084" },
 	{ "n2v6_inlan1", "192.168.10.0/24,10.0.0.10" },
+	{ "n2v6_inlan2", "" },
+	{ "n2v6_inlan3", "" },
 #endif
 
 #if defined(APP_NTWON)
