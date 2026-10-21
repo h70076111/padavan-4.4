@@ -61,11 +61,6 @@ logger -t "自动启动" "正在启动异地组网"
 /usr/bin/hx.sh start &
 fi
 
-if [ $(nvram get zerotier_enable) = 1 ] ; then
-logger -t "自动启动" "正在启动正在启动组网后台"
-/usr/bin/zerotier.sh start
-fi
-
 if [ $(nvram get nelink_enable) = 1 ] ; then
 logger -t "自动启动" "正在启动NE异地组网"
 /usr/bin/ne.sh start &
@@ -91,9 +86,14 @@ logger -t "自动启动" "正在启动ETWEB异地组网"
 /usr/bin/etink.sh start &
 fi
 
+if [ $(nvram get zerotier_enable) = 1 ] ; then
+logger -t "自动启动" "正在启动正在启动组网后台"
+/usr/bin/zerotier.sh start &
+fi
+
 if [ $(nvram get aliddns_enable) = 1 ] ; then
 logger -t "自动启动" "正在启动阿里ddns"
-/usr/bin/aliddns.sh start
+/usr/bin/aliddns.sh start &
 fi
 
 if [ $(nvram get ss_enable) = 1 ] ; then
