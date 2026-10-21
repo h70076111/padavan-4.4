@@ -419,7 +419,7 @@ if (found_app_ddnsto()||found_app_zerotier()||found_app_wireguard()||found_app_a
 }
 if (found_app_hxcli()){
 	tabtitle[17] = new Array("", "SD WAN");
-}SD-WAN
+}
 if (found_app_sqm()){
 	tabtitle[18] = new Array("", "QoS限速");
 }
