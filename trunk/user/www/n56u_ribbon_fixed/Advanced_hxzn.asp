@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title><#Web_Title#> - 宏兴智能组网</title>
+<title><#Web_Title#> - SD-WAN组网</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
@@ -361,7 +361,7 @@ function button_hxcli_status() {
 	<div class="row-fluid">
 									<div id="tabMenu" class="submenuBlock"></div>
 									<div class="alert alert-info" style="margin: 10px;">
-									<p>宏兴智能组网是一个易于配置异地组网 直连技术支持IPV6【安卓 电脑 MACOS 】：<a href="https://pan.baidu.com/s/1JR-JZm09dJ3Og487o9b2AQ?pwd=3388" target="blank">点击百度网盘下载</a></div>
+									<p>SD-WAN智能组网是一个易于配置异地组网 直连技术支持IPV6【安卓 电脑 MACOS 】：<a href="https://pan.baidu.com/s/1JR-JZm09dJ3Og487o9b2AQ?pwd=3388" target="blank">点击百度网盘下载</a></div>
 									</p>
 										</div>
 		<table width="100%" cellpadding="4" cellspacing="0" class="table">
