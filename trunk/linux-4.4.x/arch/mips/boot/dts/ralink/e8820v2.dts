@@ -19,24 +19,12 @@
 
 		sys_red {
 			label = "power_red";
-			gpios = <&gpio0 15 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio0 7 GPIO_ACTIVE_HIGH>;
 		};
 
 		wan {
 			label = "wan";
 			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
-		};
-
-		wlan2g {
-			label = "sw2g";
-			gpios = <&gpio0 33 GPIO_ACTIVE_LOW>;
-			linux,default-trigger = "phy0radio";
-		};
-
-		wlan5g {
-			label = "sw5g";
-			gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
-			linux,default-trigger = "phy1radio";
 		};
 
 		led_wps: wps {
@@ -65,7 +53,7 @@
 		
 		wifi {
 			label = "wifi";
-			gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio0 19 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RFKILL>;
 		};
 	};
