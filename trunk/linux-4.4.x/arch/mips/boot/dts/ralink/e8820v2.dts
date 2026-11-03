@@ -38,6 +38,7 @@
 			label = "reset";
 			gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
+		};
 		
 		wifi {
 			label = "wifi";
