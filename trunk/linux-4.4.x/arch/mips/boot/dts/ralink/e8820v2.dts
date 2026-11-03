@@ -19,12 +19,12 @@
 
 		internet {
 			label = "internet";
-			gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
 		};
 
 		power {
 			label = "power";
-			gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio0 7 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan2g {
