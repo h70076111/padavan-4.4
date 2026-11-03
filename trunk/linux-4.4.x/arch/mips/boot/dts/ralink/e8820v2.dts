@@ -25,17 +25,18 @@
 		power {
 			label = "power";
 			gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
-
-		wlan5g {
-			label = "sw5g";
-			gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
-			linux,default-trigger = "phy1radio";
 		};
 
 		wlan2g {
 			label = "sw2g";
 			gpios = <&gpio0 33 GPIO_ACTIVE_LOW>;
 			linux,default-trigger = "phy0radio";
+		};
+
+		wlan5g {
+			label = "sw5g";
+			gpios = <&gpio0 28 GPIO_ACTIVE_LOW>;
+			linux,default-trigger = "phy1radio";
 		};
 
 		led_wps: wps {
