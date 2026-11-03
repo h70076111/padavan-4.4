@@ -8,7 +8,7 @@
 
 / {
 	compatible = "mediatek,mt7621-soc";
-	model = "ZX88200NS";
+	model = "E8820V2";
 
 	chosen {
 		bootargs = "console=ttyS0,115200";
@@ -16,38 +16,46 @@
 
 	leds {
 		compatible = "gpio-leds";
-    
-    		sys_white {
-			label = "power";
-			gpios = <&gpio0 3 GPIO_ACTIVE_LOW>;
+
+		power {
+			function = LED_FUNCTION_POWER;
+			color = <LED_COLOR_ID_BLUE>;
+			gpios = <&gpio 31 GPIO_ACTIVE_LOW>;
+			default-state = "on";
+		};
+
+		led_sys: sys {
+			label = "blue:sys";
+			gpios = <&gpio 32 GPIO_ACTIVE_LOW>;
+		};
+
+		internet {
+			label = "blue:internet";
+			gpios = <&gpio 29 GPIO_ACTIVE_LOW>;
+		};
+
+		wlan2g {
+			label = "blue:wlan2g";
+			gpios = <&gpio 33 GPIO_ACTIVE_LOW>;
+			linux,default-trigger = "phy0tpt";
+		};
+
+		wlan5g {
+			label = "blue:wlan5g";
+			gpios = <&gpio 28 GPIO_ACTIVE_LOW>;
+			linux,default-trigger = "phy1tpt";
 		};
 	};
-	
-	gpio-keys-polled {
-		compatible = "gpio-keys-polled";
-		#address-cells = <1>;
-		#size-cells = <0>;
-		poll-interval = <20>;
+
+	keys {
+		compatible = "gpio-keys";
 
 		reset {
 			label = "reset";
-			gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
+			gpios = <&gpio 18 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_RESTART>;
 		};
-		
-		wps {
-			label = "wps";
-			gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
-			linux,code = <KEY_WPS_BUTTON>;
-		};
-		
-		wifi {
-			label = "wifi";
-			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
-			linux,code = <KEY_RFKILL>;
-		};
 	};
-	
 };
 
 &pcie {
