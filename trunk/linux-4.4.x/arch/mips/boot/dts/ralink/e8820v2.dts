@@ -17,15 +17,14 @@
 	leds {
 		compatible = "gpio-leds";
 
-		sys_red {
-			label = "power_red";
-			gpios = <&gpio0 31 GPIO_ACTIVE_HIGH>;
-		};
-
-		wan {
-			label = "wan";
+		internet {
+			label = "internet";
 			gpios = <&gpio0 29 GPIO_ACTIVE_LOW>;
 		};
+
+		power {
+			label = "power";
+			gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
 
 		wlan5g {
 			label = "sw5g";
