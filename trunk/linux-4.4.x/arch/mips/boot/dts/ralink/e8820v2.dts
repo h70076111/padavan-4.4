@@ -17,14 +17,14 @@
 	leds {
 		compatible = "gpio-leds";
 
-		internet {
-			label = "internet";
-			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
+		sys_red {
+			label = "power_red";
+			gpios = <&gpio0 15 GPIO_ACTIVE_HIGH>;
 		};
 
-		power {
-			label = "power";
-			gpios = <&gpio0 7 GPIO_ACTIVE_LOW>;
+		wan {
+			label = "wan";
+			gpios = <&gpio0 10 GPIO_ACTIVE_LOW>;
 		};
 
 		wlan2g {
@@ -62,7 +62,12 @@
 			gpios = <&gpio0 24 GPIO_ACTIVE_LOW>;
 			linux,code = <KEY_WPS_BUTTON>;
 		};
-
+		
+		wifi {
+			label = "wifi";
+			gpios = <&gpio 18 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_RFKILL>;
+		};
 	};
 };
 
