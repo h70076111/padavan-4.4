@@ -20,6 +20,8 @@ if [ ! -z "$hxcli_port" ] ; then
 	fi
 fi
 hxcli_renum=`nvram get hxcli_renum`
+#清除vnt的虚拟网卡
+ifconfig hxsdwan down && ip tuntap del hxsdwan mode tun
 
 hxcli_restart () {
 relock="/var/lock/hxcli_restart.lock"
