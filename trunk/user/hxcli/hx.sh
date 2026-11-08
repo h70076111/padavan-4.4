@@ -84,7 +84,7 @@ iptables -I FORWARD -i hxsdwan -o hxsdwan -j ACCEPT
 iptables -I FORWARD -i hxsdwan -j ACCEPT
 iptables -t nat -I POSTROUTING -o hxsdwan -j MASQUERADE
 #开启arp
-ifconfig hxcli arp
+ifconfig hxsdwan arp
 else
 logger -t "异地组网" "启动失败"
 fi
