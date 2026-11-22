@@ -86,12 +86,12 @@
 			
 			partition@2140000 {
 				label = "Storage";
-				reg = <0x2140000 0x400000>; /* 4096K */
+				reg = <0x2140000 0x600000>; /* 4096K */
 			};
 
 			partition@2540000 {
 				label = "RWFS";
-				reg = <0x2540000 0x5A40000>;
+				reg = <0x2740000 0x5A40000>;
 			};
 
 			partition@all {
