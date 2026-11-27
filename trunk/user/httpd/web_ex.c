@@ -2316,6 +2316,15 @@ static int etink_status_hook(int eid, webs_t wp, int argc, char **argv)
 }
 #endif
 
+#if defined (APP_HXSDWAN)
+static int hxwan_status_hook(int eid, webs_t wp, int argc, char **argv)
+{
+	int hxwan_status_code = pids("hxsdwan");
+	websWrite(wp, "function hxwan_status() { return %d;}\n", hxwan_status_code);
+	return 0;
+}
+#endif
+
 #if defined (APP_DDNSTO)
 static int ddnsto_status_hook(int eid, webs_t wp, int argc, char **argv)
 {
@@ -2604,6 +2613,11 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 #else
 	int found_app_etink = 0;
 #endif
+#if defined(APP_HXSDWAN)
+	int found_app_hxsdwan = 1;
+#else
+	int found_app_hxsdwan = 0;
+#endif
 #if defined(APP_DDNSTO)
 	int found_app_ddnsto = 1;
 #else
@@ -2832,6 +2846,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		"function found_app_ntwon() { return %d;}\n"
 		"function found_app_n2v6() { return %d;}\n"
 		"function found_app_etink() { return %d;}\n"
+		"function found_app_hxsdwan() { return %d;}\n"
 		"function found_app_bafa() { return %d;}\n"
 		"function found_app_ddnsto() { return %d;}\n"
 		"function found_app_aldriver() { return %d;}\n"
@@ -2871,6 +2886,7 @@ ej_firmware_caps_hook(int eid, webs_t wp, int argc, char **argv)
 		found_app_n2v6,
 		found_app_ntwon,
 		found_app_etink,
+		found_app_hxsdwan,
 		found_app_bafa,
 		found_app_ddnsto,
 		found_app_aldriver,
@@ -3612,6 +3628,62 @@ apply_cgi(const char *url, webs_t wp)
 	{
 #if defined(APP_NTWON)
 		system("/usr/bin/ntwon.sh restart &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " Restarthxsdwan "))
+	{
+#if defined(APP_HXSDWAN)
+		system("/usr/bin/hxwan.sh restart &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " Updatehxsdwan "))
+	{
+#if defined(APP_HXSDWAN)
+		system("/usr/bin/hxsd.sh update &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDsdinfo "))
+	{
+#if defined(APP_HXSDWAN)
+		system("/usr/bin/hxsd.sh sdinfo &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDsdall "))
+	{
+#if defined(APP_HXSDWAN)
+		system("/usr/bin/hxsd.sh sdall &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDsdlist "))
+	{
+#if defined(APP_HXSDWAN)
+		system("/usr/bin/hxsd.sh sdlist &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDhsdoute "))
+	{
+#if defined(APP_HXSDWAN)
+		system("/usr/bin/hxsd.sh sdroute &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " CMDhsdstatus "))
+	{
+#if defined(APP_HXSDWAN)
+		system("/usr/bin/hxsd.sh sdstatus &");
+#endif
+		return 0;
+	}
+	else if (!strcmp(value, " ClearsdcliLog "))
+	{
+#if defined(APP_HXSDWAN)
+		unlink("/tmp/hxwan.log");
 #endif
 		return 0;
 	}
@@ -4460,6 +4532,21 @@ static char ntwon_log_txt[] =
 
 #endif
 
+#if defined (APP_HXSDWAN)
+static void
+do_hxwan_log_file(const char *url, FILE *stream)
+{
+	dump_file(stream, "/tmp/hxwan.log");
+	fputs("\r\n", stream);
+}
+
+static char hxwan_log_txt[] =
+"Content-Disposition: attachment;\r\n"
+"filename=hxwan.log"
+;
+
+#endif
+
 #if defined (APP_ETINK)
 static void
 do_etink_log_file(const char *url, FILE *stream)
@@ -4539,6 +4626,9 @@ struct mime_handler mime_handlers[] = {
 #endif
 #if defined(APP_ETINK)
 	{ "etink.log", "application/force-download", etink_log_txt, NULL, do_etink_log_file, 1 },
+#endif
+#if defined(APP_HXSDWAN)
+	{ "hxwan.log", "application/force-download", hxwan_log_txt, NULL, do_hxwan_log_file, 1 },
 #endif
 #if defined(APP_SHADOWSOCKS)
 	{ "applydb.cgi*", "text/html", no_cache_IE7, do_html_post_and_get, do_applydb_cgi, 1 },
@@ -4863,6 +4953,9 @@ struct ej_handler ej_handlers[] =
 #endif
 #if defined (APP_ETINK)
 	{ "etink_status", etink_status_hook},
+#endif
+#if defined (APP_HXSDWAN)
+	{ "hxwan_status", hxwan_status_hook},
 #endif
 #if defined (APP_DDNSTO)
 	{ "ddnsto_status", ddnsto_status_hook},
