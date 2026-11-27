@@ -95,10 +95,10 @@
 			{"ntwon_ip_x", "24", NULL, FALSE},
 			{0,0,0,0}
 		};
-	struct variable variables_HXCLI_HXCLIroute[] = {
-			{"hxcli_name_x", "24", NULL, FALSE},
-			{"hxcli_route_x", "24", NULL, FALSE},
-			{"hxcli_ip_x", "24", NULL, FALSE},
+	struct variable variables_HXSDWAN_HXSDWANLrout[] = {
+			{"hxwan_name_x", "24", NULL, FALSE},
+			{"hxwan_route_x", "24", NULL, FALSE},
+			{"hxwan_ip_x", "24", NULL, FALSE},
 			{0,0,0,0}
 		};
 	struct variable variables_SspConf_SspList[] = {
@@ -1064,6 +1064,40 @@
 	};
 #endif
 
+#if defined(APP_HXSDWAN)
+	struct variable variables_HXSDWAN[] = {
+			{"hxwan_enable", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_token", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_ip", "", NULL, EVM_RESTART_HXCLI},
+			{"hxwan_localadd", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_serip", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_model", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_key", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_log", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_proxy", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_first", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_ipv6_enable", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_finger", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_serverw", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_desname", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_id", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_tunname", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_mtu", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_dns", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_stun", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_port", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_punch", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_comp", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_relay", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_wan", "", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_bin", "", NULL, EVM_RESTART_HXSDWAN},
+			{"scripts.hxwan.conf", "File", NULL, EVM_RESTART_HXSDWAN},
+			{"hxwan_routenum_x", "", NULL, EVM_RESTART_HXSDWAN},
+			{"HXSDWANLrout", "Group", ARGV((char*)variables_HXSDWAN_HXSDWANLrout, "8", "55", "hxwan_routenum_x"), EVM_RESTART_HXSDWAN},
+			{0,0,0,0}
+	};
+#endif
+
 #if defined(APP_ETINK)
 	struct variable variables_ETINK[] = {
 			{"etink_enable", "", NULL, EVM_RESTART_ETINK},
@@ -1499,6 +1533,9 @@
 #if defined(APP_N2V6)
 		{"N2V6",		variables_N2V6},
 #endif
+#if defined(APP_HXSDWAN)
+		{"HXSDWAN",		variables_HXSDWAN},
+#endif
 #if defined(APP_ETINK)
 		{"ETINK",		variables_ETINK},
 #endif
@@ -1634,6 +1671,9 @@
 #endif
 #if defined(APP_N2V6)
 		{EVM_RESTART_N2V6,		EVT_RESTART_N2V6,		RCN_RESTART_N2V6,	0},
+#endif
+#if defined(APP_HXSDWAN)
+		{EVM_RESTART_HXSDWAN,		EVT_RESTART_HXSDWAN,		RCN_RESTART_HXSDWAN,	0},
 #endif
 #if defined(APP_ETINK)
 		{EVM_RESTART_ETINK,		EVT_RESTART_ETINK,		RCN_RESTART_ETINK,	0},
