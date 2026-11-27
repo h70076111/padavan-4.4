@@ -1206,7 +1206,13 @@ handle_notifications(void)
 		{
 			restart_etink();
 		}
-#endif			
+#endif
+#if defined(APP_HXSDWAN)
+		else if (strcmp(entry->d_name, RCN_RESTART_HXSDWAN) == 0)
+		{
+			restart_hxwan();
+		}
+#endif
 #if defined(APP_ADGUARDHOME)
 		else if (strcmp(entry->d_name, RCN_RESTART_ADGUARDHOME) == 0)
 		{
