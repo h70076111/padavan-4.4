@@ -653,6 +653,23 @@ void restart_hxcli(void){
 }
 #endif
 
+#if defined(APP_HXSDWAN)
+void stop_hxwan(void){
+	eval("/usr/bin/hxwan.sh","stop");
+}
+
+void start_hxwan(void){
+	int hxwan_enable = nvram_get_int("hxwan_enable");
+	if ( hxwan_enable == 1)
+		eval("/usr/bin/hxwan.sh","start");
+}
+
+void restart_hxwan(void){
+	stop_hxwan();
+	start_hxwan();
+}
+#endif
+
 #if defined(APP_BAFA)
 void stop_bafa(void){
 	eval("/usr/bin/bafa.sh","stop");
@@ -964,6 +981,9 @@ stop_services(int stopall)
 #endif
 #if defined(APP_ETLINK)
 	stop_etink();
+#endif
+#if defined(APP_HXSDWAN)
+	stop_hxwan();
 #endif
 #if defined(APP_BAFA)
 	stop_bafa();
