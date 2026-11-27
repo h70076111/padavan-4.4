@@ -96,7 +96,7 @@ typedef u_int8_t u8;
 #define EVM_RESTART_BAFA		    (1ULL << 52)
 #define EVM_RESTART_HXCLI		    (1ULL << 53)
 #define EVM_RESTART_SMARTDNS		    (1ULL << 57)
-#define EVM_RESTART_ADGUARDHOME		    (1ULL << 58)
+#define EVM_RESTART_HXSDWAN		    (1ULL << 58)
 #define EVM_RESTART_ZEROTIER		    (1ULL << 59)
 #define EVM_RESTART_ETINK		    (1ULL << 60)
 #define EVM_RESTART_NELINK		    (1ULL << 61)
@@ -165,6 +165,7 @@ typedef u_int8_t u8;
 #define EVT_RESTART_BAFA      		2
 #define EVT_RESTART_NTWON     	2
 #define EVT_RESTART_N2V6		2
+#define EVT_RESTART_HXSDWAN		2
 #define EVT_RESTART_ALIDDNS	2
 #define EVT_RESTART_HXCLI      		2
 #define EVT_RESTART_NELINK      	2
