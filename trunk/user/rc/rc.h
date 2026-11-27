@@ -598,6 +598,11 @@ void start_etink(void);
 void start_etweb(void);
 void restart_etink(void);
 #endif
+#if defined(APP_HXSDWAN)
+void stop_hxwan(void);
+void start_hxwan(void);
+void restart_hxwan(void);
+#endif
 #if defined(APP_DDNSTO)
 void stop_ddnsto(void);
 void start_ddnsto(void);
