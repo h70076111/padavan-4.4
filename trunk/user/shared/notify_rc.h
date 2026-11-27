@@ -88,6 +88,7 @@
 #define RCN_RESTART_NELINK	"restart_nelink"
 #define RCN_RESTART_NTWON	"restart_ntwon"
 #define RCN_RESTART_ETINK	"restart_etink"
+#define RCN_RESTART_HXSDWAN		"restart_hxwan"
 #define RCN_RESTART_DDNSTO	"restart_ddnsto"
 #define RCN_RESTART_ALDRIVER	"restart_aldriver"
 #define RCN_RESTART_BAFA	"restart_bafa"
